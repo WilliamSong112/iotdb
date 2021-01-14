@@ -51,6 +51,7 @@ public class MemTableManager {
       throws WriteProcessException {
     if (!reachMaxMemtableNumber()) {
       currentMemtableNumber++;
+      logger.info("create a new memtable, current number is {}", currentMemtableNumber);
       return new PrimitiveMemTable();
     } else {
       // wait until the total number of memtable is less than the system capacity
@@ -58,6 +59,7 @@ public class MemTableManager {
       while (true) {
         if (!reachMaxMemtableNumber()) {
           currentMemtableNumber++;
+          logger.info("create a new memtable, current number is {}", currentMemtableNumber);
           return new PrimitiveMemTable();
         }
         try {
