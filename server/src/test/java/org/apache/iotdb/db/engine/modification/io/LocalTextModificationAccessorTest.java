@@ -42,7 +42,7 @@ public class LocalTextModificationAccessorTest {
   public void readMyWrite() {
     String tempFileName = TestConstant.BASE_OUTPUT_PATH.concat("mod.temp");
     Modification[] modifications = new Modification[]{
-        new Deletion(new PartialPath(new String[]{"d1","s1"}), 1, 1),
+        new Deletion(new PartialPath(new String[]{"d1", "s1"}), 1, 1),
         new Deletion(new PartialPath(new String[]{"d1", "s2"}), 2, 2),
         new Deletion(new PartialPath(new String[]{"d1", "s3"}), 3, 3),
         new Deletion(new PartialPath(new String[]{"d1", "s4"}), 4, 4),

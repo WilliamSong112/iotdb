@@ -39,8 +39,8 @@ public class LongTVListTest {
     }
     tvList.sort();
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals(i, tvList.getLong((int)i));
-      Assert.assertEquals(i, tvList.getTime((int)i));
+      Assert.assertEquals(i, tvList.getLong((int) i));
+      Assert.assertEquals(i, tvList.getTime((int) i));
     }
   }
 
@@ -52,8 +52,8 @@ public class LongTVListTest {
     }
     tvList.sort();
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals(i, tvList.getLong((int)i));
-      Assert.assertEquals(i, tvList.getTime((int)i));
+      Assert.assertEquals(i, tvList.getLong((int) i));
+      Assert.assertEquals(i, tvList.getTime((int) i));
     }
   }
 
@@ -71,8 +71,8 @@ public class LongTVListTest {
     tvList.sort();
     inputs.sort(TimeValuePair::compareTo);
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals(inputs.get((int)i).getTimestamp(), tvList.getTime((int)i));
-      Assert.assertEquals(inputs.get((int)i).getValue().getLong(), tvList.getLong((int)i));
+      Assert.assertEquals(inputs.get((int) i).getTimestamp(), tvList.getTime((int) i));
+      Assert.assertEquals(inputs.get((int) i).getValue().getLong(), tvList.getLong((int) i));
     }
   }
 
@@ -88,8 +88,8 @@ public class LongTVListTest {
     tvList.putLongs(ArrayUtils.toPrimitive(timeList.toArray(new Long[0])),
         ArrayUtils.toPrimitive(longList.toArray(new Long[0])), 0, 1000);
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals(tvList.size - i, tvList.getLong((int)i));
-      Assert.assertEquals(tvList.size - i, tvList.getTime((int)i));
+      Assert.assertEquals(tvList.size - i, tvList.getLong((int) i));
+      Assert.assertEquals(tvList.size - i, tvList.getTime((int) i));
     }
   }
 }

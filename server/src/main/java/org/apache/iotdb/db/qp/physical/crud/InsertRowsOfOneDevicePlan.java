@@ -41,10 +41,11 @@ public class InsertRowsOfOneDevicePlan extends InsertPlan {
     this.deviceId = deviceId;
     rowPlans = new InsertRowPlan[insertTimes.length];
     for (int i = 0; i < insertTimes.length; i++) {
-      for(ByteBuffer b : insertValues){
+      for (ByteBuffer b : insertValues) {
         b.toString();
       }
-      rowPlans[i] = new InsertRowPlan(deviceId, insertTimes[i], measurements.get(i).toArray(new String[0]), insertValues[i]);
+      rowPlans[i] = new InsertRowPlan(deviceId, insertTimes[i],
+          measurements.get(i).toArray(new String[0]), insertValues[i]);
       if (rowPlans[i].getMeasurements().length == 0) {
         throw new QueryProcessException(
             "The measurements are null, deviceId:" + deviceId
@@ -117,7 +118,7 @@ public class InsertRowsOfOneDevicePlan extends InsertPlan {
 
     this.deviceId = new PartialPath(readString(buffer));
     this.rowPlans = new InsertRowPlan[buffer.getInt()];
-    for (int i = 0; i < rowPlans.length; i ++) {
+    for (int i = 0; i < rowPlans.length; i++) {
       rowPlans[i] = new InsertRowPlan();
       rowPlans[i].setDeviceId(deviceId);
       rowPlans[i].setTime(buffer.getLong());
@@ -127,7 +128,7 @@ public class InsertRowsOfOneDevicePlan extends InsertPlan {
 
   @Override
   public String toString() {
-    return "deviceId: " + deviceId + ", times: " + rowPlans.length ;
+    return "deviceId: " + deviceId + ", times: " + rowPlans.length;
   }
 
 

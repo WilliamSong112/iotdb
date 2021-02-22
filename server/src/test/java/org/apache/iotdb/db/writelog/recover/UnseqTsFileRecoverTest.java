@@ -99,7 +99,8 @@ public class UnseqTsFileRecoverTest {
     schema = new Schema();
     for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 10; j++) {
-        PartialPath path = new PartialPath("root.sg.device" + i + IoTDBConstant.PATH_SEPARATOR + "sensor" + j);
+        PartialPath path = new PartialPath(
+            "root.sg.device" + i + IoTDBConstant.PATH_SEPARATOR + "sensor" + j);
         MeasurementSchema measurementSchema = new MeasurementSchema("sensor" + j, TSDataType.INT64,
             TSEncoding.PLAIN);
         schema.registerTimeseries(path.toTSFilePath(), measurementSchema);
@@ -111,17 +112,20 @@ public class UnseqTsFileRecoverTest {
     schema.registerTimeseries(new Path(("root.sg.device99"), ("sensor4")),
         new MeasurementSchema("sensor4", TSDataType.INT64, TSEncoding.PLAIN));
     IoTDB.metaManager
-        .createTimeseries(new PartialPath("root.sg.device99.sensor4"), TSDataType.INT64, TSEncoding.PLAIN,
+        .createTimeseries(new PartialPath("root.sg.device99.sensor4"), TSDataType.INT64,
+            TSEncoding.PLAIN,
             TSFileDescriptor.getInstance().getConfig().getCompressor(), Collections.emptyMap());
     schema.registerTimeseries(new Path(("root.sg.device99"), ("sensor2")),
         new MeasurementSchema("sensor2", TSDataType.INT64, TSEncoding.PLAIN));
     IoTDB.metaManager
-        .createTimeseries(new PartialPath("root.sg.device99.sensor2"), TSDataType.INT64, TSEncoding.PLAIN,
+        .createTimeseries(new PartialPath("root.sg.device99.sensor2"), TSDataType.INT64,
+            TSEncoding.PLAIN,
             TSFileDescriptor.getInstance().getConfig().getCompressor(), Collections.emptyMap());
     schema.registerTimeseries(new Path(("root.sg.device99"), ("sensor1")),
         new MeasurementSchema("sensor1", TSDataType.INT64, TSEncoding.PLAIN));
     IoTDB.metaManager
-        .createTimeseries(new PartialPath("root.sg.device99.sensor1"), TSDataType.INT64, TSEncoding.PLAIN,
+        .createTimeseries(new PartialPath("root.sg.device99.sensor1"), TSDataType.INT64,
+            TSEncoding.PLAIN,
             TSFileDescriptor.getInstance().getConfig().getCompressor(), Collections.emptyMap());
     writer = new TsFileWriter(tsF, schema);
 
@@ -164,15 +168,18 @@ public class UnseqTsFileRecoverTest {
           types[k] = TSDataType.INT64;
           values[k] = String.valueOf(k + 10);
         }
-        InsertRowPlan insertRowPlan = new InsertRowPlan(new PartialPath("root.sg.device" + j), i, measurements, types,
+        InsertRowPlan insertRowPlan = new InsertRowPlan(new PartialPath("root.sg.device" + j), i,
+            measurements, types,
             values);
         node.write(insertRowPlan);
       }
       node.notifyStartFlush();
     }
-    InsertRowPlan insertRowPlan = new InsertRowPlan(new PartialPath("root.sg.device99"), 1, "sensor4", TSDataType.INT64, "4");
+    InsertRowPlan insertRowPlan = new InsertRowPlan(new PartialPath("root.sg.device99"), 1,
+        "sensor4", TSDataType.INT64, "4");
     node.write(insertRowPlan);
-    insertRowPlan = new InsertRowPlan(new PartialPath("root.sg.device99"), 300, "sensor2", TSDataType.INT64, "2");
+    insertRowPlan = new InsertRowPlan(new PartialPath("root.sg.device99"), 300, "sensor2",
+        TSDataType.INT64, "2");
     node.write(insertRowPlan);
     node.close();
 

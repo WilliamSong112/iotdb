@@ -39,7 +39,7 @@ public class CreateIndexPlan extends PhysicalPlan {
   private long time;
   private IndexType indexType;
 
-  public CreateIndexPlan(){
+  public CreateIndexPlan() {
     super(false, OperatorType.CREATE_INDEX);
     canBeSplit = false;
   }

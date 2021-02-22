@@ -140,8 +140,9 @@ public class ModificationFile implements AutoCloseable {
   }
 
   /**
-   * Create a hardlink for the modification file.
-   * The hardlink with have a suffix like ".{sysTime}_{randomLong}"
+   * Create a hardlink for the modification file. The hardlink with have a suffix like
+   * ".{sysTime}_{randomLong}"
+   *
    * @return a new ModificationFile with its path changed to the hardlink, or null if the origin
    * file does not exist or the hardlink cannot be created.
    */
@@ -151,7 +152,8 @@ public class ModificationFile implements AutoCloseable {
     }
 
     while (true) {
-      String hardlinkSuffix = TsFileConstant.PATH_SEPARATOR + System.currentTimeMillis() + "_" + random.nextLong();
+      String hardlinkSuffix =
+          TsFileConstant.PATH_SEPARATOR + System.currentTimeMillis() + "_" + random.nextLong();
       File hardlink = new File(filePath + hardlinkSuffix);
 
       try {

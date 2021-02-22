@@ -64,8 +64,10 @@ public class DirectoryStrategyTest {
     for (int i = 0; i < dataDirList.size(); i++) {
       boolean res = !fullDirIndexSet.contains(i);
       PowerMockito.when(CommonUtils.hasSpace(dataDirList.get(i))).thenReturn(res);
-      PowerMockito.when(CommonUtils.getUsableSpace(dataDirList.get(i))).thenReturn(res ? (long) (i + 1) : 0L);
-      PowerMockito.when(CommonUtils.getOccupiedSpace(dataDirList.get(i))).thenReturn(res ? (long) (i + 1) : Long.MAX_VALUE);
+      PowerMockito.when(CommonUtils.getUsableSpace(dataDirList.get(i)))
+          .thenReturn(res ? (long) (i + 1) : 0L);
+      PowerMockito.when(CommonUtils.getOccupiedSpace(dataDirList.get(i)))
+          .thenReturn(res ? (long) (i + 1) : Long.MAX_VALUE);
     }
   }
 
@@ -131,7 +133,8 @@ public class DirectoryStrategyTest {
       assertEquals(minIndex, minFolderOccupiedSpaceFirstStrategy.nextFolderIndex());
     }
 
-    PowerMockito.when(CommonUtils.getOccupiedSpace(dataDirList.get(minIndex))).thenReturn(Long.MAX_VALUE);
+    PowerMockito.when(CommonUtils.getOccupiedSpace(dataDirList.get(minIndex)))
+        .thenReturn(Long.MAX_VALUE);
     minIndex = getIndexOfMinOccupiedSpace();
     for (int i = 0; i < dataDirList.size(); i++) {
       assertEquals(minIndex, minFolderOccupiedSpaceFirstStrategy.nextFolderIndex());

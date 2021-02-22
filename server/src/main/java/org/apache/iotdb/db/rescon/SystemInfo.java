@@ -50,8 +50,8 @@ public class SystemInfo {
   private boolean isEncodingFasterThanIo = true;
 
   /**
-   * Report current mem cost of storage group to system. Called when the memory of
-   * storage group newly accumulates to IoTDBConfig.getStorageGroupSizeReportThreshold()
+   * Report current mem cost of storage group to system. Called when the memory of storage group
+   * newly accumulates to IoTDBConfig.getStorageGroupSizeReportThreshold()
    *
    * @param storageGroupInfo storage group
    */
@@ -77,8 +77,8 @@ public class SystemInfo {
   }
 
   /**
-   * Report resetting the mem cost of sg to system.
-   * It will be called after flushing, closing and failed to insert
+   * Report resetting the mem cost of sg to system. It will be called after flushing, closing and
+   * failed to insert
    *
    * @param storageGroupInfo storage group
    */
@@ -104,14 +104,12 @@ public class SystemInfo {
       logCurrentTotalSGMemory();
       rejected = false;
       forceAsyncFlush();
-    }
-    else if (totalSgMemCost >= REJECT_THERSHOLD) {
+    } else if (totalSgMemCost >= REJECT_THERSHOLD) {
       logger.warn("Some sg memory released, but system is still in reject status.");
       logCurrentTotalSGMemory();
       rejected = true;
       forceAsyncFlush();
-    } 
-    else {
+    } else {
       logger.debug("Some sg memory released, system is in normal status.");
       logCurrentTotalSGMemory();
       rejected = false;
@@ -123,9 +121,9 @@ public class SystemInfo {
   }
 
   /**
-   * Order all tsfileProcessors in system by memory cost of actual data points in memtable.
-   * Mark the top K TSPs as to be flushed,
-   * so that after flushing the K TSPs, the memory cost should be less than FLUSH_THRESHOLD
+   * Order all tsfileProcessors in system by memory cost of actual data points in memtable. Mark the
+   * top K TSPs as to be flushed, so that after flushing the K TSPs, the memory cost should be less
+   * than FLUSH_THRESHOLD
    */
   private void chooseTSPToMarkFlush() {
     if (FlushManager.getInstance().getNumberOfWorkingTasks() > 0) {

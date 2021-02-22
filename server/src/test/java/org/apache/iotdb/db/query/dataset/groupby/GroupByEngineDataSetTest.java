@@ -114,7 +114,8 @@ public class GroupByEngineDataSetTest {
     groupByTimePlan.setSlidingStep(slidingStep);
     groupByTimePlan.setStartTime(startTime);
     groupByTimePlan.setEndTime(endTime);
-    GroupByEngineDataSet groupByEngine = new GroupByWithValueFilterDataSet(queryId, groupByTimePlan);
+    GroupByEngineDataSet groupByEngine = new GroupByWithValueFilterDataSet(queryId,
+        groupByTimePlan);
     int cnt = 0;
     while (groupByEngine.hasNext()) {
       Pair pair = groupByEngine.nextTimePartition();
@@ -146,7 +147,8 @@ public class GroupByEngineDataSetTest {
     groupByTimePlan.setStartTime(startTime);
     groupByTimePlan.setEndTime(endTime);
 
-    GroupByEngineDataSet groupByEngine = new GroupByWithValueFilterDataSet(queryId, groupByTimePlan);
+    GroupByEngineDataSet groupByEngine = new GroupByWithValueFilterDataSet(queryId,
+        groupByTimePlan);
     int cnt = 0;
     while (groupByEngine.hasNext()) {
       Pair pair = groupByEngine.nextTimePartition();

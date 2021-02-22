@@ -106,7 +106,8 @@ public class FileLoaderTest {
         correctSequenceLoadedFileMap.putIfAbsent(SG_NAME + i, new HashSet<>());
         String rand = String.valueOf(r.nextInt(10000));
         String fileName =
-            getSnapshotFolder() + File.separator + SG_NAME + i + File.separator + "0" + File.separator + "0" + File.separator
+            getSnapshotFolder() + File.separator + SG_NAME + i + File.separator + "0"
+                + File.separator + "0" + File.separator
                 + (time + i * 100 + j) + IoTDBConstant.FILE_NAME_SEPARATOR + rand
                 + IoTDBConstant.FILE_NAME_SEPARATOR + "0.tsfile";
 

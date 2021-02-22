@@ -72,7 +72,7 @@ public class ReadOnlyMemChunk {
       }
       if (floatPrecision < 0) {
         logger.warn("The MAX_POINT_NUMBER shouldn't be less than 0."
-            + " Using default float precision {}.",
+                + " Using default float precision {}.",
             TSFileDescriptor.getInstance().getConfig().getFloatPrecision());
         floatPrecision = TSFileDescriptor.getInstance().getConfig().getFloatPrecision();
       }
@@ -82,7 +82,8 @@ public class ReadOnlyMemChunk {
     this.chunkDataSize = size;
     this.deletionList = deletionList;
 
-    this.chunkPointReader = tvList.getIterator(floatPrecision, encoding, chunkDataSize, deletionList);
+    this.chunkPointReader = tvList
+        .getIterator(floatPrecision, encoding, chunkDataSize, deletionList);
     initChunkMeta();
   }
 
@@ -90,7 +91,8 @@ public class ReadOnlyMemChunk {
     Statistics statsByType = Statistics.getStatsByType(dataType);
     ChunkMetadata metaData = new ChunkMetadata(measurementUid, dataType, 0, statsByType);
     if (!isEmpty()) {
-      IPointReader iterator = chunkData.getIterator(floatPrecision, encoding, chunkDataSize, deletionList);
+      IPointReader iterator = chunkData
+          .getIterator(floatPrecision, encoding, chunkDataSize, deletionList);
       while (iterator.hasNextTimeValuePair()) {
         TimeValuePair timeValuePair = iterator.nextTimeValuePair();
         switch (dataType) {

@@ -56,7 +56,7 @@ public interface MeasurementMBean {
   /**
    * set whether to monitor operation status.
    *
-   * @param operationName the name of operation, defined in attribute operationSwitch.
+   * @param operationName  the name of operation, defined in attribute operationSwitch.
    * @param operationState state of operation.
    * @return true if successful, false if fail.
    */

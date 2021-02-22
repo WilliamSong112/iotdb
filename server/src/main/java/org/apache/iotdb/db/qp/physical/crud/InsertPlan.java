@@ -114,6 +114,7 @@ public abstract class InsertPlan extends PhysicalPlan {
 
   /**
    * Reconstruct this plan with the failed measurements.
+   *
    * @return the plan itself, with measurements replaced with the previously failed ones.
    */
   public InsertPlan getPlanFromFailed() {
@@ -169,7 +170,8 @@ public abstract class InsertPlan extends PhysicalPlan {
     }
     for (String measurement : measurements) {
       if (measurement == null || measurement.isEmpty()) {
-        throw new QueryProcessException("Measurement contains null or empty string: " + Arrays.toString(measurements));
+        throw new QueryProcessException(
+            "Measurement contains null or empty string: " + Arrays.toString(measurements));
       }
     }
   }

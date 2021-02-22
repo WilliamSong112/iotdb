@@ -27,6 +27,7 @@ import org.apache.iotdb.tsfile.read.filter.basic.Filter;
 import org.apache.iotdb.tsfile.read.filter.operator.AndFilter;
 
 public class QueryDataSource {
+
   private PartialPath seriesPath;
   private List<TsFileResource> seqResources;
   private List<TsFileResource> unseqResources;
@@ -36,7 +37,8 @@ public class QueryDataSource {
    */
   private long dataTTL = Long.MAX_VALUE;
 
-  public QueryDataSource(PartialPath seriesPath, List<TsFileResource> seqResources, List<TsFileResource> unseqResources) {
+  public QueryDataSource(PartialPath seriesPath, List<TsFileResource> seqResources,
+      List<TsFileResource> unseqResources) {
     this.seriesPath = seriesPath;
     this.seqResources = seqResources;
     this.unseqResources = unseqResources;

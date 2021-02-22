@@ -40,8 +40,8 @@ public abstract class DirectoryStrategy {
   List<String> folders = new ArrayList<>();
 
   /**
-   * To init folders. Do not recommend to overwrite.
-   * This method guarantees that at least one folder has available space.
+   * To init folders. Do not recommend to overwrite. This method guarantees that at least one folder
+   * has available space.
    *
    * @param folders the folders from conf
    */

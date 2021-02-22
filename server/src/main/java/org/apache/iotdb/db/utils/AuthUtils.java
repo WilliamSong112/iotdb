@@ -114,7 +114,7 @@ public class AuthUtils {
   /**
    * validate privilege on path.
    *
-   * @param path series path
+   * @param path        series path
    * @param privilegeId privilege ID
    * @throws AuthException Authenticate Exception
    */
@@ -185,8 +185,8 @@ public class AuthUtils {
   /**
    * check privilege.
    *
-   * @param path series path
-   * @param privilegeId privilege ID
+   * @param path          series path
+   * @param privilegeId   privilege ID
    * @param privilegeList privileges in List structure
    * @return True if privilege-check passed
    */
@@ -198,12 +198,13 @@ public class AuthUtils {
     for (PathPrivilege pathPrivilege : privilegeList) {
       if (path != null) {
         if (pathPrivilege.getPath() != null &&
-                AuthUtils.pathBelongsTo(path, pathPrivilege.getPath()) &&
-                pathPrivilege.getPrivileges().contains(privilegeId)) {
+            AuthUtils.pathBelongsTo(path, pathPrivilege.getPath()) &&
+            pathPrivilege.getPrivileges().contains(privilegeId)) {
           return true;
         }
       } else {
-        if (pathPrivilege.getPath() == null && pathPrivilege.getPrivileges().contains(privilegeId)) {
+        if (pathPrivilege.getPath() == null && pathPrivilege.getPrivileges()
+            .contains(privilegeId)) {
           return true;
         }
       }
@@ -215,7 +216,7 @@ public class AuthUtils {
    * get privileges.
    *
    * @param path The seriesPath on which the privileges take effect. If seriesPath-free privileges
-   * are desired, this should be null.
+   *             are desired, this should be null.
    * @return The privileges granted to the role.
    */
   public static Set<Integer> getPrivileges(String path, List<PathPrivilege> privilegeList) {
@@ -225,7 +226,8 @@ public class AuthUtils {
     Set<Integer> privileges = new HashSet<>();
     for (PathPrivilege pathPrivilege : privilegeList) {
       if (path != null) {
-        if (pathPrivilege.getPath() != null && AuthUtils.pathBelongsTo(path, pathPrivilege.getPath())) {
+        if (pathPrivilege.getPath() != null && AuthUtils
+            .pathBelongsTo(path, pathPrivilege.getPath())) {
           privileges.addAll(pathPrivilege.getPrivileges());
         }
       } else {
@@ -240,15 +242,16 @@ public class AuthUtils {
   /**
    * check if series path has this privilege.
    *
-   * @param path series path
-   * @param privilegeId privilege Id
+   * @param path          series path
+   * @param privilegeId   privilege Id
    * @param privilegeList privileges in List structure
    * @return True if series path has this privilege
    */
   public static boolean hasPrivilege(String path, int privilegeId,
       List<PathPrivilege> privilegeList) {
     for (PathPrivilege pathPrivilege : privilegeList) {
-      if (pathPrivilege.getPath().equals(path) && pathPrivilege.getPrivileges().contains(privilegeId)) {
+      if (pathPrivilege.getPath().equals(path) && pathPrivilege.getPrivileges()
+          .contains(privilegeId)) {
         pathPrivilege.getReferenceCnt().incrementAndGet();
         return true;
       }
@@ -259,8 +262,8 @@ public class AuthUtils {
   /**
    * add privilege.
    *
-   * @param path series path
-   * @param privilegeId privilege Id
+   * @param path          series path
+   * @param privilegeId   privilege Id
    * @param privilegeList privileges in List structure
    */
   public static void addPrivilege(String path, int privilegeId, List<PathPrivilege> privilegeList) {
@@ -290,8 +293,8 @@ public class AuthUtils {
   /**
    * remove privilege.
    *
-   * @param path series path
-   * @param privilegeId privilege Id
+   * @param path          series path
+   * @param privilegeId   privilege Id
    * @param privilegeList privileges in List structure
    */
   public static void removePrivilege(String path, int privilegeId,

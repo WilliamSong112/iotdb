@@ -54,7 +54,8 @@ public class ShowTimeseriesDataSet extends ShowDataSet {
       new PartialPath(COLUMN_TIMESERIES_COMPRESSION, false),
       new PartialPath(COLUMN_TAGS, false),
       new PartialPath(COLUMN_ATTRIBUTES, false)};
-  private static final TSDataType[] resourceTypes = {TSDataType.TEXT, TSDataType.TEXT, TSDataType.TEXT,
+  private static final TSDataType[] resourceTypes = {TSDataType.TEXT, TSDataType.TEXT,
+      TSDataType.TEXT,
       TSDataType.TEXT, TSDataType.TEXT, TSDataType.TEXT, TSDataType.TEXT, TSDataType.TEXT};
 
   public ShowTimeseriesDataSet(ShowTimeSeriesPlan showTimeSeriesPlan, QueryContext context)
@@ -68,7 +69,8 @@ public class ShowTimeseriesDataSet extends ShowDataSet {
 
   @Override
   public List<RowRecord> getQueryDataSet() throws MetadataException {
-    List<ShowTimeSeriesResult> timeseriesList = IoTDB.metaManager.showTimeseries((ShowTimeSeriesPlan) plan, context);
+    List<ShowTimeSeriesResult> timeseriesList = IoTDB.metaManager
+        .showTimeseries((ShowTimeSeriesPlan) plan, context);
     List<RowRecord> records = new ArrayList<>();
     for (ShowTimeSeriesResult result : timeseriesList) {
       RowRecord record = new RowRecord(0);

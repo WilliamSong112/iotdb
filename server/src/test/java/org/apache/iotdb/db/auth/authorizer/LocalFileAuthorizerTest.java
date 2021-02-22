@@ -101,7 +101,8 @@ public class LocalFileAuthorizerTest {
     try {
       authorizer.grantPrivilegeToUser("root", nodeName, 1);
     } catch (AuthException e) {
-      Assert.assertEquals("Invalid operation, administrator already has all privileges", e.getMessage());
+      Assert.assertEquals("Invalid operation, administrator already has all privileges",
+          e.getMessage());
     }
 
     try {
@@ -119,7 +120,7 @@ public class LocalFileAuthorizerTest {
 
     try {
       authorizer.revokePrivilegeFromUser(user.getName(), nodeName, 100);
-    } catch(AuthException e) {
+    } catch (AuthException e) {
       assertEquals("Invalid privilegeId 100", e.getMessage());
     }
 
@@ -133,7 +134,8 @@ public class LocalFileAuthorizerTest {
     try {
       authorizer.revokePrivilegeFromUser("root", "root", 1);
     } catch (AuthException e) {
-      Assert.assertEquals("Invalid operation, administrator must have all privileges", e.getMessage());
+      Assert.assertEquals("Invalid operation, administrator must have all privileges",
+          e.getMessage());
     }
   }
 
@@ -200,7 +202,7 @@ public class LocalFileAuthorizerTest {
 
     try {
       authorizer.grantRoleToUser(roleName, user.getName());
-    } catch(AuthException e) {
+    } catch (AuthException e) {
       Assert.assertEquals("User user already has role role", e.getMessage());
     }
     // revoke a role from a user, the user will lose all role's permission

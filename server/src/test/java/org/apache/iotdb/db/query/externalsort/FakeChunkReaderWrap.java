@@ -26,8 +26,10 @@ import org.apache.iotdb.db.query.reader.chunk.ChunkReaderWrap;
  * for test
  */
 public class FakeChunkReaderWrap extends ChunkReaderWrap {
+
   private IPointReader pointReader;
-  public FakeChunkReaderWrap(IPointReader pointReader){
+
+  public FakeChunkReaderWrap(IPointReader pointReader) {
     super();
     this.pointReader = pointReader;
   }

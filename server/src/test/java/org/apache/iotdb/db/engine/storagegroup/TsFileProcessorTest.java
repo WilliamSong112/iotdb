@@ -85,7 +85,8 @@ public class TsFileProcessorTest {
   @Test
   public void testWriteAndFlush() throws IOException, WriteProcessException, MetadataException {
     logger.info("testWriteAndFlush begin..");
-    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath), sgInfo,
+    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath),
+        sgInfo,
         this::closeTsFileProcessor,
         (tsFileProcessor) -> true, true, INIT_ARRAY_SIZE);
 
@@ -141,7 +142,8 @@ public class TsFileProcessorTest {
   public void testWriteAndRestoreMetadata()
       throws IOException, WriteProcessException, MetadataException {
     logger.info("testWriteAndRestoreMetadata begin..");
-    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath), sgInfo,
+    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath),
+        sgInfo,
         this::closeTsFileProcessor,
         (tsFileProcessor) -> true, true, INIT_ARRAY_SIZE);
 
@@ -224,7 +226,8 @@ public class TsFileProcessorTest {
   @Test
   public void testMultiFlush() throws IOException, WriteProcessException, MetadataException {
     logger.info("testWriteAndRestoreMetadata begin..");
-    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath), sgInfo,
+    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath),
+        sgInfo,
         this::closeTsFileProcessor,
         (tsFileProcessor) -> true, true, INIT_ARRAY_SIZE);
 
@@ -265,7 +268,8 @@ public class TsFileProcessorTest {
   @Test
   public void testWriteAndClose() throws IOException, WriteProcessException, MetadataException {
     logger.info("testWriteAndRestoreMetadata begin..");
-    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath), sgInfo,
+    processor = new TsFileProcessor(storageGroup, SystemFileFactory.INSTANCE.getFile(filePath),
+        sgInfo,
         this::closeTsFileProcessor,
         (tsFileProcessor) -> true, true, INIT_ARRAY_SIZE);
 

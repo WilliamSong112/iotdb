@@ -130,7 +130,7 @@ public class DirectoryManager {
       }
     }
   }
-  
+
   public String getNextFolderForSequenceFile() throws DiskSpaceInsufficientException {
     return getSequenceFileFolder(getNextFolderIndexForSequenceFile());
   }

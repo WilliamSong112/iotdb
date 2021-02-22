@@ -59,13 +59,15 @@ public class PriorityMergeReader implements IPointReader {
 
   public void addReader(IPointReader reader, long priority) throws IOException {
     if (reader.hasNextTimeValuePair()) {
-      heap.add(new Element(reader, reader.nextTimeValuePair(), new MergeReaderPriority(priority, 0)));
+      heap.add(
+          new Element(reader, reader.nextTimeValuePair(), new MergeReaderPriority(priority, 0)));
     } else {
       reader.close();
     }
   }
 
-  public void addReader(IPointReader reader, MergeReaderPriority priority, long endTime) throws IOException {
+  public void addReader(IPointReader reader, MergeReaderPriority priority, long endTime)
+      throws IOException {
     if (reader.hasNextTimeValuePair()) {
       heap.add(new Element(reader, reader.nextTimeValuePair(), priority));
       currentReadStopTime = Math.max(currentReadStopTime, endTime);
@@ -172,6 +174,7 @@ public class PriorityMergeReader implements IPointReader {
   }
 
   public static class MergeReaderPriority implements Comparable<MergeReaderPriority> {
+
     long version;
     long offset;
 

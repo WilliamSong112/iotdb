@@ -41,6 +41,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SerializeUtilsTest {
+
   @Test
   public void serdesStringTest() {
     String str = "abcd%+/123\n\t";
@@ -231,7 +232,8 @@ public class SerializeUtilsTest {
     TVPairs.add(p4);
     TimeValuePair p5 = new TimeValuePair(0, TsPrimitiveType.getByType(TSDataType.DOUBLE, 1.0d));
     TVPairs.add(p5);
-    TimeValuePair p6 = new TimeValuePair(0, TsPrimitiveType.getByType(TSDataType.TEXT, Binary.valueOf("a")));
+    TimeValuePair p6 = new TimeValuePair(0,
+        TsPrimitiveType.getByType(TSDataType.TEXT, Binary.valueOf("a")));
     TVPairs.add(p6);
 
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -261,7 +263,8 @@ public class SerializeUtilsTest {
     TVPairs.add(Collections.singletonList(p4));
     TimeValuePair p5 = new TimeValuePair(0, TsPrimitiveType.getByType(TSDataType.DOUBLE, 1.0d));
     TVPairs.add(Collections.singletonList(p5));
-    TimeValuePair p6 = new TimeValuePair(0, TsPrimitiveType.getByType(TSDataType.TEXT, Binary.valueOf("a")));
+    TimeValuePair p6 = new TimeValuePair(0,
+        TsPrimitiveType.getByType(TSDataType.TEXT, Binary.valueOf("a")));
     TVPairs.add(Collections.singletonList(p6));
 
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -291,7 +294,7 @@ public class SerializeUtilsTest {
    */
   @Test
   public void serdesObjectsTest() {
-    Object[] objects = { 1, "2", 3d};
+    Object[] objects = {1, "2", 3d};
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     DataOutputStream outputStream = new DataOutputStream(baos);
     SerializeUtils.serializeObjects(objects, outputStream);

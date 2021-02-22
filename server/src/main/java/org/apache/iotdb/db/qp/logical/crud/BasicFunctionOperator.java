@@ -47,8 +47,8 @@ public class BasicFunctionOperator extends FunctionOperator {
    * BasicFunctionOperator Constructor.
    *
    * @param tokenIntType token in Int Type
-   * @param path path
-   * @param value value
+   * @param path         path
+   * @param value        value
    * @throws LogicalOperatorException Logical Operator Exception
    */
   public BasicFunctionOperator(int tokenIntType, PartialPath path, String value)
@@ -127,7 +127,8 @@ public class BasicFunctionOperator extends FunctionOperator {
   public BasicFunctionOperator copy() {
     BasicFunctionOperator ret;
     try {
-      ret = new BasicFunctionOperator(this.tokenIntType, new PartialPath(singlePath.getNodes().clone()), value);
+      ret = new BasicFunctionOperator(this.tokenIntType,
+          new PartialPath(singlePath.getNodes().clone()), value);
     } catch (SQLParserException e) {
       logger.error("error copy:", e);
       return null;

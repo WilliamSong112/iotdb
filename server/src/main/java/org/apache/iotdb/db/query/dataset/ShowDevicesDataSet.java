@@ -21,6 +21,7 @@ package org.apache.iotdb.db.query.dataset;
 
 import static org.apache.iotdb.db.conf.IoTDBConstant.COLUMN_DEVICES;
 import static org.apache.iotdb.db.conf.IoTDBConstant.COLUMN_STORAGE_GROUP;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,8 +44,10 @@ public class ShowDevicesDataSet extends ShowDataSet {
   private boolean hasSgCol;
 
   public ShowDevicesDataSet(ShowDevicesPlan showDevicesPlan) throws MetadataException {
-    super(showDevicesPlan.hasSgCol() ? Arrays.asList(resourcePathsWithSg) : Arrays.asList(resourcePaths),
-        showDevicesPlan.hasSgCol() ? Arrays.asList(resourceTypesWithSg) : Arrays.asList(resourceTypes));
+    super(showDevicesPlan.hasSgCol() ? Arrays.asList(resourcePathsWithSg)
+            : Arrays.asList(resourcePaths),
+        showDevicesPlan.hasSgCol() ? Arrays.asList(resourceTypesWithSg)
+            : Arrays.asList(resourceTypes));
     hasSgCol = showDevicesPlan.hasSgCol();
     this.plan = showDevicesPlan;
     hasLimit = plan.hasLimit();

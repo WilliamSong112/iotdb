@@ -73,8 +73,11 @@ public class DeletionQueryTest {
     EnvironmentUtils.envSetUp();
     IoTDB.metaManager.setStorageGroup(new PartialPath(processorName));
     for (int i = 0; i < 10; i++) {
-      IoTDB.metaManager.createTimeseries(new PartialPath(processorName + TsFileConstant.PATH_SEPARATOR + measurements[i]), dataType,
-          encoding, TSFileDescriptor.getInstance().getConfig().getCompressor(), Collections.emptyMap());
+      IoTDB.metaManager.createTimeseries(
+          new PartialPath(processorName + TsFileConstant.PATH_SEPARATOR + measurements[i]),
+          dataType,
+          encoding, TSFileDescriptor.getInstance().getConfig().getCompressor(),
+          Collections.emptyMap());
     }
   }
 
@@ -296,7 +299,8 @@ public class DeletionQueryTest {
     StorageEngine.getInstance().delete(new PartialPath(processorName, measurements[3]), 0, 250, -1);
     StorageEngine.getInstance().delete(new PartialPath(processorName, measurements[4]), 0, 250, -1);
     StorageEngine.getInstance().delete(new PartialPath(processorName, measurements[5]), 0, 230, -1);
-    StorageEngine.getInstance().delete(new PartialPath(processorName, measurements[5]), 230, 250, -1);
+    StorageEngine.getInstance()
+        .delete(new PartialPath(processorName, measurements[5]), 230, 250, -1);
 
     StorageEngine.getInstance().syncCloseAllProcessor();
 

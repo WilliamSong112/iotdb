@@ -35,10 +35,10 @@ import org.apache.iotdb.tsfile.write.schema.MeasurementSchema;
 
 /**
  * IMemTable is designed to store data points which are not flushed into TsFile yet. An instance of
- * IMemTable maintains all series belonging to one StorageGroup,
- * corresponding to one StorageGroupProcessor.<br> The concurrent control of IMemTable
- * is based on the concurrent control of StorageGroupProcessor, i.e., Writing and
- * querying operations must already have gotten writeLock and readLock respectively.<br>
+ * IMemTable maintains all series belonging to one StorageGroup, corresponding to one
+ * StorageGroupProcessor.<br> The concurrent control of IMemTable is based on the concurrent control
+ * of StorageGroupProcessor, i.e., Writing and querying operations must already have gotten
+ * writeLock and readLock respectively.<br>
  */
 public interface IMemTable {
 
@@ -71,6 +71,7 @@ public interface IMemTable {
 
   /**
    * only used when mem control enabled
+   *
    * @return whether the average number of points in each WritableChunk reaches the threshold
    */
   boolean reachTotalPointNumThreshold();
@@ -89,7 +90,8 @@ public interface IMemTable {
       throws WriteProcessException;
 
   ReadOnlyMemChunk query(String deviceId, String measurement, TSDataType dataType,
-      TSEncoding encoding, Map<String, String> props, long timeLowerBound, List<TimeRange> deletionList)
+      TSEncoding encoding, Map<String, String> props, long timeLowerBound,
+      List<TimeRange> deletionList)
       throws IOException, QueryProcessException, MetadataException;
 
   /**
@@ -100,13 +102,13 @@ public interface IMemTable {
   boolean isEmpty();
 
   /**
-   * Delete data in it whose timestamp <= 'timestamp' and belonging to timeseries
-   * path. Only called for non-flushing MemTable.
+   * Delete data in it whose timestamp <= 'timestamp' and belonging to timeseries path. Only called
+   * for non-flushing MemTable.
    *
-   * @param path the PartialPath the timeseries to be deleted.
-   * @param devicePath the device path of the timeseries to be deleted.
+   * @param path           the PartialPath the timeseries to be deleted.
+   * @param devicePath     the device path of the timeseries to be deleted.
    * @param startTimestamp the lower-bound of deletion time.
-   * @param endTimestamp the upper-bound of deletion time
+   * @param endTimestamp   the upper-bound of deletion time
    */
   void delete(PartialPath path, PartialPath devicePath, long startTimestamp, long endTimestamp);
 
@@ -122,8 +124,7 @@ public interface IMemTable {
   void release();
 
   /**
-   * must guarantee the device exists in the work memtable
-   * only used when mem control enabled
+   * must guarantee the device exists in the work memtable only used when mem control enabled
    */
   boolean checkIfChunkDoesNotExist(String deviceId, String measurement);
 

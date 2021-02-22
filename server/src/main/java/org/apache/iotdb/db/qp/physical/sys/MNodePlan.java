@@ -31,6 +31,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class MNodePlan extends PhysicalPlan {
+
   protected String name;
   protected int childSize;
 
@@ -107,7 +108,7 @@ public class MNodePlan extends PhysicalPlan {
     }
     MNodePlan that = (MNodePlan) o;
     return Objects.equals(name, that.name)
-      && Objects.equals(childSize, that.childSize);
+        && Objects.equals(childSize, that.childSize);
   }
 
   @Override

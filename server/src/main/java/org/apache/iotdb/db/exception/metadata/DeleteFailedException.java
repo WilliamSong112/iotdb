@@ -28,7 +28,7 @@ public class DeleteFailedException extends MetadataException {
 
   public DeleteFailedException(String name) {
     super(String.format("Node [%s] is being used. Deletion failed.", name),
-            TSStatusCode.NODE_DELETE_FAILED_ERROR.getStatusCode());
+        TSStatusCode.NODE_DELETE_FAILED_ERROR.getStatusCode());
     this.name = name;
   }
 

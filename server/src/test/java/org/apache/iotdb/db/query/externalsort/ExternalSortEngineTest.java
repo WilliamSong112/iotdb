@@ -41,7 +41,8 @@ import java.util.Random;
 
 public class ExternalSortEngineTest {
 
-  private String baseDir = TestConstant.BASE_OUTPUT_PATH.concat("externalSortTestTmp").concat(File.separator);
+  private String baseDir = TestConstant.BASE_OUTPUT_PATH.concat("externalSortTestTmp")
+      .concat(File.separator);
   private long queryId = EnvironmentUtils.TEST_QUERY_JOB_ID;
   private SimpleExternalSortEngine engine;
   private String preBaseDir;

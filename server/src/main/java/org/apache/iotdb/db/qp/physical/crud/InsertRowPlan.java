@@ -91,7 +91,7 @@ public class InsertRowPlan extends InsertPlan {
   }
 
   public InsertRowPlan(PartialPath deviceId, long insertTime, String[] measurementList,
-      ByteBuffer  values) throws QueryProcessException {
+      ByteBuffer values) throws QueryProcessException {
     super(Operator.OperatorType.INSERT);
     this.time = insertTime;
     this.deviceId = deviceId;

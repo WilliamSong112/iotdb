@@ -42,8 +42,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * RecoverMergeTask is an extension of MergeTask, which resumes the last merge progress by
- * scanning merge.log using LogAnalyzer and continue the unfinished merge.
+ * RecoverMergeTask is an extension of MergeTask, which resumes the last merge progress by scanning
+ * merge.log using LogAnalyzer and continue the unfinished merge.
  */
 public class RecoverMergeTask extends MergeTask {
 
@@ -55,7 +55,8 @@ public class RecoverMergeTask extends MergeTask {
       List<TsFileResource> unseqFiles, String storageGroupSysDir,
       MergeCallback callback, String taskName,
       boolean fullMerge, String storageGroupName) {
-    super(seqFiles, unseqFiles, storageGroupSysDir, callback, taskName, fullMerge, storageGroupName);
+    super(seqFiles, unseqFiles, storageGroupSysDir, callback, taskName, fullMerge,
+        storageGroupName);
   }
 
   public void recoverMerge(boolean continueMerge) throws IOException, MetadataException {
@@ -103,7 +104,8 @@ public class RecoverMergeTask extends MergeTask {
             + "increase the budget or disable continueMergeAfterReboot");
       }
 
-      MergeMultiChunkTask mergeChunkTask = new MergeMultiChunkTask(mergeContext, taskName, mergeLogger, resource,
+      MergeMultiChunkTask mergeChunkTask = new MergeMultiChunkTask(mergeContext, taskName,
+          mergeLogger, resource,
           fullMerge, analyzer.getUnmergedPaths(), concurrentMergeSeriesNum, storageGroupName);
       analyzer.setUnmergedPaths(null);
       mergeChunkTask.mergeSeries();
@@ -157,7 +159,7 @@ public class RecoverMergeTask extends MergeTask {
       long totalChunkNum = chunkNums[0];
       long maxChunkNum = chunkNums[1];
       long fileMetaSize = MergeUtils.getFileMetaSize(seqFile, resource.getFileReader(seqFile));
-      long newSingleSeriesSeqReadCost =  fileMetaSize * maxChunkNum / totalChunkNum;
+      long newSingleSeriesSeqReadCost = fileMetaSize * maxChunkNum / totalChunkNum;
       singleSeriesSeqReadCost = Math.max(newSingleSeriesSeqReadCost, singleSeriesSeqReadCost);
       maxSeqReadCost = Math.max(fileMetaSize, maxSeqReadCost);
       seqWriteCost += fileMetaSize;
@@ -195,7 +197,7 @@ public class RecoverMergeTask extends MergeTask {
       List<PartialPath> pathsToRecover = analyzer.getMergedPaths();
       int cnt = 0;
       double progress = 0.0;
-      for(PartialPath path : pathsToRecover) {
+      for (PartialPath path : pathsToRecover) {
         recoverChunkCounts(path, tsFileResource, mergeFileWriter);
         if (logger.isInfoEnabled()) {
           cnt += 1.0;
@@ -229,17 +231,18 @@ public class RecoverMergeTask extends MergeTask {
       ChunkMetadata mergedChunk = mergeFileChunks.get(mergeChunkIndex);
       if (seqChunk.getStartTime() < mergedChunk.getStartTime()) {
         // this seqChunk is unmerged
-        unmergedCnt ++;
-        seqChunkIndex ++;
-        mergeContext.getUnmergedChunkStartTimes().get(tsFileResource).get(path).add(seqChunk.getStartTime());
+        unmergedCnt++;
+        seqChunkIndex++;
+        mergeContext.getUnmergedChunkStartTimes().get(tsFileResource).get(path)
+            .add(seqChunk.getStartTime());
       } else if (mergedChunk.getStartTime() <= seqChunk.getStartTime() &&
           seqChunk.getStartTime() <= mergedChunk.getEndTime()) {
         // this seqChunk is merged
-        seqChunkIndex ++;
+        seqChunkIndex++;
       } else {
         // seqChunk.startTime > mergeChunk.endTime, find next mergedChunk that may cover the
         // seqChunk
-        mergeChunkIndex ++;
+        mergeChunkIndex++;
       }
     }
     int finalUnmergedCnt = unmergedCnt;

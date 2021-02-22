@@ -72,7 +72,8 @@ public class FillQueryExecutor {
         PartialPath path = selectedSeries.get(i);
         TSDataType dataType = dataTypes.get(i);
         IFill fill;
-        long defaultFillInterval = IoTDBDescriptor.getInstance().getConfig().getDefaultFillInterval();
+        long defaultFillInterval = IoTDBDescriptor.getInstance().getConfig()
+            .getDefaultFillInterval();
         if (!typeIFillMap.containsKey(dataType)) {
           switch (dataType) {
             case INT32:

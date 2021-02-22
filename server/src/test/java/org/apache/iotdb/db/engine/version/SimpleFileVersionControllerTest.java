@@ -30,6 +30,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SimpleFileVersionControllerTest {
+
   @Test
   public void test() throws IOException {
     String tempFilePath = TestConstant.BASE_OUTPUT_PATH.concat("version.tmp");

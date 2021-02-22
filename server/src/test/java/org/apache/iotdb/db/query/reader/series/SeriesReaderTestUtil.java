@@ -171,7 +171,8 @@ public class SeriesReaderTestUtil {
     for (String device : deviceIds) {
       for (MeasurementSchema measurementSchema : measurementSchemas) {
         IoTDB.metaManager.createTimeseries(
-            new PartialPath(device + PATH_SEPARATOR + measurementSchema.getMeasurementId()), measurementSchema
+            new PartialPath(device + PATH_SEPARATOR + measurementSchema.getMeasurementId()),
+            measurementSchema
                 .getType(), measurementSchema.getEncodingType(), measurementSchema.getCompressor(),
             Collections.emptyMap());
       }

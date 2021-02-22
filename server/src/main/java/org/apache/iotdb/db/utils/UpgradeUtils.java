@@ -41,7 +41,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
 public class UpgradeUtils {
 
   private static final Logger logger = LoggerFactory.getLogger(UpgradeUtils.class);
@@ -52,6 +51,7 @@ public class UpgradeUtils {
   private static FSFactory fsFactory = FSFactoryProducer.getFSFactory();
 
   private static Map<String, Integer> upgradeRecoverMap = new HashMap<>();
+
   public static ReadWriteLock getCntUpgradeFileLock() {
     return cntUpgradeFileLock;
   }
@@ -77,7 +77,7 @@ public class UpgradeUtils {
     try (TsFileSequenceReaderForV2 tsFileSequenceReader = new TsFileSequenceReaderForV2(
         tsFileResource.getTsFile().getAbsolutePath())) {
       String versionNumber = tsFileSequenceReader.readVersionNumberV2();
-      if (versionNumber.equals(TSFileConfig.VERSION_NUMBER_V2) 
+      if (versionNumber.equals(TSFileConfig.VERSION_NUMBER_V2)
           || versionNumber.equals(TSFileConfig.VERSION_NUMBER_V1)) {
         return true;
       }
@@ -103,7 +103,7 @@ public class UpgradeUtils {
       // move upgraded TsFile
       if (upgradedFile.exists()) {
         fsFactory.moveFile(upgradedFile,
-          fsFactory.getFile(partitionDir, upgradedFile.getName()));
+            fsFactory.getFile(partitionDir, upgradedFile.getName()));
       }
       // get temp resource
       File tempResourceFile = fsFactory
@@ -139,7 +139,7 @@ public class UpgradeUtils {
   }
 
   public static boolean isUpgradedFileGenerated(String oldFileName) {
-    return upgradeRecoverMap.containsKey(oldFileName) 
+    return upgradeRecoverMap.containsKey(oldFileName)
         && upgradeRecoverMap.get(oldFileName) == UpgradeCheckStatus.AFTER_UPGRADE_FILE
         .getCheckStatusCode();
   }
@@ -176,7 +176,8 @@ public class UpgradeUtils {
                   if (generatedFile.getName().equals(FSFactoryProducer.getFSFactory()
                       .getFile(key).getName())) {
                     Files.delete(generatedFile.toPath());
-                    Files.deleteIfExists(new File(generatedFile + ModificationFile.FILE_SUFFIX).toPath());
+                    Files.deleteIfExists(
+                        new File(generatedFile + ModificationFile.FILE_SUFFIX).toPath());
                   }
                 }
               }

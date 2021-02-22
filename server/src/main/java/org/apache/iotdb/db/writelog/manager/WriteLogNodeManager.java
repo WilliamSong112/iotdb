@@ -34,7 +34,7 @@ public interface WriteLogNodeManager {
    * nameOfTsFile}". The WriteLogNode will be automatically created if not exist.
    *
    * @param identifier -identifier, the format: "{storageGroupName}-{BufferWrite/Overflow}-{
-   * nameOfTsFile}"
+   *                   nameOfTsFile}"
    */
   WriteLogNode getNode(String identifier, Supplier<ByteBuffer[]> supplier);
 

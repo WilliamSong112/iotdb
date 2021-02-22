@@ -39,8 +39,8 @@ public interface ISyncSenderLogAnalyzer {
   void loadLastLocalFiles(Set<String> lastLocalFiles);
 
   /**
-   * Load the sync log, which indicates the progress of the last synchronization task.
-   * Deleted files and new tsfiles can be obtained by log analysis.
+   * Load the sync log, which indicates the progress of the last synchronization task. Deleted files
+   * and new tsfiles can be obtained by log analysis.
    */
   void loadLogger(Set<String> deletedFiles, Set<String> newFiles);
 

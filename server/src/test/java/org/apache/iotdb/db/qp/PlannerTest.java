@@ -166,6 +166,13 @@ public class PlannerTest {
     PhysicalPlan plan13 = processor.parseSQLToPhysicalPlan(queryStatement2);
     assertEquals(OperatorType.QUERY, plan13.getOperatorType());
 
+    String showChildNodesStatement = "SHOW CHILD NODES root.vehicle1.device1";
+    String showChildPathsStatement = "SHOW CHILD PATHS root.vehicle1.device1";
+    PhysicalPlan plan14 = processor.parseSQLToPhysicalPlan(showChildNodesStatement);
+    PhysicalPlan plan15 = processor.parseSQLToPhysicalPlan(showChildPathsStatement);
+
+//    assertEquals(OperatorType.SET_STORAGE_GROUP, plan1.getOperatorType());
+
     String insertStatementException = "insert into root.vehicle.d0(timestamp,s0,s1) values(10,100)";
     try {
       processor.parseSQLToPhysicalPlan(insertStatementException);
@@ -174,6 +181,13 @@ public class PlannerTest {
           "the measurementList's size 2 is not consistent with the valueList's size 1")
           .getMessage(), e.getMessage());
     }
+  }
+
+  @Test
+  public void parseShowChildNodeToPhysicalPlan() throws Exception {
+    String showChildNodesStatement = "show child nodes root.vehicle1.device1";
+    PhysicalPlan plan14 = processor.parseSQLToPhysicalPlan(showChildNodesStatement);
+    assertEquals(OperatorType.SHOW, plan14.getOperatorType());
   }
 
   @Test(expected = ParseCancellationException.class)

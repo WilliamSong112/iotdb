@@ -40,7 +40,8 @@ public class ShowTimeSeriesResult extends ShowResult {
   private Map<String, String> attributes;
 
   public ShowTimeSeriesResult(String name, String alias, String sgName, TSDataType dataType,
-      TSEncoding encoding, CompressionType compressor, Map<String, String> tags, Map<String, String> attributes) {
+      TSEncoding encoding, CompressionType compressor, Map<String, String> tags,
+      Map<String, String> attributes) {
     super(name, sgName);
     this.alias = alias;
     this.dataType = dataType;
@@ -95,7 +96,8 @@ public class ShowTimeSeriesResult extends ShowResult {
     return Objects.hash(name);
   }
 
-  private void writeNullable(Map<String,String> param, OutputStream outputStream) throws IOException {
+  private void writeNullable(Map<String, String> param, OutputStream outputStream)
+      throws IOException {
     ReadWriteIOUtils.write(param != null, outputStream);
     if (param != null) {
       ReadWriteIOUtils.write(tags.size(), outputStream);

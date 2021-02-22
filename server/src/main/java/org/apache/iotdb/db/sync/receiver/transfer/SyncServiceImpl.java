@@ -234,8 +234,8 @@ public class SyncServiceImpl implements SyncService.Iface {
         currentFile.get().delete();
         currentFileWriter.set(new FileOutputStream(currentFile.get()));
         return getErrorResult(String
-                .format("Digest of the sender is differ from digest of the receiver of the file %s.",
-                        currentFile.get().getAbsolutePath()));
+            .format("Digest of the sender is differ from digest of the receiver of the file %s.",
+                currentFile.get().getAbsolutePath()));
       } else {
         if (currentFile.get().getName().endsWith(MetadataConstant.METADATA_LOG)) {
           loadMetadata();
@@ -333,7 +333,8 @@ public class SyncServiceImpl implements SyncService.Iface {
   }
 
   /**
-   * release resources or cleanup when a client (a sender) is disconnected (normally or abnormally).
+   * release resources or cleanup when a client (a sender) is disconnected (normally or
+   * abnormally).
    */
   public void handleClientExit() {
     //do nothing now

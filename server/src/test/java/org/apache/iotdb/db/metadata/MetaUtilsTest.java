@@ -44,7 +44,8 @@ public class MetaUtilsTest {
     assertArrayEquals(Arrays.asList("root", "\"s g\"", "\"d_.1\"", "\"s.1.1\"").toArray(),
         MetaUtils.splitPathToDetachedPath("root.\"s g\".\"d_.1\".\"s.1.1\""));
 
-    assertArrayEquals(Arrays.asList("root", "1").toArray(), MetaUtils.splitPathToDetachedPath("root.1"));
+    assertArrayEquals(Arrays.asList("root", "1").toArray(),
+        MetaUtils.splitPathToDetachedPath("root.1"));
 
     assertArrayEquals(Arrays.asList("root", "sg", "d1", "s", "1").toArray(),
         MetaUtils.splitPathToDetachedPath("root.sg.d1.s.1"));

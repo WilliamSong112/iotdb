@@ -26,8 +26,7 @@ public enum IndexType {
   NO_INDEX,
   RTREE_PAA,
   ELB_INDEX,
-  KV_INDEX
-  ;
+  KV_INDEX;
 
   /**
    * judge the index type.

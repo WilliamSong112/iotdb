@@ -40,8 +40,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Notice that, all test begins with "IoTDB" is integration test. All test which will start the IoTDB server should be
- * defined as integration test.
+ * Notice that, all test begins with "IoTDB" is integration test. All test which will start the
+ * IoTDB server should be defined as integration test.
  */
 public class IoTDBFloatPrecisionIT {
 
@@ -67,20 +67,20 @@ public class IoTDBFloatPrecisionIT {
     EnvironmentUtils.cleanEnv();
   }
 
-  private static void initCreateSQLStatement(){
+  private static void initCreateSQLStatement() {
     sqls.add("SET STORAGE GROUP TO root.vehicle.f0");
     sqls.add("SET STORAGE GROUP TO root.vehicle.d0");
-    for(int i = 0; i < 10; i++){
-      sqls.add(String.format(CREATE_TEMPLATE_SQL, "f0", "s"+i+"rle", "FLOAT", "RLE", i));
-      sqls.add(String.format(CREATE_TEMPLATE_SQL, "f0", "s"+i+"2f", "FLOAT", "TS_2DIFF", i));
-      sqls.add(String.format(CREATE_TEMPLATE_SQL, "d0", "s"+i+"rle", "DOUBLE", "RLE", i));
-      sqls.add(String.format(CREATE_TEMPLATE_SQL, "d0", "s"+i+"2f", "DOUBLE", "TS_2DIFF", i));
+    for (int i = 0; i < 10; i++) {
+      sqls.add(String.format(CREATE_TEMPLATE_SQL, "f0", "s" + i + "rle", "FLOAT", "RLE", i));
+      sqls.add(String.format(CREATE_TEMPLATE_SQL, "f0", "s" + i + "2f", "FLOAT", "TS_2DIFF", i));
+      sqls.add(String.format(CREATE_TEMPLATE_SQL, "d0", "s" + i + "rle", "DOUBLE", "RLE", i));
+      sqls.add(String.format(CREATE_TEMPLATE_SQL, "d0", "s" + i + "2f", "DOUBLE", "TS_2DIFF", i));
     }
-    for(int i = 0; i < 10; i++){
-      sqls.add(String.format(INSERT_TEMPLATE_SQL, "f0", "s"+i+"rle", TIMESTAMP, VALUE));
-      sqls.add(String.format(INSERT_TEMPLATE_SQL, "f0", "s"+i+"2f", TIMESTAMP, VALUE));
-      sqls.add(String.format(INSERT_TEMPLATE_SQL, "d0", "s"+i+"rle", TIMESTAMP, VALUE));
-      sqls.add(String.format(INSERT_TEMPLATE_SQL, "d0", "s"+i+"2f", TIMESTAMP, VALUE));
+    for (int i = 0; i < 10; i++) {
+      sqls.add(String.format(INSERT_TEMPLATE_SQL, "f0", "s" + i + "rle", TIMESTAMP, VALUE));
+      sqls.add(String.format(INSERT_TEMPLATE_SQL, "f0", "s" + i + "2f", TIMESTAMP, VALUE));
+      sqls.add(String.format(INSERT_TEMPLATE_SQL, "d0", "s" + i + "rle", TIMESTAMP, VALUE));
+      sqls.add(String.format(INSERT_TEMPLATE_SQL, "d0", "s" + i + "2f", TIMESTAMP, VALUE));
     }
 
   }
@@ -132,7 +132,7 @@ public class IoTDBFloatPrecisionIT {
       }
 
       statement.execute("flush");
-      try (ResultSet resultSet =statement.executeQuery("select * from root")) {
+      try (ResultSet resultSet = statement.executeQuery("select * from root")) {
         cnt = 0;
         while (resultSet.next()) {
           assertEquals(TIMESTAMP + "", resultSet.getString(TIMESTAMP_STR));

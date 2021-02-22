@@ -197,7 +197,8 @@ public class MTree implements Serializable {
    * @param alias      alias of measurement
    */
   MeasurementMNode createTimeseries(PartialPath path, TSDataType dataType, TSEncoding encoding,
-      CompressionType compressor, Map<String, String> props, String alias) throws MetadataException {
+      CompressionType compressor, Map<String, String> props, String alias)
+      throws MetadataException {
     String[] nodeNames = path.getNodes();
     if (nodeNames.length <= 2 || !nodeNames[0].equals(root.getName())) {
       throw new IllegalPathException(path.getFullPath());
@@ -258,7 +259,8 @@ public class MTree implements Serializable {
   }
 
   //check if sdt parameters are valid
-  private void checkSDTFormat(String path, Map<String, String> props) throws IllegalParameterOfPathException {
+  private void checkSDTFormat(String path, Map<String, String> props)
+      throws IllegalParameterOfPathException {
     if (!props.containsKey(SDT_COMP_DEV)) {
       throw new IllegalParameterOfPathException("SDT compression deviation is required", path);
     }
@@ -266,7 +268,8 @@ public class MTree implements Serializable {
     try {
       double d = Double.parseDouble(props.get(SDT_COMP_DEV));
       if (d < 0) {
-        throw new IllegalParameterOfPathException("SDT compression deviation cannot be negative", path);
+        throw new IllegalParameterOfPathException("SDT compression deviation cannot be negative",
+            path);
       }
     } catch (NumberFormatException e) {
       throw new IllegalParameterOfPathException("SDT compression deviation formatting error", path);
@@ -290,10 +293,12 @@ public class MTree implements Serializable {
       try {
         time = Long.parseLong(props.get(compTime));
         if (time < 0) {
-          throw new IllegalParameterOfPathException(String.format("SDT compression %s time cannot be negative", s), path);
+          throw new IllegalParameterOfPathException(
+              String.format("SDT compression %s time cannot be negative", s), path);
         }
       } catch (IllegalParameterOfPathException e) {
-        throw new IllegalParameterOfPathException(String.format("SDT compression %s time formatting error", s), path);
+        throw new IllegalParameterOfPathException(
+            String.format("SDT compression %s time formatting error", s), path);
       }
     } else {
       logger.info("{} enabled SDT but did not set compression {} time", path, s);
@@ -652,12 +657,11 @@ public class MTree implements Serializable {
   }
 
   /**
-   * Get the storage group that given path belonged to or under given path
-   * All related storage groups refer two cases:
-   * 1. Storage groups with a prefix that is identical to path, e.g. given path "root.sg1",
-   *    storage group "root.sg1.sg2" and "root.sg1.sg3" will be added into result list.
-   * 2. Storage group that this path belongs to, e.g. given path "root.sg1.d1", and it is in
-   *    storage group "root.sg1". Then we adds "root.sg1" into result list.
+   * Get the storage group that given path belonged to or under given path All related storage
+   * groups refer two cases: 1. Storage groups with a prefix that is identical to path, e.g. given
+   * path "root.sg1", storage group "root.sg1.sg2" and "root.sg1.sg3" will be added into result
+   * list. 2. Storage group that this path belongs to, e.g. given path "root.sg1.d1", and it is in
+   * storage group "root.sg1". Then we adds "root.sg1" into result list.
    *
    * @return a list contains all storage groups related to given path
    */
@@ -687,13 +691,11 @@ public class MTree implements Serializable {
   }
 
   /**
-   * Traverse the MTree to match all storage group with prefix path.
-   * When trying to find storage groups via a path, we divide into two cases:
-   * 1. This path is only regarded as a prefix, in other words, this path is part of the result
-   *    storage groups.
-   * 2. This path is a full path and we use this method to find its belonged storage group.
-   * When prefixOnly is set to true, storage group paths in 1 is only added into result,
-   * otherwise, both 1 and 2 are returned.
+   * Traverse the MTree to match all storage group with prefix path. When trying to find storage
+   * groups via a path, we divide into two cases: 1. This path is only regarded as a prefix, in
+   * other words, this path is part of the result storage groups. 2. This path is a full path and we
+   * use this method to find its belonged storage group. When prefixOnly is set to true, storage
+   * group paths in 1 is only added into result, otherwise, both 1 and 2 are returned.
    *
    * @param node              the current traversing node
    * @param nodes             split the prefix path with '.'
@@ -799,9 +801,8 @@ public class MTree implements Serializable {
    * Get all timeseries paths under the given path
    *
    * @param prefixPath a prefix path or a full path, may contain '*'.
-   *
-   * @return Pair.left  contains all the satisfied paths
-   *         Pair.right means the current offset or zero if we don't set offset.
+   * @return Pair.left  contains all the satisfied paths Pair.right means the current offset or zero
+   * if we don't set offset.
    */
   Pair<List<PartialPath>, Integer> getAllTimeseriesPathWithAlias(PartialPath prefixPath, int limit,
       int offset) throws MetadataException {
@@ -1171,6 +1172,71 @@ public class MTree implements Serializable {
     }
   }
 
+
+  /**
+   * Get child node  in the next level of the given path.
+   *
+   * <p>e.g., MTree has [root.sg1.d1.s1, root.sg1.d1.s2, root.sg1.d2.s1] given path = root.sg1,
+   * return [d1, d2]
+   * <p>e.g., MTree has [root.sg1.d1.s1, root.sg1.d1.s2, root.sg1.d2.s1] given path = root.sg1.d1
+   * return [s1, s2]
+   *
+   * @return All child nodes' seriesPath(s) of given seriesPath.
+   */
+  Set<String> getChildNodeInNextLevel(PartialPath path) throws MetadataException {
+    String[] nodes = path.getNodes();
+    if (nodes.length == 0 || !nodes[0].equals(root.getName())) {
+      throw new IllegalPathException(path.getFullPath());
+    }
+    Set<String> childNodes = new TreeSet<>();
+    findChildNodeInNextLevel(root, nodes, 1, "", childNodes, nodes.length + 1);
+    return childNodes;
+  }
+
+  /**
+   * Traverse the MTree to match all child node path in next level
+   *
+   * @param node   the current traversing node
+   * @param nodes  split the prefix path with '.'
+   * @param idx    the current index of array nodes
+   * @param parent store the node string having traversed
+   * @param res    store all matched device names
+   * @param length expected length of path
+   */
+  @SuppressWarnings("squid:S3776") // Suppress high Cognitive Complexity warning
+  private void findChildNodeInNextLevel(
+      MNode node, String[] nodes, int idx, String parent, Set<String> res, int length) {
+    if (node == null) {
+      return;
+    }
+    String nodeReg = MetaUtils.getNodeRegByIdx(idx, nodes);
+    if (!nodeReg.contains(PATH_WILDCARD)) {
+      if (idx == length) {
+        res.add(node.getName());
+      } else {
+        findChildNodeInNextLevel(node.getChild(nodeReg), nodes, idx + 1,
+            parent + node.getName() + PATH_SEPARATOR, res, length);
+      }
+    } else {
+      if (node.getChildren().size() > 0) {
+        for (MNode child : node.getChildren().values()) {
+          if (!Pattern.matches(nodeReg.replace("*", ".*"), child.getName())) {
+            continue;
+          }
+          if (idx == length) {
+            res.add(node.getName());
+          } else {
+            findChildNodeInNextLevel(
+                child, nodes, idx + 1, parent + node.getName() + PATH_SEPARATOR, res, length);
+          }
+        }
+      } else if (idx == length) {
+        String nodeName = node.getName();
+        res.add(nodeName);
+      }
+    }
+  }
+
   /**
    * Get all devices under give path
    *
@@ -1205,7 +1271,8 @@ public class MTree implements Serializable {
     List<ShowDevicesResult> res = new ArrayList<>();
     for (PartialPath device : devices) {
       if (plan.hasSgCol()) {
-        res.add(new ShowDevicesResult(device.getFullPath(), getStorageGroupPath(device).getFullPath()));
+        res.add(
+            new ShowDevicesResult(device.getFullPath(), getStorageGroupPath(device).getFullPath()));
       } else {
         res.add(new ShowDevicesResult(device.getFullPath()));
       }
@@ -1222,7 +1289,8 @@ public class MTree implements Serializable {
    * @param res   store all matched device names
    */
   @SuppressWarnings("squid:S3776")
-  private void findDevices(MNode node, String[] nodes, int idx, Set<PartialPath> res, boolean hasLimit) {
+  private void findDevices(MNode node, String[] nodes, int idx, Set<PartialPath> res,
+      boolean hasLimit) {
     String nodeReg = MetaUtils.getNodeRegByIdx(idx, nodes);
     // the node path doesn't contains '*'
     if (!nodeReg.contains(PATH_WILDCARD)) {

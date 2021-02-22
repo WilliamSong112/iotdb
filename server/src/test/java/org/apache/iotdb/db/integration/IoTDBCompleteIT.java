@@ -31,8 +31,8 @@ import org.junit.Test;
 import java.sql.*;
 
 /**
- * Notice that, all test begins with "IoTDB" is integration test. All test which will start the IoTDB server should be
- * defined as integration test.
+ * Notice that, all test begins with "IoTDB" is integration test. All test which will start the
+ * IoTDB server should be defined as integration test.
  */
 public class IoTDBCompleteIT {
 
@@ -47,7 +47,8 @@ public class IoTDBCompleteIT {
   @After
   public void tearDown() throws Exception {
     EnvironmentUtils.cleanEnv();
-    HashVirtualPartitioner.getInstance().setStorageGroupNum(IoTDBDescriptor.getInstance().getConfig().getVirtualStorageGroupNum());
+    HashVirtualPartitioner.getInstance()
+        .setStorageGroupNum(IoTDBDescriptor.getInstance().getConfig().getVirtualStorageGroupNum());
   }
 
   @Test
@@ -318,8 +319,8 @@ public class IoTDBCompleteIT {
         "DELETE FROM root.vehicle.d0.s0 WHERE time <= 10",
         "INSERT INTO root.vehicle.d0(timestamp,s0) values(NOW(),5)",
         "SELECT * FROM root.vehicle.d0",
-        "NOW(),5,\n","DELETE FROM root.vehicle.d0.s0 WHERE time <= NOW()",
-        "SELECT * FROM root.vehicle.d0","",
+        "NOW(),5,\n", "DELETE FROM root.vehicle.d0.s0 WHERE time <= NOW()",
+        "SELECT * FROM root.vehicle.d0", "",
         "SELECT COUNT(s0) FROM root.vehicle.d0", "0,0,\n",
         "SELECT MAX_TIME(s0) FROM root.vehicle.d0", "",
         "SELECT MIN_TIME(s0) FROM root.vehicle.d0", "",

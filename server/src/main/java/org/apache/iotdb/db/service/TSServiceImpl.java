@@ -557,7 +557,8 @@ public class TSServiceImpl implements TSIService.Iface, ServerContext {
         OperatorType operatorType = plan.getOperatorType();
         if (operatorType == OperatorType.AGGREGATION || operatorType == OperatorType.FILL
             || operatorType == OperatorType.GROUPBYTIME) {
-          throw new QueryProcessException(operatorType.name() + " doesn't support disable align clause.");
+          throw new QueryProcessException(
+              operatorType.name() + " doesn't support disable align clause.");
         }
       }
       if (plan.getOperatorType() == OperatorType.AGGREGATION) {
@@ -678,7 +679,8 @@ public class TSServiceImpl implements TSIService.Iface, ServerContext {
   calculate fetch size for group by time plan
    */
   private int getFetchSizeForGroupByTimePlan(GroupByTimePlan groupByTimePlan) {
-    int rows =  (int) ((groupByTimePlan.getEndTime() - groupByTimePlan.getStartTime()) / groupByTimePlan
+    int rows = (int) ((groupByTimePlan.getEndTime() - groupByTimePlan.getStartTime())
+        / groupByTimePlan
         .getInterval());
     // rows gets 0 is caused by: the end time - the start time < the time interval.
     if (rows == 0 && groupByTimePlan.isIntervalByMonth()) {
@@ -1149,8 +1151,8 @@ public class TSServiceImpl implements TSIService.Iface, ServerContext {
     }
 
     TSStatus resp = RpcUtils.getStatus(statusList);
-    for(TSStatus status : resp.subStatus){
-      if(status.code != TSStatusCode.SUCCESS_STATUS.getStatusCode()){
+    for (TSStatus status : resp.subStatus) {
+      if (status.code != TSStatusCode.SUCCESS_STATUS.getStatusCode()) {
         return resp;
       }
     }

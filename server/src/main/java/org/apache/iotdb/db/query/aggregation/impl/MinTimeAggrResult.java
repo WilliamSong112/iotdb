@@ -94,7 +94,8 @@ public class MinTimeAggrResult extends AggregateResult {
       setLongValue(anotherMinTime.getResult());
       return;
     }
-    if (hasCandidateResult() && anotherMinTime.hasCandidateResult() && getResult() > anotherMinTime.getResult()) {
+    if (hasCandidateResult() && anotherMinTime.hasCandidateResult() && getResult() > anotherMinTime
+        .getResult()) {
       setLongValue(anotherMinTime.getResult());
     }
   }

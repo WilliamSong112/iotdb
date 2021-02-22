@@ -51,7 +51,8 @@ public class MaxSeriesMergeFileSelector extends MaxFileMergeFileSelector {
   public List[] select() throws MergeException {
     long startTime = System.currentTimeMillis();
     try {
-      logger.info("Selecting merge candidates from {} seqFile, {} unseqFiles", resource.getSeqFiles().size(),
+      logger.info("Selecting merge candidates from {} seqFile, {} unseqFiles",
+          resource.getSeqFiles().size(),
           resource.getUnseqFiles().size());
 
       searchMaxSeriesNum();

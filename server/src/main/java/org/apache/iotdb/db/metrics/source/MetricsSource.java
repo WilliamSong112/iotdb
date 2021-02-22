@@ -84,21 +84,24 @@ public class MetricsSource implements Source {
       }
     });
 
-    metricRegistry.register(MetricRegistry.name(SOURCE_NAME, "totalPhysical_memory"), new Gauge<Integer>() {
+    metricRegistry
+        .register(MetricRegistry.name(SOURCE_NAME, "totalPhysical_memory"), new Gauge<Integer>() {
           @Override
           public Integer getValue() {
             return (int) serverArgument.getTotalPhysicalMemory();
           }
         });
 
-    metricRegistry.register(MetricRegistry.name(SOURCE_NAME, "freePhysical_memory"), new Gauge<Integer>() {
+    metricRegistry
+        .register(MetricRegistry.name(SOURCE_NAME, "freePhysical_memory"), new Gauge<Integer>() {
           @Override
           public Integer getValue() {
             return (int) serverArgument.getFreePhysicalMemory();
           }
         });
 
-    metricRegistry.register(MetricRegistry.name(SOURCE_NAME, "usedPhysical_memory"), new Gauge<Integer>() {
+    metricRegistry
+        .register(MetricRegistry.name(SOURCE_NAME, "usedPhysical_memory"), new Gauge<Integer>() {
           @Override
           public Integer getValue() {
             return (int) serverArgument.getUsedPhysicalMemory();

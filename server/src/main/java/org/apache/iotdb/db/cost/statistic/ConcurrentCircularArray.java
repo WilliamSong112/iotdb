@@ -63,7 +63,7 @@ public class ConcurrentCircularArray {
   /**
    * drop all of the elements in array.
    */
-  public synchronized void clear(){
+  public synchronized void clear() {
     tail = head = 0;
   }
 }

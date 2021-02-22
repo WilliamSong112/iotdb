@@ -179,7 +179,8 @@ public class IoTDBInsertWithQueryIT {
   }
 
   @Test
-  public void flushWithQueryUnorderLargerTest() throws ClassNotFoundException, InterruptedException {
+  public void flushWithQueryUnorderLargerTest()
+      throws ClassNotFoundException, InterruptedException {
     // insert
     insertData(0, 100);
     insertData(500, 600);
@@ -362,7 +363,7 @@ public class IoTDBInsertWithQueryIT {
         }
       });
 
-      if(i == 2){
+      if (i == 2) {
         Thread flushThread = new Thread(new Runnable() {
           @Override
           public void run() {
@@ -459,7 +460,7 @@ public class IoTDBInsertWithQueryIT {
         long before = -1;
         while (resultSet.next()) {
           long cur = Long.parseLong(resultSet.getString(TestConstant.TIMESTAMP_STR));
-          if(cur <= before){
+          if (cur <= before) {
             fail("time order is wrong");
           }
           before = cur;
@@ -488,7 +489,7 @@ public class IoTDBInsertWithQueryIT {
         long before = -1;
         while (resultSet.next()) {
           long cur = Long.parseLong(resultSet.getString(TestConstant.TIMESTAMP_STR));
-          if(cur <= before){
+          if (cur <= before) {
             fail("time order is wrong");
           }
           before = cur;

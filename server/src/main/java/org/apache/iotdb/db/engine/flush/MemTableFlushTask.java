@@ -54,8 +54,8 @@ public class MemTableFlushTask {
   private final LinkedBlockingQueue<Object> encodingTaskQueue = new LinkedBlockingQueue<>();
   private final LinkedBlockingQueue<Object> ioTaskQueue = (config.isEnableMemControl()
       && SystemInfo.getInstance().isEncodingFasterThanIo())
-          ? new LinkedBlockingQueue<>(config.getIoTaskQueueSizeForFlushing())
-          : new LinkedBlockingQueue<>();
+      ? new LinkedBlockingQueue<>(config.getIoTaskQueueSizeForFlushing())
+      : new LinkedBlockingQueue<>();
 
   private String storageGroup;
 
@@ -65,19 +65,21 @@ public class MemTableFlushTask {
   private volatile long ioTime = 0L;
 
   /**
-   * @param memTable the memTable to flush
-   * @param writer the writer where memTable will be flushed to (current tsfile writer or vm writer)
+   * @param memTable     the memTable to flush
+   * @param writer       the writer where memTable will be flushed to (current tsfile writer or vm
+   *                     writer)
    * @param storageGroup current storage group
    */
 
-  public MemTableFlushTask(IMemTable memTable, RestorableTsFileIOWriter writer, String storageGroup) {
+  public MemTableFlushTask(IMemTable memTable, RestorableTsFileIOWriter writer,
+      String storageGroup) {
     this.memTable = memTable;
     this.writer = writer;
     this.storageGroup = storageGroup;
     this.encodingTaskFuture = SUB_TASK_POOL_MANAGER.submit(encodingTask);
     this.ioTaskFuture = SUB_TASK_POOL_MANAGER.submit(ioTask);
     LOGGER.debug("flush task of Storage group {} memtable is created, flushing to file {}.",
-              storageGroup, writer.getFile().getName());
+        storageGroup, writer.getFile().getName());
   }
 
   /**
@@ -102,7 +104,8 @@ public class MemTableFlushTask {
     long sortTime = 0;
 
     //for map do not use get(key) to iteratate
-    for (Map.Entry<String, Map<String, IWritableMemChunk>> memTableEntry : memTable.getMemTableMap().entrySet()) {
+    for (Map.Entry<String, Map<String, IWritableMemChunk>> memTableEntry : memTable.getMemTableMap()
+        .entrySet()) {
       encodingTaskQueue.put(new StartFlushGroupIOTask(memTableEntry.getKey()));
 
       final Map<String, IWritableMemChunk> value = memTableEntry.getValue();
@@ -211,7 +214,8 @@ public class MemTableFlushTask {
           try {
             ioTaskQueue.put(task);
           } catch (@SuppressWarnings("squid:S2142") InterruptedException e) {
-            LOGGER.error("Storage group {} memtable flushing to file {}, encoding task is interrupted.",
+            LOGGER.error(
+                "Storage group {} memtable flushing to file {}, encoding task is interrupted.",
                 storageGroup, writer.getFile().getName(), e);
             // generally it is because the thread pool is shutdown so the task should be aborted
             break;
@@ -240,9 +244,9 @@ public class MemTableFlushTask {
         LOGGER.error("Put task into ioTaskQueue Interrupted");
         Thread.currentThread().interrupt();
       }
-      
+
       LOGGER.debug("Storage group {}, flushing memtable {} into disk: Encoding data cost "
-          + "{} ms.",
+              + "{} ms.",
           storageGroup, writer.getFile().getName(), memSerializeTime);
     }
   };
@@ -282,7 +286,7 @@ public class MemTableFlushTask {
       ioTime += System.currentTimeMillis() - starTime;
     }
     LOGGER.debug("flushing a memtable to file {} in storage group {}, io cost {}ms",
-            writer.getFile().getName(), storageGroup, ioTime);
+        writer.getFile().getName(), storageGroup, ioTime);
   };
 
   static class TaskEnd {

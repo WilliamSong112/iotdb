@@ -75,7 +75,8 @@ public class WalCheckerTest {
         File subDir = new File(tempRoot, "storage_group" + i);
         subDir.mkdir();
         LogWriter logWriter = new LogWriter(subDir.getPath() + File.separator
-            + WAL_FILE_NAME, IoTDBDescriptor.getInstance().getConfig().getForceWalPeriodInMs() == 0);
+            + WAL_FILE_NAME,
+            IoTDBDescriptor.getInstance().getConfig().getForceWalPeriodInMs() == 0);
 
         ByteBuffer binaryPlans = ByteBuffer.allocate(64 * 1024);
         String deviceId = "device1";
@@ -83,7 +84,8 @@ public class WalCheckerTest {
         TSDataType[] types = new TSDataType[]{TSDataType.INT64, TSDataType.INT64, TSDataType.INT64};
         String[] values = new String[]{"5", "6", "7"};
         for (int j = 0; j < 10; j++) {
-          new InsertRowPlan(new PartialPath(deviceId), j, measurements, types, values).serialize(binaryPlans);
+          new InsertRowPlan(new PartialPath(deviceId), j, measurements, types, values)
+              .serialize(binaryPlans);
         }
         binaryPlans.flip();
         logWriter.write(binaryPlans);
@@ -109,7 +111,8 @@ public class WalCheckerTest {
         File subDir = new File(tempRoot, "storage_group" + i);
         subDir.mkdir();
         LogWriter logWriter = new LogWriter(subDir.getPath() + File.separator
-            + WAL_FILE_NAME, IoTDBDescriptor.getInstance().getConfig().getForceWalPeriodInMs() == 0);
+            + WAL_FILE_NAME,
+            IoTDBDescriptor.getInstance().getConfig().getForceWalPeriodInMs() == 0);
 
         ByteBuffer binaryPlans = ByteBuffer.allocate(64 * 1024);
         String deviceId = "device1";
@@ -117,7 +120,8 @@ public class WalCheckerTest {
         TSDataType[] types = new TSDataType[]{TSDataType.INT64, TSDataType.INT64, TSDataType.INT64};
         String[] values = new String[]{"5", "6", "7"};
         for (int j = 0; j < 10; j++) {
-          new InsertRowPlan(new PartialPath(deviceId), j, measurements, types, values).serialize(binaryPlans);
+          new InsertRowPlan(new PartialPath(deviceId), j, measurements, types, values)
+              .serialize(binaryPlans);
         }
         if (i > 2) {
           binaryPlans.put("not a wal".getBytes());

@@ -39,9 +39,9 @@ public class SyncUtils {
    */
   public static File getSnapshotFile(File file) {
     String relativeFilePath =
-      file.getParentFile().getParentFile().getParentFile().getName() + File.separator
-      + file.getParentFile().getParentFile().getName() + File.separator
-      + file.getParentFile().getName() + File.separator + file.getName();
+        file.getParentFile().getParentFile().getParentFile().getName() + File.separator
+            + file.getParentFile().getParentFile().getName() + File.separator
+            + file.getParentFile().getName() + File.separator + file.getName();
     String snapshotDir = SyncSenderDescriptor.getInstance().getConfig().getSnapshotPath();
     if (!new File(snapshotDir).exists()) {
       new File(snapshotDir).mkdirs();
@@ -53,7 +53,7 @@ public class SyncUtils {
    * Verify sending list is empty or not It's used by sync sender.
    */
   public static boolean isEmpty(Map<String, Map<Long, Map<Long, Set<File>>>> sendingFileList) {
-    for (Entry<String, Map<Long, Map<Long, Set<File>>>> entry: sendingFileList.entrySet()) {
+    for (Entry<String, Map<Long, Map<Long, Set<File>>>> entry : sendingFileList.entrySet()) {
       for (Entry<Long, Map<Long, Set<File>>> vgEntry : entry.getValue().entrySet()) {
         for (Entry<Long, Set<File>> innerEntry : vgEntry.getValue().entrySet()) {
           if (!innerEntry.getValue().isEmpty()) {

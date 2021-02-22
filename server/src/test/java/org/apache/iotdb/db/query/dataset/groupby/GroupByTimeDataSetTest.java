@@ -160,7 +160,6 @@ public class GroupByTimeDataSetTest {
 
     assertTrue(dataSet.hasNext());
     assertEquals("0\t1", dataSet.next().toString());
-    
 
     // with double quotation mark
     queryPlan = (QueryPlan) processor

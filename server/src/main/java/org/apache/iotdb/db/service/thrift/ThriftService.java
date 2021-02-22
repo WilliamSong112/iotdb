@@ -49,13 +49,13 @@ public abstract class ThriftService implements IService {
     } else {
       logger.debug("Start status is {} when getting status", thriftServiceThread.isServing());
     }
-    if(stopLatch == null) {
+    if (stopLatch == null) {
       logger.debug("Stop latch is null when getting status");
     } else {
       logger.debug("Stop latch is {} when getting status", stopLatch.getCount());
     }
 
-    if(thriftServiceThread != null && thriftServiceThread.isServing()) {
+    if (thriftServiceThread != null && thriftServiceThread.isServing()) {
       return STATUS_UP;
     } else {
       return STATUS_DOWN;
@@ -70,7 +70,7 @@ public abstract class ThriftService implements IService {
   public abstract ThriftService getImplementation();
 
   @Override
-  public  void start()  throws StartupException {
+  public void start() throws StartupException {
     JMXService.registerMBean(getImplementation(), mbeanName);
     startService();
   }
@@ -81,11 +81,14 @@ public abstract class ThriftService implements IService {
     JMXService.deregisterMBean(mbeanName);
   }
 
-  public abstract void initTProcessor() 
+  public abstract void initTProcessor()
       throws ClassNotFoundException, IllegalAccessException, InstantiationException;
+
   public abstract void initThriftServiceThread()
       throws IllegalAccessException, InstantiationException, ClassNotFoundException;
+
   public abstract String getBindIP();
+
   public abstract int getBindPort();
 
 
@@ -114,8 +117,9 @@ public abstract class ThriftService implements IService {
       throw new StartupException(this.getID().getName(), e.getMessage());
     }
 
-    logger.info("{}: start {} successfully, listening on ip {} port {}", IoTDBConstant.GLOBAL_DB_NAME,
-        this.getID().getName(), getBindIP(), getBindPort());
+    logger
+        .info("{}: start {} successfully, listening on ip {} port {}", IoTDBConstant.GLOBAL_DB_NAME,
+            this.getID().getName(), getBindIP(), getBindPort());
   }
 
   private void reset() {
@@ -141,9 +145,11 @@ public abstract class ThriftService implements IService {
     try {
       stopLatch.await();
       reset();
-      logger.info("{}: close {} successfully", IoTDBConstant.GLOBAL_DB_NAME, this.getID().getName());
+      logger
+          .info("{}: close {} successfully", IoTDBConstant.GLOBAL_DB_NAME, this.getID().getName());
     } catch (InterruptedException e) {
-      logger.error("{}: close {} failed because: ", IoTDBConstant.GLOBAL_DB_NAME, this.getID().getName(), e);
+      logger.error("{}: close {} failed because: ", IoTDBConstant.GLOBAL_DB_NAME,
+          this.getID().getName(), e);
       Thread.currentThread().interrupt();
     }
   }

@@ -92,6 +92,7 @@ public class IoTDBDescriptor {
 
   /**
    * get props url location
+   *
    * @return url object if location exit, otherwise null.
    */
   public URL getPropsUrl() {
@@ -451,7 +452,6 @@ public class IoTDBDescriptor {
           .parseInt(properties.getProperty("performance_stat_memory_in_kb",
               Integer.toString(conf.getPerformanceStatMemoryInKB())).trim()));
 
-
       int maxConcurrentClientNum = Integer.parseInt(properties.
           getProperty("rpc_max_concurrent_client_num",
               Integer.toString(conf.getRpcMaxConcurrentClientNum()).trim()));
@@ -580,9 +580,11 @@ public class IoTDBDescriptor {
       //if using org.apache.iotdb.db.auth.authorizer.OpenIdAuthorizer, openID_url is needed.
       conf.setOpenIdProviderUrl(properties.getProperty("openID_url", ""));
 
-      conf.setEnablePartition(Boolean.parseBoolean(properties.getProperty("enable_partition", conf.isEnablePartition() + "")));
+      conf.setEnablePartition(Boolean
+          .parseBoolean(properties.getProperty("enable_partition", conf.isEnablePartition() + "")));
 
-      conf.setPartitionInterval(Long.parseLong(properties.getProperty("partition_interval", conf.getPartitionInterval() + "")));
+      conf.setPartitionInterval(Long.parseLong(
+          properties.getProperty("partition_interval", conf.getPartitionInterval() + "")));
 
       // At the same time, set TSFileConfig
       TSFileDescriptor.getInstance().getConfig()

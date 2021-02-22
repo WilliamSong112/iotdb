@@ -78,31 +78,36 @@ public abstract class BasicAuthorizer implements IAuthorizer, IService {
   }
 
   private static class InstanceHolder {
+
     private static IAuthorizer instance;
 
     static {
-        Class<BasicAuthorizer> c;
-        try {
-          c = (Class<BasicAuthorizer>) Class.forName(IoTDBDescriptor.getInstance().getConfig().getAuthorizerProvider());
-          logger.info("Authorizer provider class: {}", IoTDBDescriptor.getInstance().getConfig().getAuthorizerProvider());
-          instance = c.getDeclaredConstructor().newInstance();
-        } catch (Exception e) {
-          instance = null;
-          //startup failed.
-          throw new IllegalStateException("Authorizer could not be initialized!", e);
-        }
+      Class<BasicAuthorizer> c;
+      try {
+        c = (Class<BasicAuthorizer>) Class
+            .forName(IoTDBDescriptor.getInstance().getConfig().getAuthorizerProvider());
+        logger.info("Authorizer provider class: {}",
+            IoTDBDescriptor.getInstance().getConfig().getAuthorizerProvider());
+        instance = c.getDeclaredConstructor().newInstance();
+      } catch (Exception e) {
+        instance = null;
+        //startup failed.
+        throw new IllegalStateException("Authorizer could not be initialized!", e);
+      }
     }
   }
 
 
-
-  /** Checks if a user has admin privileges */
+  /**
+   * Checks if a user has admin privileges
+   */
   abstract boolean isAdmin(String username);
 
   @Override
   public boolean login(String username, String password) throws AuthException {
     User user = userManager.getUser(username);
-    return user != null && password != null && user.getPassword().equals(AuthUtils.encryptPassword(password));
+    return user != null && password != null && user.getPassword()
+        .equals(AuthUtils.encryptPassword(password));
   }
 
   @Override

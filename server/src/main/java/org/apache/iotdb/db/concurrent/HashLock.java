@@ -21,9 +21,9 @@ package org.apache.iotdb.db.concurrent;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * This class manages an array of locks and use the hash code of an object as an index of
- * the array to find the corresponding lock, so that the operations on the same key (string)
- * can be prevented while the number of locks remain controlled.
+ * This class manages an array of locks and use the hash code of an object as an index of the array
+ * to find the corresponding lock, so that the operations on the same key (string) can be prevented
+ * while the number of locks remain controlled.
  */
 public class HashLock {
 

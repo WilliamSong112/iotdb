@@ -32,6 +32,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class SchemaUtilsTest {
+
   @Test
   public void registerTimeseriesTest() throws MetadataException {
     MManager mmanager = IoTDB.metaManager;

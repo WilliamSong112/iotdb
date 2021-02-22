@@ -65,7 +65,7 @@ public class TsFileRecoverPerformer {
    * @param isLastFile whether this TsFile is the last file of its partition
    */
   public TsFileRecoverPerformer(String logNodePrefix,
-    TsFileResource currentTsFileResource, boolean sequence, boolean isLastFile) {
+      TsFileResource currentTsFileResource, boolean sequence, boolean isLastFile) {
     this.filePath = currentTsFileResource.getTsFilePath();
     this.logNodePrefix = logNodePrefix;
     this.tsFileResource = currentTsFileResource;
@@ -197,12 +197,13 @@ public class TsFileRecoverPerformer {
     tsFileResource.updatePlanIndexes(restorableTsFileIOWriter.getMaxPlanIndex());
   }
 
-  private void redoLogs(RestorableTsFileIOWriter restorableTsFileIOWriter, Supplier<ByteBuffer[]> supplier)
+  private void redoLogs(RestorableTsFileIOWriter restorableTsFileIOWriter,
+      Supplier<ByteBuffer[]> supplier)
       throws StorageGroupProcessorException {
     IMemTable recoverMemTable = new PrimitiveMemTable();
     LogReplayer logReplayer = new LogReplayer(
-            logNodePrefix, filePath, tsFileResource.getModFile(),
-            tsFileResource, recoverMemTable, sequence);
+        logNodePrefix, filePath, tsFileResource.getModFile(),
+        tsFileResource, recoverMemTable, sequence);
     logReplayer.replayLogs(supplier);
     try {
       if (!recoverMemTable.isEmpty()) {

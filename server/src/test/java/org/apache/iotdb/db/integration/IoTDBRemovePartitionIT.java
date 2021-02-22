@@ -154,8 +154,8 @@ public class IoTDBRemovePartitionIT {
   @Test
   public void testRemoveOnePartitionAndInsertData() {
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
       statement.execute("set storage group to root.test");
       statement.execute("insert into root.test.wf02.wt02(timestamp,status) values(1,true)");
       statement.execute("select * from root.test.wf02.wt02");
@@ -177,8 +177,8 @@ public class IoTDBRemovePartitionIT {
   @Test
   public void testRemovePartitionAndInsertUnSeqDataAndMerge() {
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
       statement.execute("set storage group to root.test");
       statement.execute("insert into root.test.wf02.wt02(timestamp,status) values(2,true)");
       statement.execute("select * from root.test.wf02.wt02");
@@ -193,7 +193,7 @@ public class IoTDBRemovePartitionIT {
       int count = 0;
       try (ResultSet resultSet = statement.executeQuery("select * from root.test.wf02.wt02")) {
         while (resultSet.next()) {
-          count ++;
+          count++;
         }
         assertEquals(2, count);
       }
@@ -205,8 +205,8 @@ public class IoTDBRemovePartitionIT {
   @Test
   public void testRemovePartitionAndInsertUnSeqDataAndUnSeqDataMerge() {
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
       statement.execute("set storage group to root.test");
       statement.execute("insert into root.test.wf02.wt02(timestamp,status) values(2,true)");
       statement.execute("select * from root.test.wf02.wt02");
@@ -221,7 +221,7 @@ public class IoTDBRemovePartitionIT {
       int count = 0;
       try (ResultSet resultSet = statement.executeQuery("select * from root.test.wf02.wt02")) {
         while (resultSet.next()) {
-          count ++;
+          count++;
         }
         assertEquals(2, count);
       }
@@ -233,8 +233,8 @@ public class IoTDBRemovePartitionIT {
   @Test
   public void testFlushAndRemoveOnePartitionAndInsertData() {
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
       statement.execute("set storage group to root.test");
       statement.execute("insert into root.test.wf02.wt02(timestamp,status) values(1,true)");
       statement.execute("flush");

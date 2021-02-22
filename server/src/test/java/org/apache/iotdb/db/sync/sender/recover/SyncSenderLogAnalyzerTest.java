@@ -89,11 +89,12 @@ public class SyncSenderLogAnalyzerTest {
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 5; j++) {
         allFileList.computeIfAbsent(getSgName(i), k -> new HashMap<>())
-          .computeIfAbsent(0L, k -> new HashMap<>())
-          .computeIfAbsent(0L, k -> new HashSet<>());
+            .computeIfAbsent(0L, k -> new HashMap<>())
+            .computeIfAbsent(0L, k -> new HashSet<>());
         String rand = r.nextInt(10000) + TSFILE_SUFFIX;
         String fileName = FilePathUtils.regularizePath(dataDir) + IoTDBConstant.SEQUENCE_FLODER_NAME
-            + File.separator + getSgName(i) + File.separator + "0"  + File.separator + "0" + File.separator + rand;
+            + File.separator + getSgName(i) + File.separator + "0" + File.separator + "0"
+            + File.separator + rand;
         File file = new File(fileName);
         allFileList.get(getSgName(i)).get(0L).get(0L).add(file);
         if (!file.getParentFile().exists()) {
@@ -151,7 +152,8 @@ public class SyncSenderLogAnalyzerTest {
     manager.getValidFiles(dataDir);
     assertTrue(SyncUtils.isEmpty(manager.getLastLocalFilesMap()));
     assertTrue(SyncUtils.isEmpty(manager.getDeletedFilesMap()));
-    Map<String, Map<Long, Map<Long, Set<File>>>> toBeSyncedFilesMap = manager.getToBeSyncedFilesMap();
+    Map<String, Map<Long, Map<Long, Set<File>>>> toBeSyncedFilesMap = manager
+        .getToBeSyncedFilesMap();
     assertFileMap(allFileList, toBeSyncedFilesMap);
   }
 
@@ -163,8 +165,8 @@ public class SyncSenderLogAnalyzerTest {
         assertTrue(curMap.get(entry.getKey()).containsKey(vgEntry.getKey()));
         for (Entry<Long, Set<File>> innerEntry : vgEntry.getValue().entrySet()) {
           assertTrue(
-            curMap.get(entry.getKey()).get(vgEntry.getKey())
-              .get(innerEntry.getKey()).containsAll(innerEntry.getValue()));
+              curMap.get(entry.getKey()).get(vgEntry.getKey())
+                  .get(innerEntry.getKey()).containsAll(innerEntry.getValue()));
         }
       }
     }

@@ -241,8 +241,10 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
-              + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s2) + "," + resultSet
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
+              + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s2) + "," + resultSet
               .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s3)
               + "," + resultSet.getString(d1 + IoTDBConstant.PATH_SEPARATOR + s0);
           assertEquals(retArray[cnt], ans);
@@ -258,7 +260,8 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s4);
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s4);
           assertEquals(ans, retArray[cnt]);
           cnt++;
         }
@@ -285,7 +288,8 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         int cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s2);
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s2);
           assertEquals(ans, retArray[cnt]);
           cnt++;
         }
@@ -315,7 +319,8 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         int cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
               + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1);
           assertEquals(retArray[cnt], ans);
           cnt++;
@@ -344,8 +349,10 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         int cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
-              + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1) + "," + resultSet.getString(d1 + IoTDBConstant.PATH_SEPARATOR + s0);
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
+              + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1) + "," + resultSet
+              .getString(d1 + IoTDBConstant.PATH_SEPARATOR + s0);
           assertEquals(ans, retArray[cnt]);
           cnt++;
         }
@@ -373,7 +380,8 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         int cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s0) + ","
               + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1);
           assertEquals(ans, retArray[cnt]);
           cnt++;
@@ -402,7 +410,8 @@ public class IoTDBDaemonIT {
       try (ResultSet resultSet = statement.getResultSet()) {
         int cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1);
+          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet
+              .getString(d0 + IoTDBConstant.PATH_SEPARATOR + s1);
           assertEquals(retArray[cnt++], ans);
         }
         assertEquals(3, cnt);

@@ -31,5 +31,6 @@ import org.apache.iotdb.db.engine.storagegroup.TsFileResource;
  * @throws IOException
  */
 interface IFileQueryMemMeasurement {
+
   long measure(TsFileResource resource) throws IOException;
 }

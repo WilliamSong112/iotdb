@@ -38,6 +38,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class SingleDataSetTest {
+
   private final IPlanExecutor queryExecutor = new PlanExecutor();
   private final Planner processor = new Planner();
 

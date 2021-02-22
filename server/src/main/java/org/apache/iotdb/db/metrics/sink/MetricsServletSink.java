@@ -40,11 +40,14 @@ public class MetricsServletSink implements Sink {
   }
 
   @Override
-  public void start() {}
+  public void start() {
+  }
 
   @Override
-  public void stop() {}
+  public void stop() {
+  }
 
   @Override
-  public void report() {}
+  public void report() {
+  }
 }

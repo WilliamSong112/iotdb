@@ -30,22 +30,22 @@ import static org.junit.Assert.assertTrue;
 
 public class BrokerAuthenticatorTest {
 
-    @Before
-    public void before() {
-        EnvironmentUtils.envSetUp();
-    }
+  @Before
+  public void before() {
+    EnvironmentUtils.envSetUp();
+  }
 
-    @After
-    public void after() throws IOException, StorageEngineException {
-        EnvironmentUtils.cleanEnv();
-    }
+  @After
+  public void after() throws IOException, StorageEngineException {
+    EnvironmentUtils.cleanEnv();
+  }
 
-    @Test
-    public void checkValid() {
-        BrokerAuthenticator authenticator = new BrokerAuthenticator();
-        assertTrue(authenticator.checkValid(null, "root", "root".getBytes()));
-        assertFalse(authenticator.checkValid(null, "", "foo".getBytes()));
-        assertFalse(authenticator.checkValid(null, "root", null));
-        assertFalse(authenticator.checkValid(null, "foo", "foo".getBytes()));
-    }
+  @Test
+  public void checkValid() {
+    BrokerAuthenticator authenticator = new BrokerAuthenticator();
+    assertTrue(authenticator.checkValid(null, "root", "root".getBytes()));
+    assertFalse(authenticator.checkValid(null, "", "foo".getBytes()));
+    assertFalse(authenticator.checkValid(null, "root", null));
+    assertFalse(authenticator.checkValid(null, "foo", "foo".getBytes()));
+  }
 }

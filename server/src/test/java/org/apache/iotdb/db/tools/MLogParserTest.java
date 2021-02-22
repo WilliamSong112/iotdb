@@ -59,10 +59,10 @@ public class MLogParserTest {
   public void tearDown() throws Exception {
     EnvironmentUtils.cleanEnv();
     File file = new File("target" + File.separator
-      + "tmp"  + File.separator + "text.mlog");
+        + "tmp" + File.separator + "text.mlog");
     file.deleteOnExit();
     file = new File("target" + File.separator
-      + "tmp"  + File.separator + "text.snapshot");
+        + "tmp" + File.separator + "text.snapshot");
     file.deleteOnExit();
   }
 
@@ -109,14 +109,14 @@ public class MLogParserTest {
 
     try {
       MLogParser.parseFromFile(IoTDBDescriptor.getInstance().getConfig().getSchemaDir()
-        + File.separator + MetadataConstant.METADATA_LOG,
-        "target" + File.separator + "tmp"  + File.separator + "text.mlog");
+              + File.separator + MetadataConstant.METADATA_LOG,
+          "target" + File.separator + "tmp" + File.separator + "text.mlog");
     } catch (IOException e) {
       e.printStackTrace();
     }
 
     try (BufferedReader reader = new BufferedReader(new FileReader("target" + File.separator
-      + "tmp"  + File.separator + "text.mlog"))) {
+        + "tmp" + File.separator + "text.mlog"))) {
       int lineNum = 0;
       List<String> lines = new ArrayList<>();
       String line;
@@ -148,14 +148,14 @@ public class MLogParserTest {
 
     try {
       MLogParser.parseFromFile(IoTDBDescriptor.getInstance().getConfig().getSchemaDir()
-          + File.separator + MetadataConstant.MTREE_SNAPSHOT,
-        "target" + File.separator + "tmp"  + File.separator + "text.snapshot");
+              + File.separator + MetadataConstant.MTREE_SNAPSHOT,
+          "target" + File.separator + "tmp" + File.separator + "text.snapshot");
     } catch (IOException e) {
       e.printStackTrace();
     }
 
     try (BufferedReader reader = new BufferedReader(new FileReader("target" + File.separator
-      + "tmp"  + File.separator + "text.snapshot"))) {
+        + "tmp" + File.separator + "text.snapshot"))) {
       int lineNum = 0;
       List<String> lines = new ArrayList<>();
       String line;

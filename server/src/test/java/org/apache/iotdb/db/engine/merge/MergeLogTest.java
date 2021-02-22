@@ -73,7 +73,7 @@ public class MergeLogTest extends MergeTest {
     int lineCnt = 0;
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(mergeLog))) {
       while (bufferedReader.readLine() != null) {
-        lineCnt ++;
+        lineCnt++;
       }
     } catch (IOException e) {
       e.printStackTrace();

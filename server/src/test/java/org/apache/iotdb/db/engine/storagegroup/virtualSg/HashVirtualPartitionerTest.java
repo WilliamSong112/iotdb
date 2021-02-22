@@ -32,6 +32,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class HashVirtualPartitionerTest {
+
   @Before
   public void setUp() throws Exception {
     EnvironmentUtils.envSetUp();
@@ -52,7 +53,6 @@ public class HashVirtualPartitionerTest {
     HashMap<PartialPath, Set<PartialPath>> realMap = new HashMap<>();
     PartialPath d1 = new PartialPath("root.sg1.d1");
     PartialPath d2 = new PartialPath("root.sg1.d2");
-
 
     int sg1 = hashVirtualPartitioner.deviceToVirtualStorageGroupId(d1);
     int sg2 = hashVirtualPartitioner.deviceToVirtualStorageGroupId(d2);

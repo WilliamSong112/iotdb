@@ -164,7 +164,7 @@ public class StorageGroupProcessorTest {
 
   @Test
   public void testInsertDataAndRemovePartitionAndInsert()
-          throws WriteProcessException, QueryProcessException, IllegalPathException {
+      throws WriteProcessException, QueryProcessException, IllegalPathException {
     for (int j = 0; j < 10; j++) {
       TSRecord record = new TSRecord(j, deviceId);
       record.addTuple(DataPoint.getDataPoint(TSDataType.INT32, measurementId, String.valueOf(j)));
@@ -184,8 +184,8 @@ public class StorageGroupProcessorTest {
     processor.syncCloseAllWorkingTsFileProcessors();
 
     QueryDataSource queryDataSource = processor
-            .query(new PartialPath(deviceId), measurementId, context,
-                    null, null);
+        .query(new PartialPath(deviceId), measurementId, context,
+            null, null);
     Assert.assertEquals(0, queryDataSource.getUnseqResources().size());
   }
 
@@ -593,7 +593,6 @@ public class StorageGroupProcessorTest {
     }
     processor.syncCloseAllWorkingTsFileProcessors();
 
-
     for (int j = 10; j >= 1; j--) {
       TSRecord record = new TSRecord(j, deviceId);
       record.addTuple(DataPoint.getDataPoint(TSDataType.INT32, measurementId, String.valueOf(j)));
@@ -623,7 +622,8 @@ public class StorageGroupProcessorTest {
   class DummySGP extends StorageGroupProcessor {
 
     DummySGP(String systemInfoDir, String storageGroupName) throws StorageGroupProcessorException {
-      super(systemInfoDir, storageGroupName, new TsFileFlushPolicy.DirectFlushPolicy(), storageGroupName);
+      super(systemInfoDir, storageGroupName, new TsFileFlushPolicy.DirectFlushPolicy(),
+          storageGroupName);
     }
 
   }

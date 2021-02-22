@@ -24,50 +24,51 @@ import java.util.List;
  * Message describes the information sometime sent from the devices.
  */
 public class Message {
-    private String device;
-    private Long timestamp;
-    private List<String> measurements;
-    private List<String> values;
 
-    public String getDevice() {
-        return device;
-    }
+  private String device;
+  private Long timestamp;
+  private List<String> measurements;
+  private List<String> values;
 
-    public void setDevice(String device) {
-        this.device = device;
-    }
+  public String getDevice() {
+    return device;
+  }
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
+  public void setDevice(String device) {
+    this.device = device;
+  }
 
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
+  public Long getTimestamp() {
+    return timestamp;
+  }
 
-    public List<String> getMeasurements() {
-        return measurements;
-    }
+  public void setTimestamp(Long timestamp) {
+    this.timestamp = timestamp;
+  }
 
-    public void setMeasurements(List<String> measurements) {
-        this.measurements = measurements;
-    }
+  public List<String> getMeasurements() {
+    return measurements;
+  }
 
-    public List<String> getValues() {
-        return values;
-    }
+  public void setMeasurements(List<String> measurements) {
+    this.measurements = measurements;
+  }
 
-    public void setValues(List<String> values) {
-        this.values = values;
-    }
+  public List<String> getValues() {
+    return values;
+  }
 
-    @Override
-    public String toString() {
-        return "Message{" +
-                "device='" + device + '\'' +
-                ", timestamp=" + timestamp +
-                ", measurements=" + measurements +
-                ", values=" + values +
-                '}';
-    }
+  public void setValues(List<String> values) {
+    this.values = values;
+  }
+
+  @Override
+  public String toString() {
+    return "Message{" +
+        "device='" + device + '\'' +
+        ", timestamp=" + timestamp +
+        ", measurements=" + measurements +
+        ", values=" + values +
+        '}';
+  }
 }

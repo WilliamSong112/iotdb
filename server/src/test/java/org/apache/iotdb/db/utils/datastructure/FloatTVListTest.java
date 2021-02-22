@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FloatTVListTest {
+
   public static float delta = 0.001f;
 
   @Test
@@ -65,8 +66,8 @@ public class FloatTVListTest {
     tvList.putFloats(ArrayUtils.toPrimitive(timeList.toArray(new Long[0])),
         ArrayUtils.toPrimitive(floatList.toArray(new Float[0]), 0.0F), 0, 1000);
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals((float) tvList.size - i, tvList.getFloat((int)i), delta);
-      Assert.assertEquals(tvList.size - i, tvList.getTime((int)i));
+      Assert.assertEquals((float) tvList.size - i, tvList.getFloat((int) i), delta);
+      Assert.assertEquals(tvList.size - i, tvList.getTime((int) i));
     }
   }
 }

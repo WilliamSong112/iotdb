@@ -47,15 +47,16 @@ import java.util.Properties;
 
 
 public class IoTDBCheckConfigIT {
+
   private File propertiesFile = SystemFileFactory.INSTANCE
-          .getFile(IoTDBDescriptor.getInstance().getConfig().getSchemaDir()
+      .getFile(IoTDBDescriptor.getInstance().getConfig().getSchemaDir()
           + File.separator + "system.properties");
 
   private TSFileConfig tsFileConfig = TSFileDescriptor.getInstance().getConfig();
 
   private Map<String, String> systemProperties = new HashMap<>();
 
-  private Properties  properties = new Properties();
+  private Properties properties = new Properties();
 
   private PrintStream console = null;
   private ByteArrayOutputStream bytes = null;
@@ -105,7 +106,8 @@ public class IoTDBCheckConfigIT {
 
     // read properties from system.properties
     try (FileInputStream inputStream = new FileInputStream(propertiesFile);
-         InputStreamReader inputStreamReader = new InputStreamReader(inputStream, TSFileConfig.STRING_CHARSET)) {
+        InputStreamReader inputStreamReader = new InputStreamReader(inputStream,
+            TSFileConfig.STRING_CHARSET)) {
       properties.load(inputStreamReader);
     }
     String timeEncoder = (String) properties.get("time_encoder");

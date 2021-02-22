@@ -60,7 +60,8 @@ public class LastPointReader {
 
   }
 
-  public LastPointReader(PartialPath seriesPath, TSDataType dataType, Set<String> deviceMeasurements,
+  public LastPointReader(PartialPath seriesPath, TSDataType dataType,
+      Set<String> deviceMeasurements,
       QueryContext context, QueryDataSource dataSource, long queryTime, Filter timeFilter) {
     this.seriesPath = seriesPath;
     this.dataType = dataType;
@@ -81,7 +82,7 @@ public class LastPointReader {
       ChunkMetadata chunkMetadata = sortedChunkMetatdataList.poll();
       TimeValuePair chunkLastPoint = getChunkLastPoint(chunkMetadata);
       if (chunkLastPoint.getTimestamp() > resultPoint.getTimestamp() ||
-              (chunkLastPoint.getTimestamp() == resultPoint.getTimestamp() &&
+          (chunkLastPoint.getTimestamp() == resultPoint.getTimestamp() &&
               (cachedLastChunk == null || shouldUpdate(cachedLastChunk, chunkMetadata)))) {
         cachedLastChunk = chunkMetadata;
         resultPoint = chunkLastPoint;
@@ -90,7 +91,9 @@ public class LastPointReader {
     return resultPoint;
   }
 
-  /** Pick up and cache the last sequence TimeseriesMetadata that satisfies timeFilter */
+  /**
+   * Pick up and cache the last sequence TimeseriesMetadata that satisfies timeFilter
+   */
   @SuppressWarnings("squid:S3776") // Suppress high Cognitive Complexity warning
   private TimeValuePair retrieveValidLastPointFromSeqFiles() throws IOException {
     List<TsFileResource> seqFileResource = dataSource.getSeqResources();
@@ -182,8 +185,8 @@ public class LastPointReader {
 
   private boolean shouldUpdate(ChunkMetadata cachedChunk, ChunkMetadata newChunk) {
     return (newChunk.getVersion() > cachedChunk.getVersion()) ||
-            (newChunk.getVersion() == cachedChunk.getVersion() &&
-                    newChunk.getOffsetOfChunkHeader() > cachedChunk.getOffsetOfChunkHeader());
+        (newChunk.getVersion() == cachedChunk.getVersion() &&
+            newChunk.getOffsetOfChunkHeader() > cachedChunk.getOffsetOfChunkHeader());
   }
 
   private PriorityQueue<TsFileResource> sortUnSeqFileResourcesInDecendingOrder(
@@ -214,7 +217,7 @@ public class LastPointReader {
                 return 1;
               }
               return (o2.getVersion() < o1.getVersion() ? -1 :
-                      Long.compare(o2.getOffsetOfChunkHeader(), o1.getOffsetOfChunkHeader()));
+                  Long.compare(o2.getOffsetOfChunkHeader(), o1.getOffsetOfChunkHeader()));
             });
     for (TimeseriesMetadata timeseriesMetadata : unseqTimeseriesMetadataList) {
       if (timeseriesMetadata != null) {

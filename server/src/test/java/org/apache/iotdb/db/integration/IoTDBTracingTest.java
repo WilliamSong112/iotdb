@@ -35,7 +35,7 @@ import org.junit.Test;
 public class IoTDBTracingTest {
 
   @BeforeClass
-  public static void setUp(){
+  public static void setUp() {
     EnvironmentUtils.closeStatMonitor();
     EnvironmentUtils.envSetUp();
   }

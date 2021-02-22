@@ -46,13 +46,13 @@ public class BinaryTVListTest {
     Binary[] binaryList = new Binary[1001];
     List<Long> timeList = new ArrayList<>();
     for (int i = 1000; i >= 0; i--) {
-      timeList.add((long)i);
+      timeList.add((long) i);
       binaryList[i] = Binary.valueOf(String.valueOf(i));
     }
     tvList.putBinaries(ArrayUtils.toPrimitive(timeList.toArray(new Long[0])),
         binaryList, 0, 1000);
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals(tvList.size - i, tvList.getTime((int)i));
+      Assert.assertEquals(tvList.size - i, tvList.getTime((int) i));
     }
   }
 }

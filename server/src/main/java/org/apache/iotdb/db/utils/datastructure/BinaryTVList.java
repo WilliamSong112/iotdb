@@ -99,7 +99,8 @@ public class BinaryTVList extends TVList {
           .createDataListsByType(TSDataType.INT64, size);
     }
     if (sortedValues == null || sortedValues.length < size) {
-      sortedValues = (Binary[][]) PrimitiveArrayManager.createDataListsByType(TSDataType.TEXT, size);
+      sortedValues = (Binary[][]) PrimitiveArrayManager
+          .createDataListsByType(TSDataType.TEXT, size);
     }
     sort(0, size);
     clearSortedValue();

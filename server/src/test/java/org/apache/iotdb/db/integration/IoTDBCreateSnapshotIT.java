@@ -85,18 +85,18 @@ public class IoTDBCreateSnapshotIT {
 
       // test snapshot content correct
       String[] exp = new String[]{
-        "2,s0,,1,2,1,,-1,0",
-        "2,s1,,2,2,1,,-1,0",
-        "2,s2,,3,2,1,,-1,0",
-        "2,s3,,5,0,1,,-1,0",
-        "2,s4,,0,0,1,,-1,0",
-        "1,d0,9223372036854775807,5",
-        "2,s0,,1,2,1,,-1,0",
-        "2,s1,,5,0,1,,-1,0",
-        "2,s2,,0,0,1,,-1,0",
-        "1,d1,9223372036854775807,3",
-        "0,vehicle,2",
-        "0,root,1"
+          "2,s0,,1,2,1,,-1,0",
+          "2,s1,,2,2,1,,-1,0",
+          "2,s2,,3,2,1,,-1,0",
+          "2,s3,,5,0,1,,-1,0",
+          "2,s4,,0,0,1,,-1,0",
+          "1,d0,9223372036854775807,5",
+          "2,s0,,1,2,1,,-1,0",
+          "2,s1,,5,0,1,,-1,0",
+          "2,s2,,0,0,1,,-1,0",
+          "1,d1,9223372036854775807,3",
+          "0,vehicle,2",
+          "0,root,1"
       };
 
       Set<PhysicalPlan> d0Plans = new HashSet<>(6);
@@ -106,10 +106,10 @@ public class IoTDBCreateSnapshotIT {
 
       Set<PhysicalPlan> d1Plans = new HashSet<>(6);
       for (int i = 0; i < 6; i++) {
-        d1Plans.add(MLogWriter.convertFromString(exp[i+6]));
+        d1Plans.add(MLogWriter.convertFromString(exp[i + 6]));
       }
 
-      try (MLogReader mLogReader = new MLogReader(snapshotFile)){
+      try (MLogReader mLogReader = new MLogReader(snapshotFile)) {
         int i = 0;
         while (i < 6 && mLogReader.hasNext()) {
           PhysicalPlan plan = mLogReader.next();

@@ -119,7 +119,7 @@ public abstract class AbstractMemTable implements IMemTable {
       }
 
       memSize += MemUtils.getRecordSize(measurementMNodes[i].getSchema().getType(), value,
-              disableMemControl);
+          disableMemControl);
 
       write(insertRowPlan.getDeviceId().getFullPath(),
           measurements[i], measurementMNodes[i].getSchema(), insertRowPlan.getTime(), value);
@@ -237,7 +237,8 @@ public abstract class AbstractMemTable implements IMemTable {
 
   @Override
   public ReadOnlyMemChunk query(String deviceId, String measurement, TSDataType dataType,
-      TSEncoding encoding, Map<String, String> props, long timeLowerBound, List<TimeRange> deletionList)
+      TSEncoding encoding, Map<String, String> props, long timeLowerBound,
+      List<TimeRange> deletionList)
       throws IOException, QueryProcessException, MetadataException {
     if (!checkPath(deviceId, measurement)) {
       return null;
@@ -248,7 +249,7 @@ public abstract class AbstractMemTable implements IMemTable {
     int curSize = chunkCopy.size();
 
     return new ReadOnlyMemChunk(measurement, dataType, encoding, chunkCopy, props,
-            curSize, deletionList);
+        curSize, deletionList);
   }
 
   @Override

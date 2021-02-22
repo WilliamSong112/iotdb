@@ -122,8 +122,8 @@ public class FilterOperator extends Operator implements Comparable<FilterOperato
    * For a filter operator, if isSingle, call transformToSingleQueryFilter.<br> FilterOperator
    * cannot be leaf.
    *
-   * @return QueryFilter in TsFile
    * @param pathTSDataTypeHashMap
+   * @return QueryFilter in TsFile
    */
   public IExpression transformToExpression(
       Map<PartialPath, TSDataType> pathTSDataTypeHashMap) throws QueryProcessException {
@@ -163,10 +163,10 @@ public class FilterOperator extends Operator implements Comparable<FilterOperato
   /**
    * it will be used in BasicFunction Operator.
    *
+   * @param pathTSDataTypeHashMap
    * @return - pair.left: UnaryQueryFilter constructed by its one child; pair.right: Path
    * represented by this child.
    * @throws MetadataException exception in filter transforming
-   * @param pathTSDataTypeHashMap
    */
   protected Pair<IUnaryExpression, String> transformToSingleQueryFilter(
       Map<PartialPath, TSDataType> pathTSDataTypeHashMap)

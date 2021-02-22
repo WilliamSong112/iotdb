@@ -88,7 +88,7 @@ public class CommonUtils {
     Path folder = Paths.get(folderPath);
     try (Stream<Path> s = Files.walk(folder)) {
       return s.filter(p -> p.toFile().isFile())
-              .mapToLong(p -> p.toFile().length()).sum();
+          .mapToLong(p -> p.toFile().length()).sum();
     }
   }
 

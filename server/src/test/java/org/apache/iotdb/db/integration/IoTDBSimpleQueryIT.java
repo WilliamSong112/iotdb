@@ -88,7 +88,8 @@ public class IoTDBSimpleQueryIT {
       statement.setFetchSize(5);
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
-      statement.execute("CREATE TIMESERIES root.sg1.d0.s1 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2");
+      statement.execute(
+          "CREATE TIMESERIES root.sg1.d0.s1 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2");
     } catch (SQLException e) {
       e.printStackTrace();
     }
@@ -101,7 +102,8 @@ public class IoTDBSimpleQueryIT {
   }
 
   @Test
-  public void testCreateTimeseriesWithSDTProperties2() throws ClassNotFoundException, MetadataException {
+  public void testCreateTimeseriesWithSDTProperties2()
+      throws ClassNotFoundException, MetadataException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/",
@@ -136,7 +138,9 @@ public class IoTDBSimpleQueryIT {
         statement.execute(
             "CREATE TIMESERIES root.sg1.d0.s1 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=-2");
       } catch (Exception e) {
-        assertEquals("318: SDT compression deviation cannot be negative. Failed to create timeseries for path root.sg1.d0.s1", e.getMessage());
+        assertEquals(
+            "318: SDT compression deviation cannot be negative. Failed to create timeseries for path root.sg1.d0.s1",
+            e.getMessage());
       }
 
       int count = 0;
@@ -159,9 +163,12 @@ public class IoTDBSimpleQueryIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/",
             "root", "root");
         Statement statement = connection.createStatement()) {
-      statement.execute("create timeseries root.turbine.d1.s1 with datatype=FLOAT, encoding=GORILLA, compression=SNAPPY");
-      statement.execute("create timeseries root.turbine.d1.s2 with datatype=FLOAT, encoding=GORILLA, compression=SNAPPY");
-      statement.execute("create timeseries root.turbine.d2.s1 with datatype=FLOAT, encoding=GORILLA, compression=SNAPPY");
+      statement.execute(
+          "create timeseries root.turbine.d1.s1 with datatype=FLOAT, encoding=GORILLA, compression=SNAPPY");
+      statement.execute(
+          "create timeseries root.turbine.d1.s2 with datatype=FLOAT, encoding=GORILLA, compression=SNAPPY");
+      statement.execute(
+          "create timeseries root.turbine.d2.s1 with datatype=FLOAT, encoding=GORILLA, compression=SNAPPY");
       statement.execute("insert into root.turbine.d1(timestamp,s1,s2) values(1,1,2)");
 
       String[] results = {"root.turbine.d1.s1", "root.turbine.d1.s2"};
@@ -200,7 +207,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
 
       int degree = 0;
       for (int time = 0; time < 100; time++) {
@@ -244,7 +252,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2");
 
       for (int time = 1; time < 8; time++) {
         String sql = "insert into root.sg1.d0(timestamp,s0) values(" + time + ",1)";
@@ -292,7 +301,8 @@ public class IoTDBSimpleQueryIT {
       //test set sdt property
       statement
           .execute(
-              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=" + compDev);
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV="
+                  + compDev);
 
       int[] originalValues = new int[1000];
 
@@ -301,7 +311,8 @@ public class IoTDBSimpleQueryIT {
       Random rand = new Random();
       for (int i = 1; i < originalValues.length; i++) {
         originalValues[i] = rand.nextInt(500);
-        String sql = "insert into root.sg1.d0(timestamp,s0) values(" + i + "," + originalValues[i] + ")";
+        String sql =
+            "insert into root.sg1.d0(timestamp,s0) values(" + i + "," + originalValues[i] + ")";
         statement.execute(sql);
         map.put(i + "", originalValues[i]);
       }
@@ -341,7 +352,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2, COMPMINTIME=1");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2, COMPMINTIME=1");
 
       for (int time = 1; time < 8; time++) {
         String sql = "insert into root.sg1.d0(timestamp,s0) values(" + time + ",1)";
@@ -388,7 +400,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2, COMPMAXTIME=20");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=INT32,ENCODING=PLAIN,LOSS=SDT,COMPDEV=2, COMPMAXTIME=20");
 
       for (int time = 1; time < 50; time++) {
         String sql = "insert into root.sg1.d0(timestamp,s0) values(" + time + ",1)";
@@ -424,7 +437,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
 
       int degree = 0;
       for (int time = 0; time < 100; time++) {
@@ -472,7 +486,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
 
       int degree = 0;
       for (int time = 0; time < 100; time++) {
@@ -525,7 +540,8 @@ public class IoTDBSimpleQueryIT {
       statement.execute("SET STORAGE GROUP TO root.sg1");
       //test set sdt property
       statement
-          .execute("CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
+          .execute(
+              "CREATE TIMESERIES root.sg1.d0.s0 WITH DATATYPE=DOUBLE,ENCODING=PLAIN,LOSS=SDT,COMPDEV=0.01");
 
       int degree = 0;
       for (int time = 0; time < 100; time++) {
@@ -1204,7 +1220,8 @@ public class IoTDBSimpleQueryIT {
           + "max_point_number=q");
       statement.execute("CREATE TIMESERIES root.sg1.d1.s4 with datatype=FLOAT, encoding=RLE, "
           + "max_point_number=-1");
-      statement.execute("insert into root.sg1.d1(timestamp,s1,s2,s3,s4) values(1,1.1234,1.1234,1.1234,1.1234)");
+      statement.execute(
+          "insert into root.sg1.d1(timestamp,s1,s2,s3,s4) values(1,1.1234,1.1234,1.1234,1.1234)");
 
       try (ResultSet r1 = statement.executeQuery("select s1 from root.sg1.d1")) {
         r1.next();

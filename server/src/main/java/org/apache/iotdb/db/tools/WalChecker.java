@@ -49,13 +49,14 @@ public class WalChecker {
 
   /**
    * check the root wal dir and find the damaged files
+   *
    * @return a list of damaged files.
    * @throws SystemCheckException if the root wal dir does not exist.
    */
   public List<File> doCheck() throws SystemCheckException {
     File walFolderFile = SystemFileFactory.INSTANCE.getFile(walFolder);
     logger.info("Checking folder: {}", walFolderFile.getAbsolutePath());
-    if(!walFolderFile.exists() || !walFolderFile.isDirectory()) {
+    if (!walFolderFile.exists() || !walFolderFile.isDirectory()) {
       throw new SystemCheckException(walFolder);
     }
 
@@ -103,7 +104,7 @@ public class WalChecker {
       logger.error("{} fails the check because", walFile.getAbsoluteFile(), e);
       return false;
     } finally {
-      if( logReader != null) {
+      if (logReader != null) {
         logReader.close();
       }
     }
@@ -121,7 +122,6 @@ public class WalChecker {
   }
 
   /**
-   *
    * @param args walRootDirectory
    */
   public static void main(String[] args) throws SystemCheckException {

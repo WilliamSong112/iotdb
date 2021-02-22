@@ -80,15 +80,15 @@ public class SyncClientTest {
       for (int j = 0; j < 5; j++) {
         if (!allFileList.containsKey(String.valueOf(i))) {
           allFileList.computeIfAbsent(String.valueOf(i), k -> new HashMap<>())
-            .computeIfAbsent(0L, k -> new HashMap<>())
-            .computeIfAbsent(0L, k -> new HashSet<>());
+              .computeIfAbsent(0L, k -> new HashMap<>())
+              .computeIfAbsent(0L, k -> new HashSet<>());
         }
         String rand = String.valueOf(r.nextInt(10000));
         String fileName = FilePathUtils.regularizePath(dataDir) + IoTDBConstant.SEQUENCE_FLODER_NAME
-          + File.separator + i
-          + File.separator + "0"
-          + File.separator + "0"
-          + File.separator + rand;
+            + File.separator + i
+            + File.separator + "0"
+            + File.separator + "0"
+            + File.separator + rand;
         File file = new File(fileName);
         allFileList.get(String.valueOf(i)).get(0L).get(0L).add(file);
         if (!file.getParentFile().exists()) {

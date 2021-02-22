@@ -52,8 +52,7 @@ public class UpgradeTask extends WrappedRunnable {
       List<TsFileResource> upgradedResources;
       if (!UpgradeUtils.isUpgradedFileGenerated(oldTsfilePath)) {
         upgradedResources = generateUpgradedFiles();
-      }
-      else {
+      } else {
         upgradedResources = findUpgradedFiles();
       }
       upgradeResource.writeLock();
@@ -76,7 +75,7 @@ public class UpgradeTask extends WrappedRunnable {
     }
   }
 
-  private List<TsFileResource> generateUpgradedFiles() 
+  private List<TsFileResource> generateUpgradedFiles()
       throws IOException, WriteProcessException {
     upgradeResource.readLock();
     String oldTsfilePath = upgradeResource.getTsFile().getAbsolutePath();
@@ -99,8 +98,8 @@ public class UpgradeTask extends WrappedRunnable {
     try {
       File upgradeFolder = upgradeResource.getTsFile().getParentFile();
       for (File tempPartitionDir : upgradeFolder.listFiles()) {
-        if (tempPartitionDir.isDirectory() && 
-            fsFactory.getFile(tempPartitionDir, upgradeResource.getTsFile().getName() 
+        if (tempPartitionDir.isDirectory() &&
+            fsFactory.getFile(tempPartitionDir, upgradeResource.getTsFile().getName()
                 + TsFileResource.RESOURCE_SUFFIX).exists()) {
           TsFileResource resource = new TsFileResource(
               fsFactory.getFile(tempPartitionDir, upgradeResource.getTsFile().getName()));

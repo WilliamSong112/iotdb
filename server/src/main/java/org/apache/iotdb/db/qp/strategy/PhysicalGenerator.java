@@ -64,6 +64,7 @@ import org.apache.iotdb.db.qp.logical.sys.MoveFileOperator;
 import org.apache.iotdb.db.qp.logical.sys.RemoveFileOperator;
 import org.apache.iotdb.db.qp.logical.sys.SetStorageGroupOperator;
 import org.apache.iotdb.db.qp.logical.sys.SetTTLOperator;
+import org.apache.iotdb.db.qp.logical.sys.ShowChildNodesOperator;
 import org.apache.iotdb.db.qp.logical.sys.ShowChildPathsOperator;
 import org.apache.iotdb.db.qp.logical.sys.ShowDevicesOperator;
 import org.apache.iotdb.db.qp.logical.sys.ShowFunctionsOperator;
@@ -108,6 +109,7 @@ import org.apache.iotdb.db.qp.physical.sys.MergePlan;
 import org.apache.iotdb.db.qp.physical.sys.OperateFilePlan;
 import org.apache.iotdb.db.qp.physical.sys.SetStorageGroupPlan;
 import org.apache.iotdb.db.qp.physical.sys.SetTTLPlan;
+import org.apache.iotdb.db.qp.physical.sys.ShowChildNodesPlan;
 import org.apache.iotdb.db.qp.physical.sys.ShowChildPathsPlan;
 import org.apache.iotdb.db.qp.physical.sys.ShowDevicesPlan;
 import org.apache.iotdb.db.qp.physical.sys.ShowFunctionsPlan;
@@ -250,7 +252,8 @@ public class PhysicalGenerator {
             return new ShowPlan(ShowContentType.VERSION);
           case SQLConstant.TOK_TIMESERIES:
             ShowTimeSeriesOperator showTimeSeriesOperator = (ShowTimeSeriesOperator) operator;
-            ShowTimeSeriesPlan showTimeSeriesPlan = new ShowTimeSeriesPlan(showTimeSeriesOperator.getPath(),
+            ShowTimeSeriesPlan showTimeSeriesPlan = new ShowTimeSeriesPlan(
+                showTimeSeriesOperator.getPath(),
                 showTimeSeriesOperator.getLimit(), showTimeSeriesOperator.getOffset(), fetchSize);
             showTimeSeriesPlan.setIsContains(showTimeSeriesOperator.isContains());
             showTimeSeriesPlan.setKey(showTimeSeriesOperator.getKey());
@@ -262,8 +265,9 @@ public class PhysicalGenerator {
                 ShowContentType.STORAGE_GROUP, ((ShowStorageGroupOperator) operator).getPath());
           case SQLConstant.TOK_DEVICES:
             ShowDevicesOperator showDevicesOperator = (ShowDevicesOperator) operator;
-            return new ShowDevicesPlan(showDevicesOperator.getPath(), showDevicesOperator.getLimit(),
-                  showDevicesOperator.getOffset(), fetchSize, showDevicesOperator.hasSgCol());
+            return new ShowDevicesPlan(showDevicesOperator.getPath(),
+                showDevicesOperator.getLimit(),
+                showDevicesOperator.getOffset(), fetchSize, showDevicesOperator.hasSgCol());
           case SQLConstant.TOK_COUNT_DEVICES:
             return new CountPlan(
                 ShowContentType.COUNT_DEVICES, ((CountOperator) operator).getPath());
@@ -282,6 +286,9 @@ public class PhysicalGenerator {
           case SQLConstant.TOK_CHILD_PATHS:
             return new ShowChildPathsPlan(
                 ShowContentType.CHILD_PATH, ((ShowChildPathsOperator) operator).getPath());
+          case SQLConstant.TOK_CHILD_NODES:
+            return new ShowChildNodesPlan(
+                ShowContentType.CHILD_NODE, ((ShowChildNodesOperator) operator).getPath());
           case SQLConstant.TOK_QUERY_PROCESSLIST:
             return new ShowQueryProcesslistPlan(ShowContentType.QUERY_PROCESSLIST);
           case SQLConstant.TOK_SHOW_FUNCTIONS:

@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class StorageGroupMNodePlan extends MNodePlan {
+
   private long dataTTL;
 
   public StorageGroupMNodePlan() {
@@ -99,8 +100,8 @@ public class StorageGroupMNodePlan extends MNodePlan {
     }
     StorageGroupMNodePlan that = (StorageGroupMNodePlan) o;
     return Objects.equals(name, that.name)
-      && Objects.equals(dataTTL, that.dataTTL)
-      && Objects.equals(childSize, that.childSize);
+        && Objects.equals(dataTTL, that.dataTTL)
+        && Objects.equals(childSize, that.childSize);
   }
 
   @Override

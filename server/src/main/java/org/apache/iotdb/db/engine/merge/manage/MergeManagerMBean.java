@@ -20,6 +20,7 @@
 package org.apache.iotdb.db.engine.merge.manage;
 
 public interface MergeManagerMBean {
+
   void printMergeStatus();
 
   void abortMerge(String storageGroup);

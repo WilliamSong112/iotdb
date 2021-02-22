@@ -62,7 +62,7 @@ public class LastQueryExecutor {
   private List<TSDataType> dataTypes;
   protected IExpression expression;
   private static final boolean CACHE_ENABLED =
-          IoTDBDescriptor.getInstance().getConfig().isLastCacheEnabled();
+      IoTDBDescriptor.getInstance().getConfig().isLastCacheEnabled();
 
   public LastQueryExecutor(LastQueryPlan lastQueryPlan) {
     this.selectedSeries = lastQueryPlan.getDeduplicatedPaths();
@@ -85,11 +85,12 @@ public class LastQueryExecutor {
       throws StorageEngineException, IOException, QueryProcessException {
 
     ListDataSet dataSet = new ListDataSet(
-        Arrays.asList(new PartialPath(COLUMN_TIMESERIES, false), new PartialPath(COLUMN_VALUE, false)),
+        Arrays.asList(new PartialPath(COLUMN_TIMESERIES, false),
+            new PartialPath(COLUMN_VALUE, false)),
         Arrays.asList(TSDataType.TEXT, TSDataType.TEXT));
 
     List<Pair<Boolean, TimeValuePair>> lastPairList = calculateLastPairForSeries(
-            selectedSeries, dataTypes, context, expression, lastQueryPlan);
+        selectedSeries, dataTypes, context, expression, lastQueryPlan);
 
     for (int i = 0; i < lastPairList.size(); i++) {
       if (lastPairList.get(i).right != null && lastPairList.get(i).right.getValue() != null) {
@@ -139,7 +140,8 @@ public class LastQueryExecutor {
     List<PartialPath> nonCachedPaths = new ArrayList<>();
     List<TSDataType> nonCachedDataTypes = new ArrayList<>();
     List<Pair<Boolean, TimeValuePair>> resultContainer =
-        readLastPairsFromCache(seriesPaths, dataTypes, filter, cacheAccessors, nonCachedPaths, nonCachedDataTypes);
+        readLastPairsFromCache(seriesPaths, dataTypes, filter, cacheAccessors, nonCachedPaths,
+            nonCachedDataTypes);
     if (nonCachedPaths.isEmpty()) {
       return resultContainer;
     }
@@ -150,8 +152,10 @@ public class LastQueryExecutor {
     try {
       for (int i = 0; i < nonCachedPaths.size(); i++) {
         QueryDataSource dataSource =
-            QueryResourceManager.getInstance().getQueryDataSource(nonCachedPaths.get(i), context, null);
-        LastPointReader lastReader = new LastPointReader(nonCachedPaths.get(i), nonCachedDataTypes.get(i),
+            QueryResourceManager.getInstance()
+                .getQueryDataSource(nonCachedPaths.get(i), context, null);
+        LastPointReader lastReader = new LastPointReader(nonCachedPaths.get(i),
+            nonCachedDataTypes.get(i),
             deviceMeasurementsMap.get(nonCachedPaths.get(i).getDevice()),
             context, dataSource, Long.MAX_VALUE, null);
         readerList.add(lastReader);
@@ -176,7 +180,8 @@ public class LastQueryExecutor {
     return resultContainer;
   }
 
-  private static List<Pair<Boolean, TimeValuePair>> readLastPairsFromCache(List<PartialPath> seriesPaths,
+  private static List<Pair<Boolean, TimeValuePair>> readLastPairsFromCache(
+      List<PartialPath> seriesPaths,
       List<TSDataType> dataTypes, Filter filter, List<LastCacheAccessor> cacheAccessors,
       List<PartialPath> restPaths, List<TSDataType> restDataType) {
     List<Pair<Boolean, TimeValuePair>> resultContainer = new ArrayList<>();
@@ -207,6 +212,7 @@ public class LastQueryExecutor {
   }
 
   private static class LastCacheAccessor {
+
     private PartialPath path;
     private MeasurementMNode node;
 
@@ -238,6 +244,6 @@ public class LastQueryExecutor {
 
   private static boolean satisfyFilter(Filter filter, TimeValuePair tvPair) {
     return filter == null ||
-            filter.satisfy(tvPair.getTimestamp(), tvPair.getValue().getValue());
+        filter.satisfy(tvPair.getTimestamp(), tvPair.getValue().getValue());
   }
 }

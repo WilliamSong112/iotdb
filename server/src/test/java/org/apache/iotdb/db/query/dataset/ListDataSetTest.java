@@ -70,7 +70,7 @@ public class ListDataSetTest {
   @Test
   public void showStorageGroups()
       throws QueryProcessException, TException, StorageEngineException, QueryFilterOptimizationException, MetadataException, IOException, InterruptedException, SQLException {
-    String[] results = new String [] {"0\troot.test", "0\troot.vehicle"};
+    String[] results = new String[]{"0\troot.test", "0\troot.vehicle"};
     PhysicalPlan plan = processor
         .parseSQLToPhysicalPlan(
             "show storage group");
@@ -89,7 +89,7 @@ public class ListDataSetTest {
   @Test
   public void showChildPaths()
       throws QueryProcessException, TException, StorageEngineException, QueryFilterOptimizationException, MetadataException, IOException, InterruptedException, SQLException {
-    String[] results = new String [] {"0\troot.test.d0", "0\troot.test.d1"};
+    String[] results = new String[]{"0\troot.test.d0", "0\troot.test.d1"};
     PhysicalPlan plan = processor
         .parseSQLToPhysicalPlan(
             "show child paths root.test");
@@ -108,7 +108,7 @@ public class ListDataSetTest {
   @Test
   public void showDevices()
       throws QueryProcessException, TException, StorageEngineException, QueryFilterOptimizationException, MetadataException, IOException, InterruptedException, SQLException {
-    String[] results = new String [] {"0\troot.test.d0", "0\troot.test.d1", "0\troot.vehicle.d0"};
+    String[] results = new String[]{"0\troot.test.d0", "0\troot.test.d1", "0\troot.vehicle.d0"};
     PhysicalPlan plan = processor
         .parseSQLToPhysicalPlan(
             "show devices");
@@ -127,7 +127,7 @@ public class ListDataSetTest {
   @Test
   public void showDevicesWithSg()
       throws QueryProcessException, TException, StorageEngineException, QueryFilterOptimizationException, MetadataException, IOException, InterruptedException, SQLException {
-    String[] results = new String [] {"0\troot.test.d0\troot.test", "0\troot.test.d1\troot.test",
+    String[] results = new String[]{"0\troot.test.d0\troot.test", "0\troot.test.d1\troot.test",
         "0\troot.vehicle.d0\troot.vehicle"};
     PhysicalPlan plan = processor
         .parseSQLToPhysicalPlan(

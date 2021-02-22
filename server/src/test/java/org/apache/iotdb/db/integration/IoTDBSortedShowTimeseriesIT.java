@@ -40,37 +40,46 @@ public class IoTDBSortedShowTimeseriesIT {
   private static String[] sqls = new String[]{
       "SET STORAGE GROUP TO root.turbine",
 
-      "create timeseries root.turbine.d0.s0(temperature) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d0.s0(temperature) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=f, description='turbine this is a test1') attributes(H_Alarm=100, M_Alarm=50)",
 
-      "create timeseries root.turbine.d0.s1(power) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d0.s1(power) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=kw, description='turbine this is a test2') attributes(H_Alarm=99.9, M_Alarm=44.4)",
 
-      "create timeseries root.turbine.d0.s2(cpu) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d0.s2(cpu) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=cores, description='turbine this is a cpu') attributes(H_Alarm=99.9, M_Alarm=44.4)",
 
-      "create timeseries root.turbine.d0.s3(gpu0) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d0.s3(gpu0) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=cores, description='turbine this is a gpu') attributes(H_Alarm=99.9, M_Alarm=44.4)",
 
-      "create timeseries root.turbine.d0.s4(tpu0) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d0.s4(tpu0) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=cores, description='turbine this is a tpu') attributes(H_Alarm=99.9, M_Alarm=44.4)",
 
       "create timeseries root.turbine.d1.s0(status) with datatype=INT32, encoding=RLE " +
           "tags(description='turbine this is a test3') attributes(H_Alarm=9, M_Alarm=5)",
 
-      "create timeseries root.turbine.d2.s0(temperature) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d2.s0(temperature) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=f, description='turbine d2 this is a test1') attributes(MaxValue=100, MinValue=1)",
 
-      "create timeseries root.turbine.d2.s1(power) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.turbine.d2.s1(power) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=kw, description='turbine d2 this is a test2') attributes(MaxValue=99.9, MinValue=44.4)",
 
       "create timeseries root.turbine.d2.s3(status) with datatype=INT32, encoding=RLE " +
           "tags(description='turbine d2 this is a test3') attributes(MaxValue=9, MinValue=5)",
 
-      "create timeseries root.ln.d0.s0(temperature) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.ln.d0.s0(temperature) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=c, description='ln this is a test1') attributes(H_Alarm=1000, M_Alarm=500)",
 
-      "create timeseries root.ln.d0.s1(power) with datatype=FLOAT, encoding=RLE, compression=SNAPPY " +
+      "create timeseries root.ln.d0.s1(power) with datatype=FLOAT, encoding=RLE, compression=SNAPPY "
+          +
           "tags(unit=w, description='ln this is a test2') attributes(H_Alarm=9.9, M_Alarm=4.4)",
 
       "create timeseries root.ln.d1.s0(status) with datatype=INT32, encoding=RLE " +
@@ -152,7 +161,7 @@ public class IoTDBSortedShowTimeseriesIT {
             + "unit\":\"w\"},{\"H_Alarm\":\"9.9\",\"M_Alarm\":\"4.4\"}",
         "root.ln.d1.s0,status,root.ln,INT32,RLE,SNAPPY,{\"description\":\"ln this is a test3\"},"
             + "{\"H_Alarm\":\"90\",\"M_Alarm\":\"50\"}"
-        );
+    );
 
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager

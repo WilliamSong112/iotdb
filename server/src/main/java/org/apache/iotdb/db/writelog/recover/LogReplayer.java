@@ -128,7 +128,8 @@ public class LogReplayer {
       }
       modFile
           .write(
-              new Deletion(path, currentTsFileResource.getTsFileSize(), deletePlan.getDeleteStartTime(),
+              new Deletion(path, currentTsFileResource.getTsFileSize(),
+                  deletePlan.getDeleteStartTime(),
                   deletePlan.getDeleteEndTime()));
     }
   }

@@ -54,18 +54,24 @@ public class ConcatOptimizerTest {
     processor = new Planner();
     IoTDB.metaManager.init();
     IoTDB.metaManager.setStorageGroup(new PartialPath("root.laptop"));
-    IoTDB.metaManager.createTimeseries(new PartialPath("root.laptop.d1.s1"), TSDataType.INT64, TSEncoding.PLAIN,
-        CompressionType.UNCOMPRESSED, null);
-    IoTDB.metaManager.createTimeseries(new PartialPath("root.laptop.d1.s2"), TSDataType.INT64, TSEncoding.PLAIN,
-        CompressionType.UNCOMPRESSED, null);
-    IoTDB.metaManager.createTimeseries(new PartialPath("root.laptop.d2.s1"), TSDataType.INT64, TSEncoding.PLAIN,
-        CompressionType.UNCOMPRESSED, null);
-    IoTDB.metaManager.createTimeseries(new PartialPath("root.laptop.d2.s2"), TSDataType.INT64, TSEncoding.PLAIN,
-        CompressionType.UNCOMPRESSED, null);
-    IoTDB.metaManager.createTimeseries(new PartialPath("root.laptop.d3.s1"), TSDataType.INT64, TSEncoding.PLAIN,
-        CompressionType.UNCOMPRESSED, null);
-    IoTDB.metaManager.createTimeseries(new PartialPath("root.laptop.d3.s2"), TSDataType.INT64, TSEncoding.PLAIN,
-        CompressionType.UNCOMPRESSED, null);
+    IoTDB.metaManager
+        .createTimeseries(new PartialPath("root.laptop.d1.s1"), TSDataType.INT64, TSEncoding.PLAIN,
+            CompressionType.UNCOMPRESSED, null);
+    IoTDB.metaManager
+        .createTimeseries(new PartialPath("root.laptop.d1.s2"), TSDataType.INT64, TSEncoding.PLAIN,
+            CompressionType.UNCOMPRESSED, null);
+    IoTDB.metaManager
+        .createTimeseries(new PartialPath("root.laptop.d2.s1"), TSDataType.INT64, TSEncoding.PLAIN,
+            CompressionType.UNCOMPRESSED, null);
+    IoTDB.metaManager
+        .createTimeseries(new PartialPath("root.laptop.d2.s2"), TSDataType.INT64, TSEncoding.PLAIN,
+            CompressionType.UNCOMPRESSED, null);
+    IoTDB.metaManager
+        .createTimeseries(new PartialPath("root.laptop.d3.s1"), TSDataType.INT64, TSEncoding.PLAIN,
+            CompressionType.UNCOMPRESSED, null);
+    IoTDB.metaManager
+        .createTimeseries(new PartialPath("root.laptop.d3.s2"), TSDataType.INT64, TSEncoding.PLAIN,
+            CompressionType.UNCOMPRESSED, null);
   }
 
   @After

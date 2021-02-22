@@ -37,7 +37,8 @@ public class OperateFilePlan extends PhysicalPlan {
     this.file = file;
   }
 
-  public OperateFilePlan(File file, OperatorType operatorType, boolean autoCreateSchema, int sgLevel) {
+  public OperateFilePlan(File file, OperatorType operatorType, boolean autoCreateSchema,
+      int sgLevel) {
     super(false, operatorType);
     this.file = file;
     this.autoCreateSchema = autoCreateSchema;

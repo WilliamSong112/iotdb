@@ -26,21 +26,22 @@ import java.util.ServiceLoader;
  * PayloadFormatManager loads payload formatter from SPI services.
  */
 public class PayloadFormatManager {
-    private static Map<String, PayloadFormatter> map = new HashMap<>();
 
-    static {
-        init();
-    }
+  private static Map<String, PayloadFormatter> map = new HashMap<>();
 
-    private static void init() {
-        ServiceLoader<PayloadFormatter> formats = ServiceLoader.load(PayloadFormatter.class);
-        for (PayloadFormatter format : formats) {
-            map.put(format.getName(), format);
-        }
-    }
+  static {
+    init();
+  }
 
-    public static PayloadFormatter getPayloadFormat(String name) {
-        Preconditions.checkArgument(map.containsKey(name), "Unknown payload format named: " + name);
-        return map.get(name);
+  private static void init() {
+    ServiceLoader<PayloadFormatter> formats = ServiceLoader.load(PayloadFormatter.class);
+    for (PayloadFormatter format : formats) {
+      map.put(format.getName(), format);
     }
+  }
+
+  public static PayloadFormatter getPayloadFormat(String name) {
+    Preconditions.checkArgument(map.containsKey(name), "Unknown payload format named: " + name);
+    return map.get(name);
+  }
 }

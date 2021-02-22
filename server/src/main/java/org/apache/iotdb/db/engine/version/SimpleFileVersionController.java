@@ -47,6 +47,7 @@ public class SimpleFileVersionController implements VersionController {
   private long prevVersion;
   private long currVersion;
   private String directoryPath;
+
   public SimpleFileVersionController(String directoryPath, long timePartitionId)
       throws IOException {
     this.directoryPath = directoryPath + File.separator + timePartitionId;
@@ -120,7 +121,7 @@ public class SimpleFileVersionController implements VersionController {
   @SuppressWarnings("squid:S3776") // Suppress high Cognitive Complexity warning
   private void restore() throws IOException {
     File directory = SystemFileFactory.INSTANCE.getFile(directoryPath);
-    if(!directory.exists()){
+    if (!directory.exists()) {
       directory.mkdirs();
     }
     File[] versionFiles = directory.listFiles((dir, name) -> name.startsWith(FILE_PREFIX));

@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class EncodingInferenceUtilsTest {
+
   @Test
   public void getDefaultEncodingTest() {
     IoTDBConfig conf = IoTDBDescriptor.getInstance().getConfig();

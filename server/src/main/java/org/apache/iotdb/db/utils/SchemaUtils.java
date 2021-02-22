@@ -149,9 +149,10 @@ public class SchemaUtils {
   }
 
   /**
-   * If the datatype of 'aggregation' depends on 'measurementDataType' (min_value, max_value), return
-   * 'measurementDataType' directly, or return a list whose elements are all the datatype of 'aggregation' and its length
-   * is the same as 'measurementDataType'.
+   * If the datatype of 'aggregation' depends on 'measurementDataType' (min_value, max_value),
+   * return 'measurementDataType' directly, or return a list whose elements are all the datatype of
+   * 'aggregation' and its length is the same as 'measurementDataType'.
+   *
    * @param measurementDataType
    * @param aggregation
    * @return

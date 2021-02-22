@@ -17,18 +17,20 @@
  * under the License.
  *
  */
+package org.apache.iotdb.db.qp.logical.sys;
 
-package org.apache.iotdb.db.exception.metadata;
+import org.apache.iotdb.db.metadata.PartialPath;
 
-import org.apache.iotdb.rpc.TSStatusCode;
+public class ShowChildNodesOperator extends ShowOperator {
 
-public class AliasAlreadyExistException extends MetadataException {
+  private PartialPath path;
 
-  private static final long serialVersionUID = 7299770003548114589L;
+  public ShowChildNodesOperator(int tokenIntType, PartialPath path) {
+    super(tokenIntType);
+    this.path = path;
+  }
 
-  public AliasAlreadyExistException(String path, String alias) {
-    super(String.format("Alias [%s] for Path [%s] already exist", alias, path),
-        TSStatusCode.ALIAS_ALREADY_EXIST_ERROR.getStatusCode());
-    this.isUserException = true;
+  public PartialPath getPath() {
+    return path;
   }
 }

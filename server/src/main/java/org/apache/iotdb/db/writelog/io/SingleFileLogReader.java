@@ -102,11 +102,11 @@ public class SingleFileLogReader implements ILogReader {
 
   @Override
   public PhysicalPlan next() {
-    if (!hasNext()){
+    if (!hasNext()) {
       throw new NoSuchElementException();
     }
 
-    idx ++;
+    idx++;
     return batchLogReader.next();
   }
 

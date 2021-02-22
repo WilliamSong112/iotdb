@@ -27,7 +27,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 
 public abstract class AbstractPoolManager {
-  
+
   private static final int WAIT_TIMEOUT = 2000;
 
   protected ExecutorService pool;
@@ -44,7 +44,7 @@ public abstract class AbstractPoolManager {
       try {
         if (!pool.awaitTermination(WAIT_TIMEOUT, TimeUnit.MILLISECONDS)) {
           logger.info("{} thread pool doesn't exit after {}ms.", getName(),
-              + totalWaitTime);
+              +totalWaitTime);
         }
         totalWaitTime += WAIT_TIMEOUT;
       } catch (InterruptedException e) {

@@ -70,12 +70,13 @@ public interface ISyncClient {
    * For deleted files in a storage group, sync them to receiver side and load these files in
    * receiver.
    *
-   * @param sgName storage group name
-   * @param vgId virtual group id
-   * @param timeRangeId id of time range
+   * @param sgName           storage group name
+   * @param vgId             virtual group id
+   * @param timeRangeId      id of time range
    * @param deletedFilesName list of deleted file names
    */
-  void syncDeletedFilesNameInOneGroup(String sgName, Long vgId, Long timeRangeId, Set<File> deletedFilesName)
+  void syncDeletedFilesNameInOneGroup(String sgName, Long vgId, Long timeRangeId,
+      Set<File> deletedFilesName)
       throws SyncConnectionException, IOException;
 
   /**
@@ -92,9 +93,9 @@ public interface ISyncClient {
    * For new valid files in a storage group, sync them to receiver side and load these data in
    * receiver.
    *
-   * @param sgName storage group name
-   * @param vgId virtual group id
-   * @param timeRangeId id of time range
+   * @param sgName        storage group name
+   * @param vgId          virtual group id
+   * @param timeRangeId   id of time range
    * @param toBeSyncFiles list of new tsfile names
    */
   void syncDataFilesInOneGroup(String sgName, Long vgId, Long timeRangeId, Set<File> toBeSyncFiles)

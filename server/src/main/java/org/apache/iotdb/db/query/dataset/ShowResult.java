@@ -38,6 +38,7 @@ public class ShowResult implements Comparable<ShowResult> {
   public String getName() {
     return name;
   }
+
   public String getSgName() {
     return sgName;
   }

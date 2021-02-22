@@ -34,8 +34,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Notice that, all test begins with "IoTDB" is integration test. All test which will start the IoTDB server should be
- * defined as integration test.
+ * Notice that, all test begins with "IoTDB" is integration test. All test which will start the
+ * IoTDB server should be defined as integration test.
  */
 public class IoTDBNumberPathIT {
 
@@ -319,8 +319,8 @@ public class IoTDBNumberPathIT {
         "DELETE FROM root.123.456.789 WHERE time <= 10",
         "INSERT INTO root.123.456(timestamp,789) values(NOW(),5)",
         "SELECT * FROM root.123.456",
-        "NOW(),5,\n","DELETE FROM root.123.456.789 WHERE time <= NOW()",
-        "SELECT * FROM root.123.456","",
+        "NOW(),5,\n", "DELETE FROM root.123.456.789 WHERE time <= NOW()",
+        "SELECT * FROM root.123.456", "",
         "SELECT COUNT(789) FROM root.123.456", "0,0,\n",
         "SELECT MAX_TIME(789) FROM root.123.456", "",
         "SELECT MIN_TIME(789) FROM root.123.456", "",
@@ -367,9 +367,10 @@ public class IoTDBNumberPathIT {
 
   private void executeSQL(String[] sqls) throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
-    try (Connection connection = DriverManager.getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/",
+    try (Connection connection = DriverManager
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/",
             "root", "root");
-         Statement statement = connection.createStatement()){
+        Statement statement = connection.createStatement()) {
       String result = "";
       Long now_start = 0L;
       boolean cmp = false;

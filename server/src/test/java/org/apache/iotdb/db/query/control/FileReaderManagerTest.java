@@ -119,7 +119,6 @@ public class FileReaderManagerTest {
       Assert.assertTrue(manager.contains(tsFile, false));
     }
 
-
     // the code below is not valid because the cacheFileReaderClearPeriod config in this class is not valid
 
     // TimeUnit.SECONDS.sleep(5);

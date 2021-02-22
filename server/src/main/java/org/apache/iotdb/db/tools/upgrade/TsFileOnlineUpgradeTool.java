@@ -100,10 +100,11 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
   /**
    * upgrade a single TsFile
    *
-   * @param tsFileName old version tsFile's absolute path
+   * @param tsFileName        old version tsFile's absolute path
    * @param upgradedResources new version tsFiles' resources
    */
-  public static void upgradeOneTsfile(TsFileResource resourceToBeUpgraded, List<TsFileResource> upgradedResources)
+  public static void upgradeOneTsfile(TsFileResource resourceToBeUpgraded,
+      List<TsFileResource> upgradedResources)
       throws IOException, WriteProcessException {
     try (TsFileOnlineUpgradeTool updater = new TsFileOnlineUpgradeTool(resourceToBeUpgraded)) {
       updater.upgradeFile(upgradedResources);
@@ -120,7 +121,7 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
    *
    * @throws IOException, WriteProcessException
    */
-  @SuppressWarnings({ "squid:S3776", "deprecation" }) // Suppress high Cognitive Complexity warning
+  @SuppressWarnings({"squid:S3776", "deprecation"}) // Suppress high Cognitive Complexity warning
   private void upgradeFile(List<TsFileResource> upgradedResources)
       throws IOException, WriteProcessException {
 
@@ -162,11 +163,11 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
             for (int j = 0; j < header.getNumOfPages(); j++) {
               // a new Page
               PageHeader pageHeader = reader.readPageHeader(dataType);
-              boolean needToDecode = 
+              boolean needToDecode =
                   checkIfNeedToDecode(dataType, encoding, pageHeader);
               needToDecodeInfo.add(needToDecode);
               ByteBuffer pageData = !needToDecode
-                  ? reader.readCompressedPage(pageHeader) 
+                  ? reader.readCompressedPage(pageHeader)
                   : reader.readPage(pageHeader, header.getCompressionType());
               pageHeadersInChunk.add(pageHeader);
               dataInChunk.add(pageData);
@@ -195,11 +196,11 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
                 currentMod = (Deletion) modsIterator.next();
               }
               if (currentMod.getFileOffset() <= version) {
-                for (Entry<TsFileIOWriter, ModificationFile> entry 
+                for (Entry<TsFileIOWriter, ModificationFile> entry
                     : fileModificationMap.entrySet()) {
                   TsFileIOWriter tsFileIOWriter = entry.getKey();
                   ModificationFile newMods = entry.getValue();
-                  newMods.write(new Deletion(currentMod.getPath(), 
+                  newMods.write(new Deletion(currentMod.getPath(),
                       tsFileIOWriter.getFile().length(),
                       currentMod.getStartTime(),
                       currentMod.getEndTime()));
@@ -208,8 +209,8 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
               }
             }
             // write plan indices for ending memtable
-            for (TsFileIOWriter tsFileIOWriter : partitionWriterMap.values()) { 
-              tsFileIOWriter.writePlanIndices(); 
+            for (TsFileIOWriter tsFileIOWriter : partitionWriterMap.values()) {
+              tsFileIOWriter.writePlanIndices();
             }
             break;
           default:
@@ -228,11 +229,11 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
           if (currentMod == null) {
             currentMod = (Deletion) modsIterator.next();
           }
-          for (Entry<TsFileIOWriter, ModificationFile> entry 
+          for (Entry<TsFileIOWriter, ModificationFile> entry
               : fileModificationMap.entrySet()) {
             TsFileIOWriter tsFileIOWriter = entry.getKey();
             ModificationFile newMods = entry.getValue();
-            newMods.write(new Deletion(currentMod.getPath(), 
+            newMods.write(new Deletion(currentMod.getPath(),
                 tsFileIOWriter.getFile().length(),
                 currentMod.getStartTime(),
                 currentMod.getEndTime()));
@@ -251,17 +252,17 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
   }
 
   /**
-   * Due to TsFile version-3 changed the serialize way of integer in TEXT data and 
-   * INT32 data with PLAIN encoding, and also add a sum statistic for BOOLEAN data,
-   * these types of data need to decode to points and rewrite in new TsFile.
+   * Due to TsFile version-3 changed the serialize way of integer in TEXT data and INT32 data with
+   * PLAIN encoding, and also add a sum statistic for BOOLEAN data, these types of data need to
+   * decode to points and rewrite in new TsFile.
    */
   private boolean checkIfNeedToDecode(TSDataType dataType, TSEncoding encoding,
       PageHeader pageHeader) {
     return dataType == TSDataType.BOOLEAN ||
         dataType == TSDataType.TEXT ||
         (dataType == TSDataType.INT32 && encoding == TSEncoding.PLAIN) ||
-        StorageEngine.getTimePartition(pageHeader.getStartTime()) 
-        != StorageEngine.getTimePartition(pageHeader.getEndTime());
+        StorageEngine.getTimePartition(pageHeader.getStartTime())
+            != StorageEngine.getTimePartition(pageHeader.getEndTime());
   }
 
   /**
@@ -314,7 +315,7 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
           if (!partitionDir.exists()) {
             partitionDir.mkdirs();
           }
-          File newFile = FSFactoryProducer.getFSFactory().getFile(partitionDir 
+          File newFile = FSFactoryProducer.getFSFactory().getFile(partitionDir
               + File.separator + oldTsFile.getName());
           try {
             if (!newFile.createNewFile()) {
@@ -323,7 +324,8 @@ public class TsFileOnlineUpgradeTool implements AutoCloseable {
             }
             TsFileIOWriter writer = new TsFileIOWriter(newFile);
             if (oldModification != null) {
-              fileModificationMap.put(writer, new ModificationFile(newFile + ModificationFile.FILE_SUFFIX));
+              fileModificationMap
+                  .put(writer, new ModificationFile(newFile + ModificationFile.FILE_SUFFIX));
             }
             return writer;
           } catch (IOException e) {

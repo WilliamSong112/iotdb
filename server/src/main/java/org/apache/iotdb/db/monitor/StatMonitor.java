@@ -105,7 +105,8 @@ public class StatMonitor implements StatMonitorMBean, IService {
     TSRecord tsRecord = new TSRecord(insertTime, storageGroupSeries.getDevice());
     tsRecord.addTuple(
         new LongDataPoint(StatMeasurementConstants.TOTAL_POINTS.getMeasurement(),
-            storageEngine.getProcessorMap().get(new PartialPath(storageGroupName)).getMonitorSeriesValue()));
+            storageEngine.getProcessorMap().get(new PartialPath(storageGroupName))
+                .getMonitorSeriesValue()));
     storageEngine.insert(new InsertRowPlan(tsRecord));
 
     // update global monitor series
@@ -217,8 +218,9 @@ public class StatMonitor implements StatMonitorMBean, IService {
   @Override
   public long getStorageGroupTotalPointsNum(String storageGroupName) {
     try {
-      VirtualStorageGroupManager virtualStorageGroupManager = storageEngine.getProcessorMap().get(new PartialPath(storageGroupName));
-      if(virtualStorageGroupManager == null){
+      VirtualStorageGroupManager virtualStorageGroupManager = storageEngine.getProcessorMap()
+          .get(new PartialPath(storageGroupName));
+      if (virtualStorageGroupManager == null) {
         return 0;
       }
 

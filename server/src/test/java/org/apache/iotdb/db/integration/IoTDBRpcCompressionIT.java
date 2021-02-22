@@ -35,8 +35,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class IoTDBRpcCompressionIT {
-  boolean rpcThriftCompression = IoTDBDescriptor.getInstance().getConfig().isRpcThriftCompressionEnable();
-  boolean rpcAdvancedCompression = IoTDBDescriptor.getInstance().getConfig().isRpcAdvancedCompressionEnable();
+
+  boolean rpcThriftCompression = IoTDBDescriptor.getInstance().getConfig()
+      .isRpcThriftCompressionEnable();
+  boolean rpcAdvancedCompression = IoTDBDescriptor.getInstance().getConfig()
+      .isRpcAdvancedCompressionEnable();
+
   @Before
   public void setUp() throws Exception {
     EnvironmentUtils.closeStatMonitor();
@@ -48,7 +52,8 @@ public class IoTDBRpcCompressionIT {
   public void tearDown() throws Exception {
     EnvironmentUtils.cleanEnv();
     IoTDBDescriptor.getInstance().getConfig().setRpcThriftCompressionEnable(rpcThriftCompression);
-    IoTDBDescriptor.getInstance().getConfig().setRpcAdvancedCompressionEnable(rpcAdvancedCompression);
+    IoTDBDescriptor.getInstance().getConfig()
+        .setRpcAdvancedCompressionEnable(rpcAdvancedCompression);
   }
 
   @Test
@@ -59,7 +64,7 @@ public class IoTDBRpcCompressionIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
         Statement statement = connection.createStatement()
-    ){
+    ) {
       doSomething(statement);
     }
   }
@@ -75,7 +80,7 @@ public class IoTDBRpcCompressionIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
         Statement statement = connection.createStatement()
-    ){
+    ) {
       doSomething(statement);
     } finally {
       Config.rpcThriftCompressionEnable = false;
@@ -93,7 +98,7 @@ public class IoTDBRpcCompressionIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
         Statement statement = connection.createStatement()
-    ){
+    ) {
       doSomething(statement);
     }
   }
@@ -110,7 +115,7 @@ public class IoTDBRpcCompressionIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
         Statement statement = connection.createStatement()
-    ){
+    ) {
       doSomething(statement);
     } finally {
       Config.rpcThriftCompressionEnable = false;
@@ -119,34 +124,34 @@ public class IoTDBRpcCompressionIT {
 
   private void doSomething(Statement statement) throws SQLException, InterruptedException {
 
-      statement.execute("set storage group to root.demo");
-      statement.execute("create timeseries root.demo.d1.s1 with datatype=INT64,encoding=RLE");
-      statement.execute("create timeseries root.demo.d1.s2 with datatype=INT64,encoding=RLE");
-      statement.execute("create timeseries root.demo.d1.s3 with datatype=INT64,encoding=RLE");
-      statement.execute("insert into root.demo.d1(time,s1,s2) values(1,1,2)");
-      statement.execute("flush");
-      statement.execute("insert into root.demo.d1(time,s3) values(1,1)");
-      statement.execute("flush");
-      try (ResultSet set = statement.executeQuery("SELECT * FROM root")) {
-        int cnt = 0;
-        while (set.next()) {
-          cnt++;
-          assertEquals(1, set.getLong("root.demo.d1.s3"));
-        }
-        assertEquals(1, cnt);
+    statement.execute("set storage group to root.demo");
+    statement.execute("create timeseries root.demo.d1.s1 with datatype=INT64,encoding=RLE");
+    statement.execute("create timeseries root.demo.d1.s2 with datatype=INT64,encoding=RLE");
+    statement.execute("create timeseries root.demo.d1.s3 with datatype=INT64,encoding=RLE");
+    statement.execute("insert into root.demo.d1(time,s1,s2) values(1,1,2)");
+    statement.execute("flush");
+    statement.execute("insert into root.demo.d1(time,s3) values(1,1)");
+    statement.execute("flush");
+    try (ResultSet set = statement.executeQuery("SELECT * FROM root")) {
+      int cnt = 0;
+      while (set.next()) {
+        cnt++;
+        assertEquals(1, set.getLong("root.demo.d1.s3"));
       }
-      Thread.sleep(1000);
-      // before merge completes
-      try (ResultSet set = statement.executeQuery("SELECT * FROM root")) {
-        int cnt = 0;
-        while (set.next()) {
-          cnt++;
-          assertEquals(1, set.getLong("root.demo.d1.s3"));
-        }
-        assertEquals(1, cnt);
+      assertEquals(1, cnt);
+    }
+    Thread.sleep(1000);
+    // before merge completes
+    try (ResultSet set = statement.executeQuery("SELECT * FROM root")) {
+      int cnt = 0;
+      while (set.next()) {
+        cnt++;
+        assertEquals(1, set.getLong("root.demo.d1.s3"));
       }
+      assertEquals(1, cnt);
+    }
 
-      // after merge completes
-      statement.execute("DELETE FROM root.demo.d1");
+    // after merge completes
+    statement.execute("DELETE FROM root.demo.d1");
   }
 }

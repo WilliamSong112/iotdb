@@ -53,7 +53,8 @@ public class PrimitiveMemTableTest {
   @Test
   public void memSeriesSortIteratorTest() throws IOException {
     TSDataType dataType = TSDataType.INT32;
-    WritableMemChunk series = new WritableMemChunk(new MeasurementSchema("s1", dataType, TSEncoding.PLAIN), TVList.newList(dataType));
+    WritableMemChunk series = new WritableMemChunk(
+        new MeasurementSchema("s1", dataType, TSEncoding.PLAIN), TVList.newList(dataType));
     int count = 1000;
     for (int i = 0; i < count; i++) {
       series.write(i, i);
@@ -79,11 +80,14 @@ public class PrimitiveMemTableTest {
 
     int dataSize = 10000;
     for (int i = 0; i < dataSize; i++) {
-      memTable.write(deviceId, measurementId[0], new MeasurementSchema(measurementId[0], TSDataType.INT32, TSEncoding.PLAIN), dataSize - i - 1,
+      memTable.write(deviceId, measurementId[0],
+          new MeasurementSchema(measurementId[0], TSDataType.INT32, TSEncoding.PLAIN),
+          dataSize - i - 1,
           i + 10);
     }
     for (int i = 0; i < dataSize; i++) {
-      memTable.write(deviceId, measurementId[0], new MeasurementSchema(measurementId[0], TSDataType.INT32, TSEncoding.PLAIN), i, i);
+      memTable.write(deviceId, measurementId[0],
+          new MeasurementSchema(measurementId[0], TSDataType.INT32, TSEncoding.PLAIN), i, i);
     }
     ReadOnlyMemChunk memChunk = memTable
         .query(deviceId, measurementId[0], TSDataType.INT32, TSEncoding.RLE, Collections.emptyMap(),
@@ -102,7 +106,8 @@ public class PrimitiveMemTableTest {
     TimeValuePair[] ret = genTimeValuePair(size, dataType);
 
     for (TimeValuePair aRet : ret) {
-      memTable.write(deviceId, sensorId, new MeasurementSchema(sensorId, dataType, encoding), aRet.getTimestamp(),
+      memTable.write(deviceId, sensorId, new MeasurementSchema(sensorId, dataType, encoding),
+          aRet.getTimestamp(),
           aRet.getValue().getValue());
     }
     IPointReader tvPair = memTable

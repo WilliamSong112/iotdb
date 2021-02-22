@@ -25,6 +25,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class DoubleTVListTest {
+
   public static double delta = 0.001d;
 
   @Test
@@ -65,8 +66,8 @@ public class DoubleTVListTest {
     tvList.putDoubles(ArrayUtils.toPrimitive(timeList.toArray(new Long[0])),
         ArrayUtils.toPrimitive(doubleList.toArray(new Double[0]), 0.0d), 0, 1000);
     for (long i = 0; i < tvList.size; i++) {
-      Assert.assertEquals((double) tvList.size - i, tvList.getDouble((int)i), delta);
-      Assert.assertEquals(tvList.size - i, tvList.getTime((int)i));
+      Assert.assertEquals((double) tvList.size - i, tvList.getDouble((int) i), delta);
+      Assert.assertEquals(tvList.size - i, tvList.getTime((int) i));
     }
   }
 }

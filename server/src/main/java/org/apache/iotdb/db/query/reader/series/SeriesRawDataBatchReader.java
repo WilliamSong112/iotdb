@@ -47,7 +47,8 @@ public class SeriesRawDataBatchReader implements ManagedSeriesReader {
     this.seriesReader = seriesReader;
   }
 
-  public SeriesRawDataBatchReader(PartialPath seriesPath, Set<String> allSensors, TSDataType dataType,
+  public SeriesRawDataBatchReader(PartialPath seriesPath, Set<String> allSensors,
+      TSDataType dataType,
       QueryContext context, QueryDataSource dataSource, Filter timeFilter, Filter valueFilter,
       TsFileFilter fileFilter, boolean ascending) {
     this.seriesReader = new SeriesReader(seriesPath, allSensors, dataType, context, dataSource,

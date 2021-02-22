@@ -28,12 +28,12 @@ import org.apache.iotdb.db.qp.logical.RootOperator;
 public class DeleteTimeSeriesOperator extends RootOperator {
 
   private List<PartialPath> deletePathList;
-  
+
   public DeleteTimeSeriesOperator(int tokenIntType) {
     super(tokenIntType);
     operatorType = OperatorType.DELETE_TIMESERIES;
   }
-  
+
   public List<PartialPath> getDeletePathList() {
     return deletePathList;
   }

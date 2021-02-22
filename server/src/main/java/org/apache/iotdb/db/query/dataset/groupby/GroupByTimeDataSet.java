@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 public class GroupByTimeDataSet extends QueryDataSet {
 
   private static final Logger logger = LoggerFactory
-    .getLogger(GroupByTimeDataSet.class);
+      .getLogger(GroupByTimeDataSet.class);
 
   private List<RowRecord> records = new ArrayList<>();
   private int index = 0;
@@ -47,8 +47,9 @@ public class GroupByTimeDataSet extends QueryDataSet {
   private GroupByTimePlan groupByTimePlan;
   private QueryContext context;
 
-  public GroupByTimeDataSet(QueryContext context, GroupByTimePlan plan, GroupByEngineDataSet dataSet)
-    throws QueryProcessException, IOException {
+  public GroupByTimeDataSet(QueryContext context, GroupByTimePlan plan,
+      GroupByEngineDataSet dataSet)
+      throws QueryProcessException, IOException {
     this.queryId = context.getQueryId();
     this.paths = new ArrayList<>(plan.getDeduplicatedPaths());
     this.dataTypes = plan.getDeduplicatedDataTypes();
@@ -70,7 +71,7 @@ public class GroupByTimeDataSet extends QueryDataSet {
       RowRecord rawRecord = dataSet.nextWithoutConstraint();
       RowRecord curRecord = new RowRecord(rawRecord.getTimestamp());
       List<AggregateResult> mergedAggResults = FilePathUtils.mergeRecordByPath(
-              plan, rawRecord, finalPaths, pathIndex);
+          plan, rawRecord, finalPaths, pathIndex);
       for (AggregateResult resultData : mergedAggResults) {
         TSDataType dataType = resultData.getResultDataType();
         curRecord.addField(resultData.getResult(), dataType);

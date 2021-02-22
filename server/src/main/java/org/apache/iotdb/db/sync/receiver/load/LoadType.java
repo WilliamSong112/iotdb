@@ -19,5 +19,5 @@
 package org.apache.iotdb.db.sync.receiver.load;
 
 public enum LoadType {
-    DELETE, ADD, NONE
+  DELETE, ADD, NONE
 }

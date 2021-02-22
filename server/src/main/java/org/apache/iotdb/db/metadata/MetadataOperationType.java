@@ -20,7 +20,7 @@ package org.apache.iotdb.db.metadata;
 
 public class MetadataOperationType {
 
-  private MetadataOperationType(){
+  private MetadataOperationType() {
     //allowed to do nothing
   }
 

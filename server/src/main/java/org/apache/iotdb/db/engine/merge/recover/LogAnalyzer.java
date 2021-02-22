@@ -50,24 +50,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * LogAnalyzer scans the "merge.log" file and recovers information such as files of last merge,
- * the last available positions of each file and how many timeseries and files have been merged.
- * An example of merging 1 seqFile and 1 unseqFile containing 3 series is:
- * seqFiles
- * server/0seq.tsfile
- * unseqFiles
- * server/0unseq.tsfile
- * merge start
- * start root.mergeTest.device0.sensor0
- * server/0seq.tsfile.merge 338
- * end
- * start root.mergeTest.device0.sensor1
- * server/0seq.tsfile.merge 664
- * end
- * all ts end
- * server/0seq.tsfile 145462
- * end
- * merge end
+ * LogAnalyzer scans the "merge.log" file and recovers information such as files of last merge, the
+ * last available positions of each file and how many timeseries and files have been merged. An
+ * example of merging 1 seqFile and 1 unseqFile containing 3 series is: seqFiles server/0seq.tsfile
+ * unseqFiles server/0unseq.tsfile merge start start root.mergeTest.device0.sensor0
+ * server/0seq.tsfile.merge 338 end start root.mergeTest.device0.sensor1 server/0seq.tsfile.merge
+ * 664 end all ts end server/0seq.tsfile 145462 end merge end
  */
 public class LogAnalyzer {
 
@@ -88,7 +76,8 @@ public class LogAnalyzer {
 
   private Status status;
 
-  public LogAnalyzer(MergeResource resource, String taskName, File logFile, String storageGroupName) {
+  public LogAnalyzer(MergeResource resource, String taskName, File logFile,
+      String storageGroupName) {
     this.resource = resource;
     this.taskName = taskName;
     this.logFile = logFile;
@@ -98,6 +87,7 @@ public class LogAnalyzer {
   /**
    * Scan through the logs to find out where the last merge has stopped and store the information
    * about the progress in the fields.
+   *
    * @return a Status indicating the completed stage of the last merge.
    * @throws IOException
    */
@@ -110,7 +100,8 @@ public class LogAnalyzer {
 
         analyzeUnseqFiles(bufferedReader);
 
-        List<PartialPath> storageGroupPaths = IoTDB.metaManager.getAllTimeseriesPath(new PartialPath(storageGroupName + ".*"));
+        List<PartialPath> storageGroupPaths = IoTDB.metaManager
+            .getAllTimeseriesPath(new PartialPath(storageGroupName + ".*"));
         unmergedPaths = new ArrayList<>();
         unmergedPaths.addAll(storageGroupPaths);
 
@@ -179,14 +170,16 @@ public class LogAnalyzer {
   }
 
   @SuppressWarnings("squid:S3776") // Suppress high Cognitive Complexity warning
-  private void analyzeMergedSeries(BufferedReader bufferedReader, List<PartialPath> unmergedPaths) throws IOException {
+  private void analyzeMergedSeries(BufferedReader bufferedReader, List<PartialPath> unmergedPaths)
+      throws IOException {
     if (!STR_MERGE_START.equals(currLine)) {
       return;
     }
 
     status = Status.MERGE_START;
     for (TsFileResource seqFile : resource.getSeqFiles()) {
-      File mergeFile = SystemFileFactory.INSTANCE.getFile(seqFile.getTsFilePath() + MergeTask.MERGE_SUFFIX);
+      File mergeFile = SystemFileFactory.INSTANCE
+          .getFile(seqFile.getTsFilePath() + MergeTask.MERGE_SUFFIX);
       fileLastPositions.put(mergeFile, 0L);
     }
 
@@ -199,7 +192,7 @@ public class LogAnalyzer {
       if (currLine.contains(STR_START)) {
         // a TS starts to merge
         String[] splits = currLine.split(" ");
-        for (int i = 1; i < splits.length; i ++) {
+        for (int i = 1; i < splits.length; i++) {
           try {
             currTSList.add(new PartialPath(splits[i]));
           } catch (IllegalPathException e) {
@@ -261,7 +254,7 @@ public class LogAnalyzer {
         while (unmergedFileIter.hasNext()) {
           TsFileResource seqFile = unmergedFileIter.next();
           if (seqFile.getTsFile().getAbsolutePath().equals(seqFilePath)) {
-            mergedCnt ++;
+            mergedCnt++;
             unmergedFileIter.remove();
             break;
           }

@@ -103,12 +103,12 @@ public class IoTDBLastIT {
   @Test
   public void lastWithEmptySeriesTest() throws Exception {
     String[] retArray = new String[]{
-            "root.ln.wf02.status,true",
+        "root.ln.wf02.status,true",
     };
 
     try (Connection connection =
-             DriverManager.getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        DriverManager.getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
 
       statement.execute(
           "CREATE TIMESERIES root.ln.wf02.temperature WITH DATATYPE=DOUBLE, ENCODING=PLAIN");
@@ -483,8 +483,8 @@ public class IoTDBLastIT {
         };
 
     try (Connection connection =
-             DriverManager.getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        DriverManager.getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
 
       statement.execute("select last temperature from root.ln.wf01.wt01");
       statement.execute(

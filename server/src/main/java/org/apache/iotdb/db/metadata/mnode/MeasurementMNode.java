@@ -157,7 +157,7 @@ public class MeasurementMNode extends MNode {
    */
   public static MeasurementMNode deserializeFrom(MeasurementMNodePlan plan) {
     MeasurementMNode node = new MeasurementMNode(null, plan.getName(),
-      plan.getSchema(), plan.getAlias());
+        plan.getSchema(), plan.getAlias());
     node.setOffset(plan.getOffset());
 
     return node;

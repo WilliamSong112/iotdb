@@ -23,16 +23,17 @@ import org.apache.iotdb.db.metadata.PartialPath;
 /**
  * CountOperator is used to count time-series and count nodes.
  */
-public class CountOperator extends ShowOperator{
+public class CountOperator extends ShowOperator {
+
   private PartialPath path;
   private int level;
 
-  public CountOperator(int tokenIntType, PartialPath path){
+  public CountOperator(int tokenIntType, PartialPath path) {
     super(tokenIntType);
     this.path = path;
   }
 
-  public CountOperator(int tokenIntType, PartialPath path, int level){
+  public CountOperator(int tokenIntType, PartialPath path, int level) {
     super(tokenIntType);
     this.path = path;
     this.level = level;

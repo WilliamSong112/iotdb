@@ -169,34 +169,40 @@ public class IoTDBFillIT {
       int cnt = 0;
       try {
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 70 Fill(int32[linear, 500ms, 500ms], "
-                + "double[linear, 500ms, 500ms], boolean[previous, 500ms])");
+            + "from root.ln.wf01.wt01 where time = 70 Fill(int32[linear, 500ms, 500ms], "
+            + "double[linear, 500ms, 500ms], boolean[previous, 500ms])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 70 Fill(int32[linear], "
-                + "double[linear], boolean[previous])");
+            + "from root.ln.wf01.wt01 where time = 70 Fill(int32[linear], "
+            + "double[linear], boolean[previous])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
@@ -221,7 +227,6 @@ public class IoTDBFillIT {
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
         Statement statement = connection.createStatement()) {
 
-
       boolean hasResultSet = statement.execute("select temperature,status, hardware "
           + "from root.ln.wf01.wt01 where time = 70 "
           + "Fill(int32[linear, 25ms, 25ms], double[linear, 25ms, 25ms], boolean[previous, 5ms])");
@@ -231,34 +236,40 @@ public class IoTDBFillIT {
       ResultSet resultSet = statement.getResultSet();
       try {
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 80 "
-                + "Fill(int32[linear, 25ms, 25ms], double[linear, 25ms, 25ms], boolean[previous, 5ms])");
+            + "from root.ln.wf01.wt01 where time = 80 "
+            + "Fill(int32[linear, 25ms, 25ms], double[linear, 25ms, 25ms], boolean[previous, 5ms])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 625 "
-                + "Fill(int32[linear, 25ms, 25ms], double[linear, 25ms, 25ms], boolean[previous, 5ms])");
+            + "from root.ln.wf01.wt01 where time = 625 "
+            + "Fill(int32[linear, 25ms, 25ms], double[linear, 25ms, 25ms], boolean[previous, 5ms])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
@@ -292,34 +303,40 @@ public class IoTDBFillIT {
       try {
         cnt = 0;
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 70 "
-                + "Fill(int32[previous, 500ms], double[previous, 500ms], boolean[previous, 500ms])");
+            + "from root.ln.wf01.wt01 where time = 70 "
+            + "Fill(int32[previous, 500ms], double[previous, 500ms], boolean[previous, 500ms])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 70 "
-                + "Fill(int32[previous, 15ms], double[previous, 15ms], boolean[previous, 5ms])");
+            + "from root.ln.wf01.wt01 where time = 70 "
+            + "Fill(int32[previous, 15ms], double[previous, 15ms], boolean[previous, 5ms])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
@@ -352,21 +369,25 @@ public class IoTDBFillIT {
       ResultSet resultSet = statement.getResultSet();
       try {
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         hasResultSet = statement.execute("select temperature,status, hardware "
-                + "from root.ln.wf01.wt01 where time = 70 "
-                + "Fill(int32[linear], double[linear], boolean[previous])");
+            + "from root.ln.wf01.wt01 where time = 70 "
+            + "Fill(int32[linear], double[linear], boolean[previous])");
 
         Assert.assertTrue(hasResultSet);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
-                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet.getString(HARDWARE_STR);
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_1)
+                  + "," + resultSet.getString(STATUS_STR_1) + "," + resultSet
+                  .getString(HARDWARE_STR);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
@@ -396,19 +417,19 @@ public class IoTDBFillIT {
       try {
         while (resultSet.next()) {
           String ans =
-                  resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
-                          + "," + resultSet.getString(STATUS_STR_2);
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+                  + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
         }
 
         resultSet = statement.executeQuery("select temperature,status "
-                + "from root.ln.wf01.wt02 where time = 800 Fill(double[previous])");
+            + "from root.ln.wf01.wt02 where time = 800 Fill(double[previous])");
 
         while (resultSet.next()) {
           String ans =
-                  resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
-                          + "," + resultSet.getString(STATUS_STR_2);
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+                  + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
         }
@@ -432,38 +453,45 @@ public class IoTDBFillIT {
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
         Statement statement = connection.createStatement()) {
 
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(50, 82.1, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(35, 121.22, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(50, 82.1, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(35, 121.22, true)");
       statement.execute("flush");
 
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(25, 102.15, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(78, 32.2, false)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(25, 102.15, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(78, 32.2, false)");
       statement.execute("flush");
 
       int cnt = 0;
       ResultSet resultSet = statement.executeQuery("select temperature,status "
-              + "from root.ln.wf01.wt02 where time = 58 Fill(double[previous])");
+          + "from root.ln.wf01.wt02 where time = 58 Fill(double[previous])");
       try {
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
                   + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
         }
 
         resultSet = statement.executeQuery("select temperature,status "
-                + "from root.ln.wf01.wt02 where time = 40 Fill(double[previous])");
+            + "from root.ln.wf01.wt02 where time = 40 Fill(double[previous])");
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
                   + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
         }
 
         resultSet = statement.executeQuery("select temperature,status "
-                + "from root.ln.wf01.wt02 where time = 80 Fill(double[previous])");
+            + "from root.ln.wf01.wt02 where time = 80 Fill(double[previous])");
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
                   + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
@@ -487,8 +515,10 @@ public class IoTDBFillIT {
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
         Statement statement = connection.createStatement()) {
 
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(50, 82.1, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(35, 121.22, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(50, 82.1, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(35, 121.22, true)");
       statement.execute("flush");
 
       int cnt = 0;
@@ -496,20 +526,24 @@ public class IoTDBFillIT {
           + "from root.ln.wf01.wt02 where time = 59 Fill(double[previous])");
       try {
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
                   + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
         }
 
-        statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(25, 102.15, true)");
-        statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(50, 32.2, false)");
+        statement.execute(
+            "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(25, 102.15, true)");
+        statement.execute(
+            "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(50, 32.2, false)");
         statement.execute("flush");
 
         resultSet = statement.executeQuery("select temperature,status "
-                + "from root.ln.wf01.wt02 where time = 52 Fill(double[previous])");
+            + "from root.ln.wf01.wt02 where time = 52 Fill(double[previous])");
         while (resultSet.next()) {
-          String ans = resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
+          String ans =
+              resultSet.getString(TIMESTAMP_STR) + "," + resultSet.getString(TEMPERATURE_STR_2)
                   + "," + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray[cnt], ans);
           cnt++;
@@ -534,30 +568,35 @@ public class IoTDBFillIT {
         Statement statement = connection.createStatement()) {
 
       int cnt = 0;
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(950, 82.1, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(650, 121.22, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(950, 82.1, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(650, 121.22, true)");
       statement.execute("flush");
 
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(740, 33.1, false)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(420, 125.1, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(890, 22.82, false)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(740, 33.1, false)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(420, 125.1, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(890, 22.82, false)");
       statement.execute("flush");
 
       ResultSet resultSet = statement.executeQuery(
-              "select temperature,status from root.ln.wf01.wt02 where time = 886 "
-                  + "Fill(double[previous])");
+          "select temperature,status from root.ln.wf01.wt02 where time = 886 "
+              + "Fill(double[previous])");
       try {
         while (resultSet.next()) {
           String ans = resultSet.getString(TIMESTAMP_STR) + ","
-                  + resultSet.getString(TEMPERATURE_STR_2) + ","
-                  + resultSet.getString(STATUS_STR_2);
+              + resultSet.getString(TEMPERATURE_STR_2) + ","
+              + resultSet.getString(STATUS_STR_2);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
 
         resultSet = statement.executeQuery(
-                "select temperature,status from root.ln.wf01.wt02 where time = 730 "
-                    + "Fill(double[previous])");
+            "select temperature,status from root.ln.wf01.wt02 where time = 730 "
+                + "Fill(double[previous])");
 
         while (resultSet.next()) {
           String ans =
@@ -587,21 +626,26 @@ public class IoTDBFillIT {
         Statement statement = connection.createStatement()) {
 
       int cnt = 0;
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(1030, 82.1, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(940, 121.22, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(1030, 82.1, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(940, 121.22, true)");
       statement.execute("flush");
 
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(740, 62.1, false)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(740, 62.1, false)");
       statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,status) values(980, true)");
       statement.execute("flush");
 
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(910, 33.1, false)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(620, 125.1, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(910, 33.1, false)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(620, 125.1, true)");
       statement.execute("flush");
 
       ResultSet resultSet = statement.executeQuery(
-            "select temperature,status from root.ln.wf01.wt02 where time = 990 "
-                + "Fill(double[previous])");
+          "select temperature,status from root.ln.wf01.wt02 where time = 990 "
+              + "Fill(double[previous])");
       try {
         while (resultSet.next()) {
           String ans = resultSet.getString(TIMESTAMP_STR) + ","
@@ -642,7 +686,8 @@ public class IoTDBFillIT {
         Statement statement = connection.createStatement()) {
 
       int cnt = 0;
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp, temperature, status) values(1030, 21.6, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp, temperature, status) values(1030, 21.6, true)");
       statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,status) values(940, true)");
       statement.execute("flush");
 
@@ -651,8 +696,8 @@ public class IoTDBFillIT {
       statement.execute("flush");
 
       ResultSet resultSet = statement.executeQuery(
-            "select temperature,status from root.ln.wf01.wt02 where time = 990 "
-                + "Fill(double[previous])");
+          "select temperature,status from root.ln.wf01.wt02 where time = 990 "
+              + "Fill(double[previous])");
       try {
         while (resultSet.next()) {
           String ans = resultSet.getString(TIMESTAMP_STR) + ","
@@ -681,18 +726,20 @@ public class IoTDBFillIT {
         Statement statement = connection.createStatement()) {
 
       int cnt = 0;
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp, temperature, status) values(1030, 21.6, true)");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp, temperature, status) values(940, 188.2, false)");
-
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp, temperature, status) values(1030, 21.6, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp, temperature, status) values(940, 188.2, false)");
 
       statement.execute("DELETE FROM root.ln.wf01.wt02.temperature WHERE time < 1000");
       statement.execute("flush");
-      statement.execute("INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(980, 47.22, true)");
+      statement.execute(
+          "INSERT INTO root.ln.wf01.wt02(timestamp,temperature,status) values(980, 47.22, true)");
       statement.execute("flush");
 
       ResultSet resultSet = statement.executeQuery(
-            "select temperature,status from root.ln.wf01.wt02 where time = 1080 "
-                + "Fill(double[previous])");
+          "select temperature,status from root.ln.wf01.wt02 where time = 1080 "
+              + "Fill(double[previous])");
       try {
         while (resultSet.next()) {
           String ans = resultSet.getString(TIMESTAMP_STR) + ","
@@ -716,7 +763,6 @@ public class IoTDBFillIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
         Statement statement = connection.createStatement()) {
-
 
       for (String sql : dataSet1) {
         statement.execute(sql);

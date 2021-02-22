@@ -76,6 +76,7 @@ public class MetricsSystem {
     sources.add(source);
   }
 
-  public void registerSinks() {}
+  public void registerSinks() {
+  }
 
 }

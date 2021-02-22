@@ -38,7 +38,7 @@ public class DatetimeQueryDataSetUtilsTest {
   private long delta;
 
   /**
-   *  Test convertDatetimeStrToLong() method with different time precision.
+   * Test convertDatetimeStrToLong() method with different time precision.
    */
   @Test
   public void convertDatetimeStrToLongTest1() throws LogicalOperatorException {

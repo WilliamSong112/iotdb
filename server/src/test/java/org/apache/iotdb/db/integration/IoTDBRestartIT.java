@@ -122,10 +122,10 @@ public class IoTDBRestartIT {
       EnvironmentUtils.restartDaemon();
       StorageEngine.getInstance().recover();
       // wait for recover
-      while(!StorageEngine.getInstance().isAllSgReady()){
+      while (!StorageEngine.getInstance().isAllSgReady()) {
         Thread.sleep(500);
         time += 500;
-        if(time > 10000){
+        if (time > 10000) {
           logger.warn("wait too long in restart, wait for: " + time / 1000 + "s");
         }
       }

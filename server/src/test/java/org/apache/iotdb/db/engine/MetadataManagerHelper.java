@@ -52,9 +52,10 @@ public class MetadataManagerHelper {
       mmanager.createTimeseries(new PartialPath("root.vehicle.d0.s3"), TSDataType.valueOf("DOUBLE"),
           TSEncoding.PLAIN, compressionType,
           Collections.emptyMap());
-      mmanager.createTimeseries(new PartialPath("root.vehicle.d0.s4"), TSDataType.valueOf("BOOLEAN"),
-          TSEncoding.PLAIN, compressionType,
-          Collections.emptyMap());
+      mmanager
+          .createTimeseries(new PartialPath("root.vehicle.d0.s4"), TSDataType.valueOf("BOOLEAN"),
+              TSEncoding.PLAIN, compressionType,
+              Collections.emptyMap());
       mmanager.createTimeseries(new PartialPath("root.vehicle.d0.s5"), TSDataType.valueOf("TEXT"),
           TSEncoding.PLAIN, compressionType,
           Collections.emptyMap());
@@ -67,8 +68,9 @@ public class MetadataManagerHelper {
           TSEncoding.PLAIN, compressionType, Collections.emptyMap());
       mmanager.createTimeseries(new PartialPath("root.vehicle.d1.s3"), TSDataType.valueOf("DOUBLE"),
           TSEncoding.PLAIN, compressionType, Collections.emptyMap());
-      mmanager.createTimeseries(new PartialPath("root.vehicle.d1.s4"), TSDataType.valueOf("BOOLEAN"),
-          TSEncoding.PLAIN, compressionType, Collections.emptyMap());
+      mmanager
+          .createTimeseries(new PartialPath("root.vehicle.d1.s4"), TSDataType.valueOf("BOOLEAN"),
+              TSEncoding.PLAIN, compressionType, Collections.emptyMap());
       mmanager.createTimeseries(new PartialPath("root.vehicle.d1.s5"), TSDataType.valueOf("TEXT"),
           TSEncoding.PLAIN, compressionType, Collections.emptyMap());
 
@@ -80,8 +82,9 @@ public class MetadataManagerHelper {
           TSEncoding.PLAIN, compressionType, Collections.emptyMap());
       mmanager.createTimeseries(new PartialPath("root.vehicle.d2.s3"), TSDataType.valueOf("DOUBLE"),
           TSEncoding.PLAIN, compressionType, Collections.emptyMap());
-      mmanager.createTimeseries(new PartialPath("root.vehicle.d2.s4"), TSDataType.valueOf("BOOLEAN"),
-          TSEncoding.PLAIN, compressionType, Collections.emptyMap());
+      mmanager
+          .createTimeseries(new PartialPath("root.vehicle.d2.s4"), TSDataType.valueOf("BOOLEAN"),
+              TSEncoding.PLAIN, compressionType, Collections.emptyMap());
       mmanager.createTimeseries(new PartialPath("root.vehicle.d2.s5"), TSDataType.valueOf("TEXT"),
           TSEncoding.PLAIN, compressionType, Collections.emptyMap());
 

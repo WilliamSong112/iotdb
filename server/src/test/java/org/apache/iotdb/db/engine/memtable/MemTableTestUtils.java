@@ -35,7 +35,7 @@ public class MemTableTestUtils {
 
   static {
     schema
-        .registerTimeseries(new Path(deviceId0, measurementId0), 
+        .registerTimeseries(new Path(deviceId0, measurementId0),
             new MeasurementSchema(measurementId0, dataType0, TSEncoding.PLAIN));
   }
 
@@ -45,7 +45,8 @@ public class MemTableTestUtils {
       throw new RuntimeException(String.format("start time %d > end time %d", startTime, endTime));
     }
     for (long l = startTime; l <= endTime; l++) {
-      iMemTable.write(deviceId, measurementId, new MeasurementSchema(measurementId, dataType, TSEncoding.PLAIN), l, (int)l);
+      iMemTable.write(deviceId, measurementId,
+          new MeasurementSchema(measurementId, dataType, TSEncoding.PLAIN), l, (int) l);
     }
   }
 

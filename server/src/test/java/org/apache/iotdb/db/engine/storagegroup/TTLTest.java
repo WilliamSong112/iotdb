@@ -267,8 +267,8 @@ public class TTLTest {
     for (File directory : seqDir.listFiles()) {
       if (directory.isDirectory()) {
         for (File file : directory.listFiles()) {
-          if(file.isDirectory()){
-            for(File tsfile : file.listFiles()){
+          if (file.isDirectory()) {
+            for (File tsfile : file.listFiles()) {
               if (tsfile.getPath().endsWith(TsFileConstant.TSFILE_SUFFIX)) {
                 seqFiles.add(file);
               }
@@ -282,8 +282,8 @@ public class TTLTest {
     for (File directory : unseqDir.listFiles()) {
       if (directory.isDirectory()) {
         for (File file : directory.listFiles()) {
-          if(file.isDirectory()){
-            for(File tsfile : file.listFiles()){
+          if (file.isDirectory()) {
+            for (File tsfile : file.listFiles()) {
               if (tsfile.getPath().endsWith(TsFileConstant.TSFILE_SUFFIX)) {
                 unseqFiles.add(file);
               }
@@ -309,8 +309,8 @@ public class TTLTest {
     for (File directory : seqDir.listFiles()) {
       if (directory.isDirectory()) {
         for (File file : directory.listFiles()) {
-          if(file.isDirectory()){
-            for(File tsfile : file.listFiles()){
+          if (file.isDirectory()) {
+            for (File tsfile : file.listFiles()) {
               if (tsfile.getPath().endsWith(TsFileConstant.TSFILE_SUFFIX)) {
                 seqFiles.add(file);
               }
@@ -324,8 +324,8 @@ public class TTLTest {
     for (File directory : unseqDir.listFiles()) {
       if (directory.isDirectory()) {
         for (File file : directory.listFiles()) {
-          if(file.isDirectory()){
-            for(File tsfile : file.listFiles()){
+          if (file.isDirectory()) {
+            for (File tsfile : file.listFiles()) {
               if (tsfile.getPath().endsWith(TsFileConstant.TSFILE_SUFFIX)) {
                 unseqFiles.add(file);
               }

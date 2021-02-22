@@ -39,14 +39,13 @@ public class MemUtils {
 
   private static Logger logger = LoggerFactory.getLogger(MemUtils.class);
 
-  private MemUtils(){
+  private MemUtils() {
 
   }
 
   /**
-   * function for getting the value size.
-   * If mem control enabled, do not add text data size here, the size will be added to memtable
-   * before inserting.
+   * function for getting the value size. If mem control enabled, do not add text data size here,
+   * the size will be added to memtable before inserting.
    */
   public static long getRecordSize(TSDataType dataType, Object value,
       boolean addingTextDataSize) {
@@ -75,7 +74,7 @@ public class MemUtils {
 
   public static long getBinaryColumnSize(Binary[] column, int start, int end) {
     long memSize = 0;
-    memSize += (end-start) * RamUsageEstimator.NUM_BYTES_OBJECT_HEADER;
+    memSize += (end - start) * RamUsageEstimator.NUM_BYTES_OBJECT_HEADER;
     for (int i = start; i < end; i++) {
       memSize += RamUsageEstimator.sizeOf(column[i].getValues());
     }
@@ -98,15 +97,20 @@ public class MemUtils {
       }
       switch (insertTabletPlan.getDataTypes()[i]) {
         case INT32:
-          memSize += (end - start) * (8L + 4L); break;
+          memSize += (end - start) * (8L + 4L);
+          break;
         case INT64:
-          memSize += (end - start) * (8L + 8L); break;
+          memSize += (end - start) * (8L + 8L);
+          break;
         case FLOAT:
-          memSize += (end - start) * (8L + 4L); break;
+          memSize += (end - start) * (8L + 4L);
+          break;
         case DOUBLE:
-          memSize += (end - start) * (8L + 8L); break;
+          memSize += (end - start) * (8L + 8L);
+          break;
         case BOOLEAN:
-          memSize += (end - start) * (8L + 1L); break;
+          memSize += (end - start) * (8L + 1L);
+          break;
         case TEXT:
           memSize += (end - start) * 8L;
           if (addingTextDataSize) {

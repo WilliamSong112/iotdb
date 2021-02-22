@@ -42,9 +42,9 @@ public class FlushPlan extends PhysicalPlan {
   /**
    * key-> storage group, value->list of pair, Pair<PartitionId, isSequence>,
    * <p>
-   * Notice, the value maybe null, when it is null, all partitions under the storage groups are flushed,
-   * so do not use {@link java.util.concurrent.ConcurrentHashMap} when
-   * initializing as ConcurrentMap dose not support null key and value
+   * Notice, the value maybe null, when it is null, all partitions under the storage groups are
+   * flushed, so do not use {@link java.util.concurrent.ConcurrentHashMap} when initializing as
+   * ConcurrentMap dose not support null key and value
    */
   private Map<PartialPath, List<Pair<Long, Boolean>>> storageGroupPartitionIds;
 

@@ -75,30 +75,32 @@ public class WatermarkDetector {
         items = line.split(",");
         long timestamp = parseTimestamp(items[0]);
         if (GroupedLSBWatermarkEncoder
-                .hashMod(String.format("%s%d", secretKey, timestamp), embed_row_cycle)
-                == 0) {
+            .hashMod(String.format("%s%d", secretKey, timestamp), embed_row_cycle)
+            == 0) {
           String str = items[columnIndex];
           if (str.equals("null")) {
             continue;
           }
 
           int targetBitPosition = GroupedLSBWatermarkEncoder
-                  .hashMod(String.format("%s%d%s", secretKey, timestamp, secretKey),
-                          embed_lsb_num);
+              .hashMod(String.format("%s%d%s", secretKey, timestamp, secretKey),
+                  embed_lsb_num);
           int groupId = GroupedLSBWatermarkEncoder
-                  .hashMod(String.format("%d%s", timestamp, secretKey), watermarkBitString.length());
+              .hashMod(String.format("%d%s", timestamp, secretKey), watermarkBitString.length());
 
           boolean isTrue = true;
           switch (dataType) {
             case "int":
-              isTrue = EncodingUtils.testBit(Integer.parseInt(items[columnIndex]), targetBitPosition);
+              isTrue = EncodingUtils
+                  .testBit(Integer.parseInt(items[columnIndex]), targetBitPosition);
               break;
             case "float":
               int floatToIntBits = Float.floatToIntBits(Float.parseFloat(items[columnIndex]));
               isTrue = EncodingUtils.testBit(floatToIntBits, targetBitPosition);
               break;
             case "double":
-              long doubleToLongBits = Double.doubleToLongBits(Double.parseDouble(items[columnIndex]));
+              long doubleToLongBits = Double
+                  .doubleToLongBits(Double.parseDouble(items[columnIndex]));
               isTrue = EncodingUtils.testBit(doubleToLongBits, targetBitPosition);
               break;
             default:
@@ -166,7 +168,7 @@ public class WatermarkDetector {
   /**
    * Finds the minimum b that meets the formula: (C(l,b)+C(l,b+1)+C(l,b+2)+...+C(l,l))/2^l < alpha
    *
-   * @param l the total number
+   * @param l     the total number
    * @param alpha significance level
    * @return the minimum b
    */

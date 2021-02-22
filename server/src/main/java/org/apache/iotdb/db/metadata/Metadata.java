@@ -76,13 +76,13 @@ public class Metadata implements Serializable {
 
   @Override
   public boolean equals(Object obj) {
-    if(this == obj){
+    if (this == obj) {
       return true;
     }
-    if(obj == null){
+    if (obj == null) {
       return false;
     }
-    if(this.getClass() != obj.getClass()){
+    if (this.getClass() != obj.getClass()) {
       return false;
     }
 
@@ -98,7 +98,8 @@ public class Metadata implements Serializable {
   /**
    * only used to check if deviceIdMap is equal to another deviceIdMap
    */
-  private boolean deviceIdMapEquals(Map<String, List<String>> map1, Map<String, List<String>> map2) {
+  private boolean deviceIdMapEquals(Map<String, List<String>> map1,
+      Map<String, List<String>> map2) {
     if (!map1.keySet().equals(map2.keySet())) {
       return false;
     }

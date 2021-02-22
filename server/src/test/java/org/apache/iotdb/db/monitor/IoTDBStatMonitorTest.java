@@ -42,6 +42,7 @@ import org.slf4j.LoggerFactory;
  * This is a integration test for StatMonitor.
  */
 public class IoTDBStatMonitorTest {
+
   private static final Logger logger = LoggerFactory.getLogger(IoTDBStatMonitorTest.class);
 
   private StatMonitor statMonitor;
@@ -63,7 +64,7 @@ public class IoTDBStatMonitorTest {
     config.setEnableMonitorSeriesWrite(true);
     EnvironmentUtils.envSetUp();
     statMonitor = StatMonitor.getInstance();
-    if (statMonitor.globalSeries.isEmpty()){
+    if (statMonitor.globalSeries.isEmpty()) {
       statMonitor.initMonitorSeriesInfo();
     }
     insertSomeData();
@@ -84,15 +85,15 @@ public class IoTDBStatMonitorTest {
     // restart server
     EnvironmentUtils.restartDaemon();
     long time = 0;
-    while(!StorageEngine.getInstance().isAllSgReady()){
+    while (!StorageEngine.getInstance().isAllSgReady()) {
       Thread.sleep(500);
       time += 500;
 
-      if(time > 10000){
+      if (time > 10000) {
         logger.warn("wait for sg ready for : " + (time / 1000) + " s");
       }
 
-      if(time > 30000){
+      if (time > 30000) {
         throw new IllegalStateException("wait too long in IoTDBStatMonitorTest");
       }
     }

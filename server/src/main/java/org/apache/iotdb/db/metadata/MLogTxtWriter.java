@@ -83,8 +83,8 @@ public class MLogTxtWriter implements AutoCloseable {
   public void createTimeseries(CreateTimeSeriesPlan plan, long offset) throws IOException {
     StringBuilder buf = new StringBuilder();
     buf.append(String.format("%s,%s,%s,%s,%s", MetadataOperationType.CREATE_TIMESERIES,
-            plan.getPath().getFullPath(), plan.getDataType().serialize(),
-            plan.getEncoding().serialize(), plan.getCompressor().serialize()));
+        plan.getPath().getFullPath(), plan.getDataType().serialize(),
+        plan.getEncoding().serialize(), plan.getCompressor().serialize()));
 
     buf.append(",");
     if (plan.getProps() != null) {
@@ -120,14 +120,16 @@ public class MLogTxtWriter implements AutoCloseable {
   }
 
   public void setStorageGroup(String storageGroup) throws IOException {
-    String outputStr = MetadataOperationType.SET_STORAGE_GROUP + "," + storageGroup + LINE_SEPARATOR;
+    String outputStr =
+        MetadataOperationType.SET_STORAGE_GROUP + "," + storageGroup + LINE_SEPARATOR;
     ByteBuffer buff = ByteBuffer.wrap(outputStr.getBytes());
     channel.write(buff);
     lineNumber.incrementAndGet();
   }
 
   public void deleteStorageGroup(String storageGroup) throws IOException {
-    String outputStr = MetadataOperationType.DELETE_STORAGE_GROUP + "," + storageGroup + LINE_SEPARATOR;
+    String outputStr =
+        MetadataOperationType.DELETE_STORAGE_GROUP + "," + storageGroup + LINE_SEPARATOR;
     ByteBuffer buff = ByteBuffer.wrap(outputStr.getBytes());
     channel.write(buff);
     lineNumber.incrementAndGet();
@@ -141,7 +143,8 @@ public class MLogTxtWriter implements AutoCloseable {
   }
 
   public void changeOffset(String path, long offset) throws IOException {
-    String outputStr = String.format(STRING_TYPE, MetadataOperationType.CHANGE_OFFSET, path, offset);
+    String outputStr = String
+        .format(STRING_TYPE, MetadataOperationType.CHANGE_OFFSET, path, offset);
     ByteBuffer buff = ByteBuffer.wrap(outputStr.getBytes());
     channel.write(buff);
     lineNumber.incrementAndGet();

@@ -128,7 +128,7 @@ public class DnfFilterOptimizer implements IFilterOptimizer {
    * If operator is leaf, add it in newChildrenList. If operator is And, add its children to
    * newChildrenList.
    *
-   * @param operator which children should be added in new children list
+   * @param operator        which children should be added in new children list
    * @param newChildrenList new children list
    * @throws LogicalOptimizeException exception in DNF optimizing
    */
@@ -148,7 +148,7 @@ public class DnfFilterOptimizer implements IFilterOptimizer {
    * used by getDnf. If operator is leaf or And, add operator to newChildrenList. Else add
    * operator's children to newChildrenList
    *
-   * @param operator to be added in new children list
+   * @param operator        to be added in new children list
    * @param newChildrenList new children list
    */
   private void addChildOpInOr(FilterOperator operator, List<FilterOperator> newChildrenList) {

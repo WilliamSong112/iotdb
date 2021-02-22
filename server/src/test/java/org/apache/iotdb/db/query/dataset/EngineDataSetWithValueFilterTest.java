@@ -131,7 +131,8 @@ public class EngineDataSetWithValueFilterTest {
   @Test
   public void testOrderByTimeDesc() throws Exception {
     QueryPlan queryPlan = (QueryPlan) processor
-        .parseSQLToPhysicalPlan("select vehicle.d0.s1 from root where root.vehicle.d0.s0 > 100 order by time desc");
+        .parseSQLToPhysicalPlan(
+            "select vehicle.d0.s1 from root where root.vehicle.d0.s0 > 100 order by time desc");
     QueryDataSet dataSet = queryExecutor
         .processQuery(queryPlan, EnvironmentUtils.TEST_QUERY_CONTEXT);
 

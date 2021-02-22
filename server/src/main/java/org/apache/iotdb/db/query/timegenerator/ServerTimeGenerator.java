@@ -71,7 +71,8 @@ public class ServerTimeGenerator extends TimeGenerator {
     }
   }
 
-  public void serverConstructNode(IExpression expression) throws IOException, StorageEngineException {
+  public void serverConstructNode(IExpression expression)
+      throws IOException, StorageEngineException {
     List<PartialPath> pathList = new ArrayList<>();
     getPartialPathFromExpression(expression, pathList);
     List<StorageGroupProcessor> list = StorageEngine.getInstance().mergeLock(pathList);
@@ -100,7 +101,8 @@ public class ServerTimeGenerator extends TimeGenerator {
     QueryDataSource queryDataSource;
     try {
       dataType = IoTDB.metaManager.getSeriesType(path);
-      queryDataSource = QueryResourceManager.getInstance().getQueryDataSource(path, context, valueFilter);
+      queryDataSource = QueryResourceManager.getInstance()
+          .getQueryDataSource(path, context, valueFilter);
       // update valueFilter by TTL
       valueFilter = queryDataSource.updateFilterUsingTTL(valueFilter);
     } catch (Exception e) {
@@ -119,7 +121,8 @@ public class ServerTimeGenerator extends TimeGenerator {
    * extract time filter from a value filter
    */
   private Filter getTimeFilter(Filter filter) {
-    if (filter instanceof UnaryFilter && ((UnaryFilter) filter).getFilterType() == FilterType.TIME_FILTER) {
+    if (filter instanceof UnaryFilter
+        && ((UnaryFilter) filter).getFilterType() == FilterType.TIME_FILTER) {
       return filter;
     }
     if (filter instanceof AndFilter) {

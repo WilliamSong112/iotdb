@@ -95,8 +95,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and only one chunk for each time series
-   * second file has only one page for each chunk and only one chunk for each time series
+   * first file has only one page for each chunk and only one chunk for each time series second file
+   * has only one page for each chunk and only one chunk for each time series
    */
   @Test
   public void test1() throws SQLException {
@@ -144,8 +144,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and two chunks for each time series
-   * second file has only one page for each chunk and only one chunk for each time series
+   * first file has only one page for each chunk and two chunks for each time series second file has
+   * only one page for each chunk and only one chunk for each time series
    */
   @Test
   public void test2() throws SQLException {
@@ -196,8 +196,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and only one chunk for each time series
-   * second file has only one page for each chunk and only one chunk for each time series
+   * first file has two pages for each chunk and only one chunk for each time series second file has
+   * only one page for each chunk and only one chunk for each time series
    */
   @Test
   public void test3() throws SQLException {
@@ -247,8 +247,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and two chunks for each time series
-   * second file has only one page for each chunk and only one chunk for each time series
+   * first file has two pages for each chunk and two chunks for each time series second file has
+   * only one page for each chunk and only one chunk for each time series
    */
   @Test
   public void test4() throws SQLException {
@@ -304,8 +304,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and only one chunk for each time series
-   * second file has two pages for each chunk and only one chunk for each time series
+   * first file has only one page for each chunk and only one chunk for each time series second file
+   * has two pages for each chunk and only one chunk for each time series
    */
   @Test
   public void test5() throws SQLException {
@@ -356,8 +356,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and two chunks for each time series
-   * second file has two pages for each chunk and only one chunk for each time series
+   * first file has only one page for each chunk and two chunks for each time series second file has
+   * two pages for each chunk and only one chunk for each time series
    */
   @Test
   public void test6() throws SQLException {
@@ -413,8 +413,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and only one chunk for each time series
-   * second file has two pages for each chunk and only one chunk for each time series
+   * first file has two pages for each chunk and only one chunk for each time series second file has
+   * two pages for each chunk and only one chunk for each time series
    */
   @Test
   public void test7() throws SQLException {
@@ -466,8 +466,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and two chunks for each time series
-   * second file has two pages for each chunk and only one chunk for each time series
+   * first file has two pages for each chunk and two chunks for each time series second file has two
+   * pages for each chunk and only one chunk for each time series
    */
   @Test
   public void test8() throws SQLException {
@@ -526,8 +526,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and only one chunk for each time series
-   * second file has only one page for each chunk and two chunks for each time series
+   * first file has only one page for each chunk and only one chunk for each time series second file
+   * has only one page for each chunk and two chunks for each time series
    */
   @Test
   public void test9() throws SQLException {
@@ -579,8 +579,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and two chunks for each time series
-   * second file has only one page for each chunk and two chunks for each time series
+   * first file has only one page for each chunk and two chunks for each time series second file has
+   * only one page for each chunk and two chunks for each time series
    */
   @Test
   public void test10() throws SQLException {
@@ -625,7 +625,8 @@ public class IoTDBNewTsFileCompactionIT {
       }
       assertEquals(retArray.length, cnt);
 
-      try (ResultSet resultSet = statement.executeQuery("SELECT count(s1) FROM root.sg1.d1 where time < 4")) {
+      try (ResultSet resultSet = statement
+          .executeQuery("SELECT count(s1) FROM root.sg1.d1 where time < 4")) {
         assertTrue(resultSet.next());
         assertEquals(3L, resultSet.getLong("count(root.sg1.d1.s1)"));
       }
@@ -639,8 +640,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and only one chunk for each time series
-   * second file has only one page for each chunk and two chunks for each time series
+   * first file has two pages for each chunk and only one chunk for each time series second file has
+   * only one page for each chunk and two chunks for each time series
    */
   @Test
   public void test11() throws SQLException {
@@ -693,8 +694,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and two chunks for each time series
-   * second file has only one page for each chunk and two chunks for each time series
+   * first file has two pages for each chunk and two chunks for each time series second file has
+   * only one page for each chunk and two chunks for each time series
    */
   @Test
   public void test12() throws SQLException {
@@ -753,8 +754,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and only one chunk for each time series
-   * second file has two pages for each chunk and two chunks for each time series
+   * first file has only one page for each chunk and only one chunk for each time series second file
+   * has two pages for each chunk and two chunks for each time series
    */
   @Test
   public void test13() throws SQLException {
@@ -787,7 +788,6 @@ public class IoTDBNewTsFileCompactionIT {
       statement.execute("INSERT INTO root.sg1.d1(time,s1) values(5, 5)");
       statement.execute("FLUSH");
 
-
       assertTrue(waitForMergeFinish());
 
       int cnt;
@@ -812,8 +812,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has only one page for each chunk and two chunks for each time series
-   * second file has two pages for each chunk and two chunks for each time series
+   * first file has only one page for each chunk and two chunks for each time series second file has
+   * two pages for each chunk and two chunks for each time series
    */
   @Test
   public void test14() throws SQLException {
@@ -873,8 +873,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and only one chunk for each time series
-   * second file has two pages for each chunk and two chunks for each time series
+   * first file has two pages for each chunk and only one chunk for each time series second file has
+   * two pages for each chunk and two chunks for each time series
    */
   @Test
   public void test15() throws SQLException {
@@ -934,8 +934,8 @@ public class IoTDBNewTsFileCompactionIT {
   }
 
   /**
-   * first file has two pages for each chunk and two chunks for each time series
-   * second file has two pages for each chunk and two chunks for each time series
+   * first file has two pages for each chunk and two chunks for each time series second file has two
+   * pages for each chunk and two chunks for each time series
    */
   @Test
   public void test16() throws SQLException {

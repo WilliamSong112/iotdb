@@ -70,18 +70,18 @@ public class MLogParser {
     Options options = new Options();
 
     Option opFile = Option.builder(FILE_ARGS).required().argName(FILE_NAME).hasArg().desc(
-      "Need to specify a binary mlog file to parse (required)")
-      .build();
+        "Need to specify a binary mlog file to parse (required)")
+        .build();
     options.addOption(opFile);
 
     Option opOut = Option.builder(OUT_ARGS).required(false).argName(OUT_NAME).hasArg().desc(
-      "Could specify the output file after parse (optional)")
-      .build();
+        "Could specify the output file after parse (optional)")
+        .build();
     options.addOption(opOut);
 
     Option opHelp = Option.builder(HELP_ARGS).longOpt(HELP_ARGS)
-      .hasArg(false).desc("Display help information")
-      .build();
+        .hasArg(false).desc("Display help information")
+        .build();
     options.addOption(opHelp);
 
     return options;
@@ -129,7 +129,7 @@ public class MLogParser {
   }
 
   public static String checkRequiredArg(String arg, String name, CommandLine commandLine)
-    throws ParseException {
+      throws ParseException {
     String str = commandLine.getOptionValue(arg);
     if (str == null) {
       String msg = String.format("Required values for option '%s' not provided", name);
@@ -142,14 +142,14 @@ public class MLogParser {
 
   public static void parseFromFile(String inputFile, String outputFile) throws IOException {
     try (MLogReader mLogReader = new MLogReader(inputFile);
-         MLogTxtWriter mLogTxtWriter = new MLogTxtWriter(outputFile)) {
+        MLogTxtWriter mLogTxtWriter = new MLogTxtWriter(outputFile)) {
 
       while (mLogReader.hasNext()) {
         PhysicalPlan plan = mLogReader.next();
         switch (plan.getOperatorType()) {
           case CREATE_TIMESERIES:
-            mLogTxtWriter.createTimeseries((CreateTimeSeriesPlan)plan,
-              ((CreateTimeSeriesPlan) plan).getTagOffset());
+            mLogTxtWriter.createTimeseries((CreateTimeSeriesPlan) plan,
+                ((CreateTimeSeriesPlan) plan).getTagOffset());
             break;
           case DELETE_TIMESERIES:
             for (PartialPath partialPath : plan.getPaths()) {
@@ -166,15 +166,15 @@ public class MLogParser {
             break;
           case TTL:
             mLogTxtWriter.setTTL(((SetTTLPlan) plan).getStorageGroup().getFullPath(),
-              ((SetTTLPlan) plan).getDataTTL());
+                ((SetTTLPlan) plan).getDataTTL());
             break;
           case CHANGE_ALIAS:
             mLogTxtWriter.changeAlias(((ChangeAliasPlan) plan).getPath().getFullPath(),
-              ((ChangeAliasPlan) plan).getAlias());
+                ((ChangeAliasPlan) plan).getAlias());
             break;
           case CHANGE_TAG_OFFSET:
             mLogTxtWriter.changeOffset(((ChangeTagOffsetPlan) plan).getPath().getFullPath(),
-              ((ChangeTagOffsetPlan) plan).getOffset());
+                ((ChangeTagOffsetPlan) plan).getOffset());
             break;
           case MEASUREMENT_MNODE:
             mLogTxtWriter.serializeMeasurementMNode((MeasurementMNodePlan) plan);

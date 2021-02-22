@@ -79,8 +79,8 @@ public interface IWritableMemChunk {
 
 
   /**
-   * served for flush requests.
-   * The logic is just same as getSortedTVListForQuery, but without add reference count
+   * served for flush requests. The logic is just same as getSortedTVListForQuery, but without add
+   * reference count
    *
    * @return sorted tv list
    */

@@ -24,16 +24,19 @@ import java.util.List;
  * PayloadFormatter format the payload to the messages.
  */
 public interface PayloadFormatter {
-    /**
-     * format a payload to a list of messages
-     * @param payload
-     * @return
-     */
-    List<Message> format(ByteBuf payload);
 
-    /**
-     * get the formatter name
-     * @return
-     */
-    String getName();
+  /**
+   * format a payload to a list of messages
+   *
+   * @param payload
+   * @return
+   */
+  List<Message> format(ByteBuf payload);
+
+  /**
+   * get the formatter name
+   *
+   * @return
+   */
+  String getName();
 }

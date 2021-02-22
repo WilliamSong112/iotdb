@@ -743,7 +743,7 @@ public class IOTDBGroupByIT {
     }
   }
 
-  @Test 
+  @Test
   public void usingLimit() {
     String[] retArray1 = new String[]{
         "90,0,0.0,null",
@@ -794,7 +794,8 @@ public class IOTDBGroupByIT {
       long endTime = 1585742238000L;
 
       String[] retArray1 = {"10/31/2019:19:57:18", "30.0", "11/30/2019:19:57:18", "31.0",
-          "12/31/2019:19:57:18", "31.0", "01/31/2020:19:57:18", "29.0", "02/29/2020:19:57:18", "31.0",
+          "12/31/2019:19:57:18", "31.0", "01/31/2020:19:57:18", "29.0", "02/29/2020:19:57:18",
+          "31.0",
           "03/31/2020:19:57:18", "1.0"};
 
       for (long i = startTime; i <= endTime; i += 86400_000L) {

@@ -45,9 +45,10 @@ public class MemTableManager {
 
   /**
    * Called when memory control is disabled
-   * @throws WriteProcessException 
+   *
+   * @throws WriteProcessException
    */
-  public synchronized IMemTable getAvailableMemTable(String storageGroup) 
+  public synchronized IMemTable getAvailableMemTable(String storageGroup)
       throws WriteProcessException {
     if (!reachMaxMemtableNumber()) {
       currentMemtableNumber++;
@@ -99,7 +100,7 @@ public class MemTableManager {
    */
   public synchronized void addOrDeleteStorageGroup(int diff) {
     int maxMemTableNum = CONFIG.getMaxMemtableNumber();
-    maxMemTableNum += MEMTABLE_NUM_FOR_EACH_PARTITION 
+    maxMemTableNum += MEMTABLE_NUM_FOR_EACH_PARTITION
         * CONFIG.getConcurrentWritingTimePartition() * diff;
     CONFIG.setMaxMemtableNumber(maxMemTableNum);
     notifyAll();

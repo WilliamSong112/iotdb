@@ -110,7 +110,7 @@ public class MergeSingleFilterOptimizer implements IFilterOptimizer {
         // successive next single child with same seriesPath,merge it with previous children
         // if not duplicate
         FilterOperator child = children.get(firstNonSingleIndex);
-        if(!tempExtrNode.contains(child)){
+        if (!tempExtrNode.contains(child)) {
           tempExtrNode.add(child);
         }
       } else {
@@ -149,7 +149,7 @@ public class MergeSingleFilterOptimizer implements IFilterOptimizer {
   }
 
   private PartialPath addLastNullChild(List<FilterOperator> ret,
-                                FilterOperator filter, int i, PartialPath childPath){
+      FilterOperator filter, int i, PartialPath childPath) {
     List<FilterOperator> children = filter.getChildren();
     for (; i < children.size(); i++) {
       ret.add(children.get(i));

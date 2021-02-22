@@ -35,20 +35,20 @@ public class CreateTimeSeriesOperator extends RootOperator {
   private Map<String, String> props = null;
   private Map<String, String> attributes = null;
   private Map<String, String> tags = null;
-  
+
   public CreateTimeSeriesOperator(int tokenIntType) {
     super(tokenIntType);
     operatorType = OperatorType.CREATE_TIMESERIES;
   }
-  
+
   public PartialPath getPath() {
     return path;
   }
-  
+
   public void setPath(PartialPath path) {
     this.path = path;
   }
-  
+
   public TSDataType getDataType() {
     return dataType;
   }

@@ -111,8 +111,6 @@ public class IoTDBMultiDeviceIT {
       statement.execute("CREATE TIMESERIES root.car.d1.s1 WITH DATATYPE=INT64, ENCODING=RLE");
       statement.execute("CREATE TIMESERIES root.car.d2.s1 WITH DATATYPE=INT64, ENCODING=RLE");
 
-
-
       // insert of data time range :0-1000 into fans
       for (int time = 0; time < 1000; time++) {
 
@@ -269,7 +267,7 @@ public class IoTDBMultiDeviceIT {
         long before = -1;
         while (resultSet.next()) {
           long cur = Long.parseLong(resultSet.getString(TestConstant.TIMESTAMP_STR));
-          if(cur <= before){
+          if (cur <= before) {
             fail("time order wrong!");
           }
           before = cur;
@@ -298,7 +296,6 @@ public class IoTDBMultiDeviceIT {
       statement.execute("DELETE FROM root.fans.* WHERE time >= 200500 and time < 201000");
       statement.execute("DELETE FROM root.car.* WHERE time >= 200500 and time < 201000");
 
-
       boolean hasResultSet = statement.execute(selectSql);
       Assert.assertTrue(hasResultSet);
       try (ResultSet resultSet = statement.getResultSet()) {
@@ -306,7 +303,7 @@ public class IoTDBMultiDeviceIT {
         long before = -1;
         while (resultSet.next()) {
           long cur = Long.parseLong(resultSet.getString(TestConstant.TIMESTAMP_STR));
-          if(cur <= before){
+          if (cur <= before) {
             fail("time order wrong!");
           }
           before = cur;

@@ -481,15 +481,16 @@ public class SyncClient implements ISyncClient {
           for (Entry<Long, Set<Long>> vgEntry : entry.getValue().entrySet()) {
             lastLocalFilesMap.get(sgName).putIfAbsent(vgEntry.getKey(), new HashMap<>());
             for (Long timeRangeId : vgEntry.getValue()) {
-              lastLocalFilesMap.get(sgName).get(vgEntry.getKey()).putIfAbsent(timeRangeId, new HashSet<>());
+              lastLocalFilesMap.get(sgName).get(vgEntry.getKey())
+                  .putIfAbsent(timeRangeId, new HashSet<>());
               syncDeletedFilesNameInOneGroup(sgName, vgEntry.getKey(), timeRangeId,
-                deletedFilesMap.getOrDefault(sgName, Collections.emptyMap())
-                  .getOrDefault(vgEntry.getKey(), Collections.emptyMap())
-                  .getOrDefault(timeRangeId, Collections.emptySet()));
+                  deletedFilesMap.getOrDefault(sgName, Collections.emptyMap())
+                      .getOrDefault(vgEntry.getKey(), Collections.emptyMap())
+                      .getOrDefault(timeRangeId, Collections.emptySet()));
               syncDataFilesInOneGroup(sgName, vgEntry.getKey(), timeRangeId,
-                toBeSyncedFilesMap.getOrDefault(sgName, Collections.emptyMap())
-                  .getOrDefault(vgEntry.getKey(), Collections.emptyMap())
-                  .getOrDefault(timeRangeId, Collections.emptySet()));
+                  toBeSyncedFilesMap.getOrDefault(sgName, Collections.emptyMap())
+                      .getOrDefault(vgEntry.getKey(), Collections.emptyMap())
+                      .getOrDefault(timeRangeId, Collections.emptySet()));
             }
           }
         } catch (SyncDeviceOwnerConflictException e) {
@@ -526,7 +527,8 @@ public class SyncClient implements ISyncClient {
     for (File file : deletedFilesName) {
       try {
         if (serviceClient.syncDeletedFileName(getFileNameWithSG(file)).code == SUCCESS_CODE) {
-          logger.info("Receiver has received deleted file name {} successfully.", getFileNameWithSG(file));
+          logger.info("Receiver has received deleted file name {} successfully.",
+              getFileNameWithSG(file));
           lastLocalFilesMap.get(sgName).get(vgId).get(timeRangeId).remove(file);
           syncLog.finishSyncDeletedFileName(file);
         }
@@ -538,7 +540,8 @@ public class SyncClient implements ISyncClient {
   }
 
   @Override
-  public void syncDataFilesInOneGroup(String sgName, Long vgId, Long timeRangeId, Set<File> toBeSyncFiles)
+  public void syncDataFilesInOneGroup(String sgName, Long vgId, Long timeRangeId,
+      Set<File> toBeSyncFiles)
       throws SyncConnectionException, IOException, SyncDeviceOwnerConflictException {
     if (toBeSyncFiles.isEmpty()) {
       logger.info("There has no new tsfiles to be synced in storage group {}", sgName);
@@ -716,8 +719,8 @@ public class SyncClient implements ISyncClient {
 
   private String getFileNameWithSG(File file) {
     return file.getParentFile().getParentFile().getParentFile().getName()
-      + File.separator + file.getParentFile().getParentFile().getName()
-      + File.separator + file.getParentFile().getName()
-      + File.separator + file.getName();
+        + File.separator + file.getParentFile().getParentFile().getName()
+        + File.separator + file.getParentFile().getName()
+        + File.separator + file.getName();
   }
 }

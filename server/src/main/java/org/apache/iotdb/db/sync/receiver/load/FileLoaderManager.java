@@ -103,7 +103,7 @@ public class FileLoaderManager {
   /**
    * Check whether there have conflicts about the device owner.
    *
-   * @param curOwner sender name that want to be owner.
+   * @param curOwner  sender name that want to be owner.
    * @param deviceSet device set
    */
   private void checkDeviceConflict(String curOwner, Set<String> deviceSet)
@@ -118,7 +118,7 @@ public class FileLoaderManager {
   /**
    * Update the device owners and deserialize.
    *
-   * @param curOwner sender name that want to be owner.
+   * @param curOwner  sender name that want to be owner.
    * @param deviceSet device set.
    */
   private void updateDeviceOwner(String curOwner, Set<String> deviceSet) throws IOException {
@@ -139,7 +139,7 @@ public class FileLoaderManager {
   private void deSerializeDeviceOwnerMap(File deviceOwnerFile)
       throws IOException, ClassNotFoundException {
     try (FileInputStream fis = new FileInputStream(deviceOwnerFile);
-         ObjectInputStream deviceOwnerInput = new ObjectInputStream(fis)) {
+        ObjectInputStream deviceOwnerInput = new ObjectInputStream(fis)) {
       deviceOwnerMap = (Map<String, String>) deviceOwnerInput.readObject();
     }
   }

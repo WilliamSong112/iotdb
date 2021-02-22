@@ -75,7 +75,8 @@ public class FileNodeManagerBenchmark {
     for (String device : devices) {
       for (String measurement : measurements) {
         manager.createTimeseries(new PartialPath(device + "." + measurement), TSDataType.INT64,
-            TSEncoding.PLAIN, TSFileDescriptor.getInstance().getConfig().getCompressor(), Collections
+            TSEncoding.PLAIN, TSFileDescriptor.getInstance().getConfig().getCompressor(),
+            Collections
                 .emptyMap());
       }
     }

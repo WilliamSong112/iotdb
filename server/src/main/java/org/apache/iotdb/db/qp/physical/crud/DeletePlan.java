@@ -43,8 +43,8 @@ public class DeletePlan extends PhysicalPlan {
    * constructor of DeletePlan with single path.
    *
    * @param startTime delete time range start
-   * @param endTime delete time range end
-   * @param path time series path
+   * @param endTime   delete time range end
+   * @param path      time series path
    */
   public DeletePlan(long startTime, long endTime, PartialPath path) {
     super(false, Operator.OperatorType.DELETE);
@@ -57,8 +57,8 @@ public class DeletePlan extends PhysicalPlan {
    * constructor of DeletePlan with multiple paths.
    *
    * @param startTime delete time range start
-   * @param endTime delete time range end
-   * @param paths time series paths in List structure
+   * @param endTime   delete time range end
+   * @param paths     time series paths in List structure
    */
   public DeletePlan(long startTime, long endTime, List<PartialPath> paths) {
     super(false, Operator.OperatorType.DELETE);

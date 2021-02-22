@@ -208,7 +208,7 @@ public class IoTDBDeletionIT {
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("DELETE FROM root.vehicle.d0.s0");
       try (ResultSet set = statement.executeQuery("SELECT s0 FROM root.vehicle.d0")) {
         int cnt = 0;
@@ -225,9 +225,9 @@ public class IoTDBDeletionIT {
   public void testPartialPathRangeDelete() throws SQLException {
     prepareData();
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
-                    "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
+            "root");
+        Statement statement = connection.createStatement()) {
 
       statement.execute("DELETE FROM root.vehicle.d0.* WHERE time <= 300 and time > 150");
       try (ResultSet set = statement.executeQuery("SELECT s0 FROM root.vehicle.d0")) {
@@ -258,7 +258,7 @@ public class IoTDBDeletionIT {
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
 
       for (int i = 1; i <= 10000; i++) {
         statement.execute(
@@ -285,22 +285,22 @@ public class IoTDBDeletionIT {
     // Adjust memstable threshold size to make it flush automatically
     IoTDBDescriptor.getInstance().getConfig().setMemtableSizeThreshold(1000000);
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
-                    "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
+            "root");
+        Statement statement = connection.createStatement()) {
 
       for (int i = 1; i <= 100000; i++) {
         statement.execute(
-                String.format(insertTemplate, i, i, i, (double) i, "'" + i + "'",
-                        i % 2 == 0));
+            String.format(insertTemplate, i, i, i, (double) i, "'" + i + "'",
+                i % 2 == 0));
       }
 
       statement.execute("DELETE FROM root.vehicle.d0.s0 WHERE time > 15000 and time <= 30000");
       statement.execute("DELETE FROM root.vehicle.d0.s0 WHERE time > 30000 and time <= 40000");
       for (int i = 100001; i <= 200000; i++) {
         statement.execute(
-                String.format(insertTemplate, i, i, i, (double) i, "'" + i + "'",
-                        i % 2 == 0));
+            String.format(insertTemplate, i, i, i, (double) i, "'" + i + "'",
+                i % 2 == 0));
       }
       statement.execute("DELETE FROM root.vehicle.d0.s0 WHERE time > 50000 and time <= 80000");
       statement.execute("DELETE FROM root.vehicle.d0.s0 WHERE time > 90000 and time <= 110000");
@@ -323,7 +323,7 @@ public class IoTDBDeletionIT {
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("CREATE TIMESERIES root.ln.d1.\"status,01\" WITH DATATYPE=BOOLEAN,"
           + " ENCODING=PLAIN");
       statement.execute("INSERT INTO root.ln.d1(timestamp,\"status,01\") "

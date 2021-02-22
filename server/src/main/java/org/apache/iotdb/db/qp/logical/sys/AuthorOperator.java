@@ -38,7 +38,7 @@ public class AuthorOperator extends RootOperator {
    * AuthorOperator Constructor with AuthorType.
    *
    * @param tokenIntType token in Int type
-   * @param type author type
+   * @param type         author type
    */
   public AuthorOperator(int tokenIntType, AuthorType type) {
     super(tokenIntType);
@@ -50,7 +50,7 @@ public class AuthorOperator extends RootOperator {
    * AuthorOperator Constructor with OperatorType.
    *
    * @param tokenIntType token in Int type
-   * @param type operator type
+   * @param type         operator type
    */
   public AuthorOperator(int tokenIntType, OperatorType type) {
     super(tokenIntType);

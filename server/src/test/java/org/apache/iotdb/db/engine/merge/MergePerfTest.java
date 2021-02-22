@@ -31,7 +31,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MergePerfTest extends MergeTest{
+public class MergePerfTest extends MergeTest {
 
   private long timeConsumption;
   private boolean fullMerge;

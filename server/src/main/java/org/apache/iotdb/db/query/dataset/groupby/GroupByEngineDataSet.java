@@ -154,6 +154,7 @@ public abstract class GroupByEngineDataSet extends QueryDataSet {
 
   /**
    * add natural months based on the first starttime to avoid edge cases, ie 2/28
+   *
    * @param numMonths numMonths is updated in hasNextWithoutConstraint()
    * @return curStartTime
    */

@@ -36,7 +36,8 @@ import org.slf4j.LoggerFactory;
 /**
  * sync receiver server.
  */
-public class SyncServerManager  extends ThriftService implements SyncServerManagerMBean {
+public class SyncServerManager extends ThriftService implements SyncServerManagerMBean {
+
   private static Logger logger = LoggerFactory.getLogger(SyncServerManager.class);
   private SyncServiceImpl serviceImpl;
 
@@ -75,7 +76,7 @@ public class SyncServerManager  extends ThriftService implements SyncServerManag
         Integer.MAX_VALUE, config.getThriftServerAwaitTimeForStopService(),
         new SyncServerThriftHandler(serviceImpl),
         config.isRpcThriftCompressionEnable()
-        );
+    );
     thriftServiceThread.setName(ThreadName.SYNC_SERVER.getName());
   }
 

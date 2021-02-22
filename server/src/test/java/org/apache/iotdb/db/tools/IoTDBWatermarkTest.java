@@ -46,8 +46,10 @@ import org.junit.Test;
  */
 public class IoTDBWatermarkTest {
 
-  private static String filePath1 = TestConstant.BASE_OUTPUT_PATH.concat("watermarked_query_result.csv");
-  private static String filePath2 = TestConstant.BASE_OUTPUT_PATH.concat("notWatermarked_query_result.csv");
+  private static String filePath1 = TestConstant.BASE_OUTPUT_PATH
+      .concat("watermarked_query_result.csv");
+  private static String filePath2 = TestConstant.BASE_OUTPUT_PATH
+      .concat("notWatermarked_query_result.csv");
   private static PrintWriter writer1;
   private static PrintWriter writer2;
   private static String secretKey = "ASDFGHJKL";
@@ -99,7 +101,7 @@ public class IoTDBWatermarkTest {
       throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager
-          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
         Statement statement = connection.createStatement()) {
 
       String[] create_sql = new String[]{"SET STORAGE GROUP TO root.vehicle",
@@ -134,8 +136,8 @@ public class IoTDBWatermarkTest {
     // Watermark Embedding
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager
-          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-          Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
       statement.execute("GRANT WATERMARK_EMBEDDING TO root");
       boolean hasResultSet = statement.execute("SELECT s0,s1,s2 FROM root.vehicle.d0");
       Assert.assertTrue(hasResultSet);
@@ -144,9 +146,12 @@ public class IoTDBWatermarkTest {
         while (resultSet.next()) {
           String ans =
               resultSet.getString(TestConstant.TIMESTAMP_STR)
-                  + "," + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s0)
-                  + "," + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1)
-                  + "," + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s2);
+                  + "," + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s0)
+                  + "," + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1)
+                  + "," + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s2);
           writer1.println(ans);
         }
         writer1.close();
@@ -173,7 +178,7 @@ public class IoTDBWatermarkTest {
     // No Watermark Embedding
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager
-          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
         Statement statement = connection.createStatement()) {
       statement.execute("REVOKE WATERMARK_EMBEDDING FROM root");
       boolean hasResultSet = statement.execute("SELECT s0,s1,s2 FROM root.vehicle.d0");
@@ -183,9 +188,12 @@ public class IoTDBWatermarkTest {
         while (resultSet.next()) {
           String ans =
               resultSet.getString(TestConstant.TIMESTAMP_STR)
-                  + "," + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s0)
-                  + "," + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1)
-                  + "," + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s2);
+                  + "," + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s0)
+                  + "," + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1)
+                  + "," + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s2);
           writer2.println(ans);
         }
         writer2.close();

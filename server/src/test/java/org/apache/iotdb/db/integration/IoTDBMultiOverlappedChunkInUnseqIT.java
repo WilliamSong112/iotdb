@@ -48,7 +48,8 @@ public class IoTDBMultiOverlappedChunkInUnseqIT {
     EnvironmentUtils.closeStatMonitor();
     IoTDBDescriptor.getInstance().getConfig()
         .setCompactionStrategy(CompactionStrategy.NO_COMPACTION);
-    beforeMemtableSizeThreshold = IoTDBDescriptor.getInstance().getConfig().getMemtableSizeThreshold();
+    beforeMemtableSizeThreshold = IoTDBDescriptor.getInstance().getConfig()
+        .getMemtableSizeThreshold();
     IoTDBDescriptor.getInstance().getConfig().setMemtableSizeThreshold(1024);
     EnvironmentUtils.envSetUp();
     Class.forName(Config.JDBC_DRIVER_NAME);
@@ -68,8 +69,8 @@ public class IoTDBMultiOverlappedChunkInUnseqIT {
   public void selectOverlappedPageTest() {
 
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
       String sql = "select count(s0) from root.vehicle.d0 where time < 1000000";
       try (ResultSet resultSet = statement.executeQuery(sql)) {
         while (resultSet.next()) {
@@ -85,24 +86,24 @@ public class IoTDBMultiOverlappedChunkInUnseqIT {
 
   private static void insertData() {
     try (Connection connection = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement statement = connection.createStatement()) {
 
       statement.execute("CREATE TIMESERIES root.vehicle.d0.s0 WITH DATATYPE=INT32, ENCODING=RLE");
 
       String sql = String
-              .format("insert into root.vehicle.d0(timestamp,s0) values(%s,%s)", 1000000, 1000000);
+          .format("insert into root.vehicle.d0(timestamp,s0) values(%s,%s)", 1000000, 1000000);
       statement.execute(sql);
 
       statement.execute("flush");
       for (long time = 1; time <= 1000; time++) {
         sql = String
-                .format("insert into root.vehicle.d0(timestamp,s0) values(%s,%s)", time, time);
+            .format("insert into root.vehicle.d0(timestamp,s0) values(%s,%s)", time, time);
         statement.execute(sql);
       }
       for (long time = 2; time <= 1000; time++) {
         sql = String
-                .format("insert into root.vehicle.d0(timestamp,s0) values(%s,%s)", time, 1000);
+            .format("insert into root.vehicle.d0(timestamp,s0) values(%s,%s)", time, 1000);
         statement.execute(sql);
       }
       statement.execute("flush");

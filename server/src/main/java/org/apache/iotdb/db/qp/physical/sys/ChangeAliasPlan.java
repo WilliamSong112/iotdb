@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChangeAliasPlan extends PhysicalPlan {
+
   private PartialPath path;
   private String alias;
 

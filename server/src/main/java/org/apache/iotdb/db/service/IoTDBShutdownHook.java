@@ -28,7 +28,7 @@ public class IoTDBShutdownHook extends Thread {
 
   @Override
   public void run() {
-    if(logger.isInfoEnabled()) {
+    if (logger.isInfoEnabled()) {
       logger.info("IoTDB exits. Jvm memory usage: {}", MemUtils.bytesCntToStr(
           Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()));
     }

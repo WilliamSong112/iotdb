@@ -35,8 +35,8 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * Notice that, all test begins with "IoTDB" is integration test. All test which will start the IoTDB server should be
- * defined as integration test.
+ * Notice that, all test begins with "IoTDB" is integration test. All test which will start the
+ * IoTDB server should be defined as integration test.
  */
 public class IoTDBAuthorizationIT {
 
@@ -55,13 +55,13 @@ public class IoTDBAuthorizationIT {
   public void allPrivilegesTest() throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
         Statement adminStmt = adminCon.createStatement()) {
       adminStmt.execute("CREATE USER tempuser 'temppw'");
       boolean caught = false;
       try (Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
-           Statement userStmt = userCon.createStatement()) {
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          Statement userStmt = userCon.createStatement()) {
 
         try {
           userStmt.execute("SET STORAGE GROUP TO root.a");
@@ -161,18 +161,18 @@ public class IoTDBAuthorizationIT {
   public void updatePasswordTest() throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement adminStmt = adminCon.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement adminStmt = adminCon.createStatement()) {
       adminStmt.execute("CREATE USER tempuser 'temppw'");
       Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
       userCon.close();
 
       adminStmt.execute("ALTER USER tempuser SET PASSWORD 'newpw'");
       boolean caught = false;
       try {
         userCon = DriverManager
-                .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
       } catch (SQLException e) {
         caught = true;
       } finally {
@@ -181,7 +181,7 @@ public class IoTDBAuthorizationIT {
       assertTrue(caught);
 
       userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "newpw");
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "newpw");
 
       userCon.close();
     }
@@ -191,13 +191,13 @@ public class IoTDBAuthorizationIT {
   public void illegalGrantRevokeUserTest() throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement adminStmt = adminCon.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement adminStmt = adminCon.createStatement()) {
       adminStmt.execute("CREATE USER tempuser 'temppw'");
 
       try (Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
-           Statement userStmt = userCon.createStatement()) {
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          Statement userStmt = userCon.createStatement()) {
 
         // grant a non-existing user
         boolean caught = false;
@@ -329,14 +329,14 @@ public class IoTDBAuthorizationIT {
   public void createDeleteTimeSeriesTest() throws SQLException, ClassNotFoundException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement adminStmt = adminCon.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement adminStmt = adminCon.createStatement()) {
 
       adminStmt.execute("CREATE USER tempuser 'temppw'");
 
       try (Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
-           Statement userStmt = userCon.createStatement()) {
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          Statement userStmt = userCon.createStatement()) {
 
         // grant and revoke the user the privilege to create time series
         boolean caught = false;
@@ -445,13 +445,13 @@ public class IoTDBAuthorizationIT {
   public void insertQueryTest() throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement adminStmt = adminCon.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement adminStmt = adminCon.createStatement()) {
       adminStmt.execute("CREATE USER tempuser 'temppw'");
 
       try (Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
-           Statement userStmt = userCon.createStatement()) {
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          Statement userStmt = userCon.createStatement()) {
 
         adminStmt.execute("GRANT USER tempuser PRIVILEGES 'SET_STORAGE_GROUP' ON root.a");
         userStmt.execute("SET STORAGE GROUP TO root.a");
@@ -510,13 +510,13 @@ public class IoTDBAuthorizationIT {
   public void rolePrivilegeTest() throws SQLException, ClassNotFoundException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement adminStmt = adminCon.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement adminStmt = adminCon.createStatement()) {
 
       adminStmt.execute("CREATE USER tempuser 'temppw'");
       try (Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
-           Statement userStmt = userCon.createStatement()) {
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          Statement userStmt = userCon.createStatement()) {
 
         boolean caught = false;
         try {
@@ -527,7 +527,7 @@ public class IoTDBAuthorizationIT {
         assertTrue(caught);
         adminStmt.execute("CREATE ROLE admin");
         adminStmt.execute(
-                "GRANT ROLE admin PRIVILEGES 'SET_STORAGE_GROUP','CREATE_TIMESERIES','DELETE_TIMESERIES','READ_TIMESERIES','INSERT_TIMESERIES' on root");
+            "GRANT ROLE admin PRIVILEGES 'SET_STORAGE_GROUP','CREATE_TIMESERIES','DELETE_TIMESERIES','READ_TIMESERIES','INSERT_TIMESERIES' on root");
         adminStmt.execute("GRANT admin TO tempuser");
 
         userStmt.execute("SET STORAGE GROUP TO root.a");
@@ -567,8 +567,8 @@ public class IoTDBAuthorizationIT {
   public void authPerformanceTest() throws ClassNotFoundException, SQLException {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection adminCon = DriverManager
-            .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement adminStmt = adminCon.createStatement()) {
+        .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
+        Statement adminStmt = adminCon.createStatement()) {
 
       adminStmt.execute("CREATE USER tempuser 'temppw'");
       adminStmt.execute("SET STORAGE GROUP TO root.a");
@@ -578,8 +578,8 @@ public class IoTDBAuthorizationIT {
         adminStmt.execute("GRANT USER tempuser PRIVILEGES 'INSERT_TIMESERIES' ON root.a.b" + i);
       }
       try (Connection userCon = DriverManager
-              .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
-           Statement userStmt = userCon.createStatement()) {
+          .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "tempuser", "temppw");
+          Statement userStmt = userCon.createStatement()) {
 
         int insertCnt = 20000;
         int batchSize = 500;
@@ -588,8 +588,8 @@ public class IoTDBAuthorizationIT {
         for (int i = 0; i < insertCnt; ) {
           for (int j = 0; j < batchSize; j++) {
             userStmt.addBatch(
-                    "INSERT INTO root.a(timestamp, b" + (privilegeCnt - 1) + ") VALUES (" + (i++ + 1)
-                            + ", 100)");
+                "INSERT INTO root.a(timestamp, b" + (privilegeCnt - 1) + ") VALUES (" + (i++ + 1)
+                    + ", 100)");
           }
           userStmt.executeBatch();
           userStmt.clearBatch();
@@ -599,7 +599,7 @@ public class IoTDBAuthorizationIT {
         for (int i = 0; i < insertCnt; ) {
           for (int j = 0; j < batchSize; j++) {
             adminStmt.addBatch(
-                    "INSERT INTO root.a(timestamp, b0) VALUES (" + (i++ + 1 + insertCnt) + ", 100)");
+                "INSERT INTO root.a(timestamp, b0) VALUES (" + (i++ + 1 + insertCnt) + ", 100)");
           }
           adminStmt.executeBatch();
           adminStmt.clearBatch();
@@ -626,16 +626,16 @@ public class IoTDBAuthorizationIT {
         }
         resultSet = adminStmt.executeQuery("LIST USER");
         ans = "root,\n"
-                + "user0,\n"
-                + "user1,\n"
-                + "user2,\n"
-                + "user3,\n"
-                + "user4,\n"
-                + "user5,\n"
-                + "user6,\n"
-                + "user7,\n"
-                + "user8,\n"
-                + "user9,\n";
+            + "user0,\n"
+            + "user1,\n"
+            + "user2,\n"
+            + "user3,\n"
+            + "user4,\n"
+            + "user5,\n"
+            + "user6,\n"
+            + "user7,\n"
+            + "user8,\n"
+            + "user9,\n";
         validateResultSet(resultSet, ans);
 
         for (int i = 0; i < 10; i++) {
@@ -645,11 +645,11 @@ public class IoTDBAuthorizationIT {
         }
         resultSet = adminStmt.executeQuery("LIST USER");
         ans = "root,\n"
-                + "user1,\n"
-                + "user3,\n"
-                + "user5,\n"
-                + "user7,\n"
-                + "user9,\n";
+            + "user1,\n"
+            + "user3,\n"
+            + "user5,\n"
+            + "user7,\n"
+            + "user9,\n";
         validateResultSet(resultSet, ans);
       } finally {
         resultSet.close();
@@ -678,15 +678,15 @@ public class IoTDBAuthorizationIT {
 
         resultSet = adminStmt.executeQuery("LIST ROLE");
         ans = "role0,\n"
-                + "role1,\n"
-                + "role2,\n"
-                + "role3,\n"
-                + "role4,\n"
-                + "role5,\n"
-                + "role6,\n"
-                + "role7,\n"
-                + "role8,\n"
-                + "role9,\n";
+            + "role1,\n"
+            + "role2,\n"
+            + "role3,\n"
+            + "role4,\n"
+            + "role5,\n"
+            + "role6,\n"
+            + "role7,\n"
+            + "role8,\n"
+            + "role9,\n";
         validateResultSet(resultSet, ans);
 
         for (int i = 0; i < 10; i++) {
@@ -696,10 +696,10 @@ public class IoTDBAuthorizationIT {
         }
         resultSet = adminStmt.executeQuery("LIST ROLE");
         ans = "role1,\n"
-                + "role3,\n"
-                + "role5,\n"
-                + "role7,\n"
-                + "role9,\n";
+            + "role3,\n"
+            + "role5,\n"
+            + "role7,\n"
+            + "role9,\n";
         validateResultSet(resultSet, ans);
       } finally {
         resultSet.close();
@@ -739,9 +739,9 @@ public class IoTDBAuthorizationIT {
 
         resultSet = adminStmt.executeQuery("LIST PRIVILEGES USER user1 ON root.a.b.c");
         ans = ",root.a.b : READ_TIMESERIES"
-                + ",\n"
-                + "role1,root.a.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES"
-                + ",\n";
+            + ",\n"
+            + "role1,root.a.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES"
+            + ",\n";
         validateResultSet(resultSet, ans);
 
         adminStmt.execute("REVOKE role1 from user1");
@@ -778,12 +778,12 @@ public class IoTDBAuthorizationIT {
         validateResultSet(resultSet, ans);
 
         adminStmt.execute(
-          "GRANT ROLE role1 PRIVILEGES 'READ_TIMESERIES','INSERT_TIMESERIES','DELETE_TIMESERIES' ON root.a.b.c");
-      adminStmt.execute(
-          "GRANT ROLE role1 PRIVILEGES 'READ_TIMESERIES','INSERT_TIMESERIES','DELETE_TIMESERIES' ON root.d.b.c");
+            "GRANT ROLE role1 PRIVILEGES 'READ_TIMESERIES','INSERT_TIMESERIES','DELETE_TIMESERIES' ON root.a.b.c");
+        adminStmt.execute(
+            "GRANT ROLE role1 PRIVILEGES 'READ_TIMESERIES','INSERT_TIMESERIES','DELETE_TIMESERIES' ON root.d.b.c");
         resultSet = adminStmt.executeQuery("LIST ROLE PRIVILEGES role1");
         ans = "root.a.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES,\n"
-          + "root.d.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES,\n";
+            + "root.d.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES,\n";
         validateResultSet(resultSet, ans);
 
         resultSet = adminStmt.executeQuery("LIST PRIVILEGES ROLE role1 ON root.a.b.c");
@@ -791,11 +791,11 @@ public class IoTDBAuthorizationIT {
         validateResultSet(resultSet, ans);
 
         adminStmt.execute(
-                "REVOKE ROLE role1 PRIVILEGES 'INSERT_TIMESERIES','DELETE_TIMESERIES' ON root.a.b.c");
+            "REVOKE ROLE role1 PRIVILEGES 'INSERT_TIMESERIES','DELETE_TIMESERIES' ON root.a.b.c");
 
         resultSet = adminStmt.executeQuery("LIST ROLE PRIVILEGES role1");
         ans = "root.a.b.c : READ_TIMESERIES,\n"
-                + "root.d.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES,\n";
+            + "root.d.b.c : INSERT_TIMESERIES READ_TIMESERIES DELETE_TIMESERIES,\n";
         validateResultSet(resultSet, ans);
 
         resultSet = adminStmt.executeQuery("LIST PRIVILEGES ROLE role1 ON root.a.b.c");
@@ -846,8 +846,8 @@ public class IoTDBAuthorizationIT {
 
         resultSet = adminStmt.executeQuery("LIST ALL ROLE OF USER chenduxiu");
         ans = "xijing,\n"
-                + "shenshi,\n"
-                + "zhazha,\n";
+            + "shenshi,\n"
+            + "zhazha,\n";
         validateResultSet(resultSet, ans);
       } finally {
         resultSet.close();

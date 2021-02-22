@@ -84,8 +84,8 @@ public class IoTDBQueryTimeoutTest {
   }
 
   /**
-   * Test query with timeout, which is supposed to throw an QueryTimeoutRuntimeException.
-   * Note: This test is not guaranteed to time out.
+   * Test query with timeout, which is supposed to throw an QueryTimeoutRuntimeException. Note: This
+   * test is not guaranteed to time out.
    */
   @Test
   public void queryWithTimeoutTest() {

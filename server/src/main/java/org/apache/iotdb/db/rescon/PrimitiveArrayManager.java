@@ -280,8 +280,9 @@ public class PrimitiveArrayManager {
   }
 
   /**
-   * @param schemaDataTypeNumMap schema DataType Num Map (for each series, increase a long and a specific type)
-   * @param total current DataType Total Num (twice of number of time series)
+   * @param schemaDataTypeNumMap schema DataType Num Map (for each series, increase a long and a
+   *                             specific type)
+   * @param total                current DataType Total Num (twice of number of time series)
    */
   public static void updateSchemaDataTypeNum(Map<TSDataType, Integer> schemaDataTypeNumMap,
       long total) {

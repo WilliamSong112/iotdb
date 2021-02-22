@@ -34,8 +34,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * Notice that, all test begins with "IoTDB" is integration test. All test which will start the IoTDB server should be
- * defined as integration test.
+ * Notice that, all test begins with "IoTDB" is integration test. All test which will start the
+ * IoTDB server should be defined as integration test.
  */
 public class IoTDBAutoCreateSchemaIT {
 
@@ -89,7 +89,7 @@ public class IoTDBAutoCreateSchemaIT {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       String result = "";
       Long now_start = 0L;
       boolean cmp = false;

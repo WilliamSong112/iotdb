@@ -80,14 +80,14 @@ public abstract class Modification {
   @Override
   public boolean equals(Object obj) {
     if (this == obj) {
-       return true;
+      return true;
     }
     if (!(obj instanceof Modification)) {
       return false;
     }
     Modification mod = (Modification) obj;
     return mod.type.equals(this.type) && mod.path.equals(this.path)
-            && mod.fileOffset == this.fileOffset;
+        && mod.fileOffset == this.fileOffset;
   }
 
   @Override

@@ -17,18 +17,23 @@
  * under the License.
  *
  */
+package org.apache.iotdb.db.qp.physical.sys;
 
-package org.apache.iotdb.db.exception.metadata;
+import org.apache.iotdb.db.metadata.PartialPath;
 
-import org.apache.iotdb.rpc.TSStatusCode;
+public class ShowChildNodesPlan extends ShowPlan {
 
-public class AliasAlreadyExistException extends MetadataException {
+  // the path could be a prefix path with wildcard
+  private PartialPath prefixPath;
 
-  private static final long serialVersionUID = 7299770003548114589L;
+  public ShowChildNodesPlan(ShowContentType showContentType, PartialPath prefixPath) {
+    super(showContentType);
+    this.prefixPath = prefixPath;
+    canBeSplit = false;
+  }
 
-  public AliasAlreadyExistException(String path, String alias) {
-    super(String.format("Alias [%s] for Path [%s] already exist", alias, path),
-        TSStatusCode.ALIAS_ALREADY_EXIST_ERROR.getStatusCode());
-    this.isUserException = true;
+  @Override
+  public PartialPath getPath() {
+    return this.prefixPath;
   }
 }

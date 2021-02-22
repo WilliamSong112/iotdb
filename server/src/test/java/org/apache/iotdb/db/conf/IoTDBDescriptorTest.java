@@ -26,6 +26,7 @@ import org.junit.Test;
 import java.net.URL;
 
 public class IoTDBDescriptorTest {
+
   private final String confPath = System.getProperty(IoTDBConstant.IOTDB_CONF, null);
 
   @Before

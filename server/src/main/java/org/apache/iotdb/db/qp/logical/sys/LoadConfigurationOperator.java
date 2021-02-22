@@ -36,7 +36,7 @@ public class LoadConfigurationOperator extends RootOperator {
     return loadConfigurationOperatorType;
   }
 
-  public enum LoadConfigurationOperatorType{
+  public enum LoadConfigurationOperatorType {
     LOCAL, GLOBAL
   }
 }

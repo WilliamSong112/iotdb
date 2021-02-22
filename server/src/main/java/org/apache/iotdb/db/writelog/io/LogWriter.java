@@ -33,10 +33,11 @@ import java.nio.channels.FileChannel;
 import java.util.zip.CRC32;
 
 /**
- * LogWriter writes the binary logs into a file using FileChannel together with check sums of
- * each log calculated using CRC32.
+ * LogWriter writes the binary logs into a file using FileChannel together with check sums of each
+ * log calculated using CRC32.
  */
 public class LogWriter implements ILogWriter {
+
   private static final Logger logger = LoggerFactory.getLogger(LogWriter.class);
 
   private File logFile;

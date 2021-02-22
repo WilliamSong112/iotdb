@@ -47,7 +47,7 @@ public class MetricsService implements MetricsServiceMBean, IService {
   private Server server;
   private ExecutorService executorService;
 
-  private MetricsService(){
+  private MetricsService() {
 
   }
 
@@ -173,7 +173,8 @@ public class MetricsService implements MetricsServiceMBean, IService {
 
     private static final MetricsService INSTANCE = new MetricsService();
 
-    private MetricsServiceHolder() {}
+    private MetricsServiceHolder() {
+    }
   }
 
   private class MetricsServiceThread extends WrappedRunnable {
@@ -194,7 +195,8 @@ public class MetricsService implements MetricsServiceMBean, IService {
         //we do not sure why InterruptedException happens, but it indeed occurs in Travis WinOS
         logger.error(e1.getMessage(), e1);
       } catch (Exception e) {
-        logger.error("{}: failed to start {}, because ", IoTDBConstant.GLOBAL_DB_NAME, getID().getName(), e);
+        logger.error("{}: failed to start {}, because ", IoTDBConstant.GLOBAL_DB_NAME,
+            getID().getName(), e);
       }
     }
   }

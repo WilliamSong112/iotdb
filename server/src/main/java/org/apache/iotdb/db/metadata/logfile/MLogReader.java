@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class MLogReader implements AutoCloseable {
+
   private static final Logger logger = LoggerFactory.getLogger(MLogReader.class);
   private File logFile;
 

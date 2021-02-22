@@ -237,7 +237,8 @@ public class IoTDBMetadataFetchIT {
       String[] sqls = new String[]{"show devices root.ln with storage group",
           "show devices root.ln.wf01.wt01.temperature"};
       Set<String>[] standards = new Set[]{
-          new HashSet<>(Arrays.asList("root.ln.wf01.wt01,root.ln.wf01.wt01,", "root.ln.wf01.wt01.status,root.ln.wf01.wt01,")),
+          new HashSet<>(Arrays.asList("root.ln.wf01.wt01,root.ln.wf01.wt01,",
+              "root.ln.wf01.wt01.status,root.ln.wf01.wt01,")),
           new HashSet<>(Collections.singletonList(""))};
 
       for (int n = 0; n < sqls.length; n++) {

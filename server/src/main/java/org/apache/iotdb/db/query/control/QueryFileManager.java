@@ -47,8 +47,8 @@ public class QueryFileManager {
   }
 
   /**
-   * Set job id for current request thread. When a query request is created firstly,
-   * this method must be invoked.
+   * Set job id for current request thread. When a query request is created firstly, this method
+   * must be invoked.
    */
   void addQueryId(long queryId) {
     sealedFilePathsMap.computeIfAbsent(queryId, x -> new HashSet<>());
@@ -77,7 +77,8 @@ public class QueryFileManager {
 
       // this file may be deleted just before we lock it
       if (tsFileResource.isDeleted()) {
-        Map<Long, Set<TsFileResource>> pathMap = !isClosed ? unsealedFilePathsMap : sealedFilePathsMap;
+        Map<Long, Set<TsFileResource>> pathMap =
+            !isClosed ? unsealedFilePathsMap : sealedFilePathsMap;
         // This resource may be removed by other threads of this query.
         if (pathMap.get(queryId).remove(tsFileResource)) {
           FileReaderManager.getInstance().decreaseFileReaderReference(tsFileResource, isClosed);
@@ -88,8 +89,9 @@ public class QueryFileManager {
   }
 
   /**
-   * Whenever the jdbc request is closed normally or abnormally, this method must be invoked. All file paths used by
-   * this jdbc request must be cleared and thus the usage reference must be decreased.
+   * Whenever the jdbc request is closed normally or abnormally, this method must be invoked. All
+   * file paths used by this jdbc request must be cleared and thus the usage reference must be
+   * decreased.
    */
   void removeUsedFilesForQuery(long queryId) {
     sealedFilePathsMap.computeIfPresent(queryId, (k, v) -> {

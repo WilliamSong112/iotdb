@@ -35,6 +35,7 @@ public interface ILogReader {
 
   /**
    * return whether there exists next log to be read.
+   *
    * @return whether there exists next log to be read.
    * @throws IOException
    */
@@ -42,6 +43,7 @@ public interface ILogReader {
 
   /**
    * return the next log read from media like a WAL file and covert it to a PhysicalPlan.
+   *
    * @return the next log as a PhysicalPlan
    * @throws java.util.NoSuchElementException when there are no more logs
    */

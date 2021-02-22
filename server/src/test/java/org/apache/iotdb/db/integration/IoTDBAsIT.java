@@ -170,8 +170,8 @@ public class IoTDBAsIT {
   }
 
   /**
-   * When one alias is used but wildcard is corresponding to multi time series,
-   * it should throw one exception.
+   * When one alias is used but wildcard is corresponding to multi time series, it should throw one
+   * exception.
    */
   @Test
   public void selectWithAsFailTest() throws ClassNotFoundException {
@@ -486,7 +486,8 @@ public class IoTDBAsIT {
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
         Statement statement = connection.createStatement()) {
       boolean hasResultSet = statement
-          .execute("select count(s1) as s1_num, count(s2), count(s3) as s3_num from root.sg.d2 align by device");
+          .execute(
+              "select count(s1) as s1_num, count(s2), count(s3) as s3_num from root.sg.d2 align by device");
       Assert.assertTrue(hasResultSet);
 
       try (ResultSet resultSet = statement.getResultSet()) {

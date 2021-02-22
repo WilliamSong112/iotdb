@@ -27,7 +27,8 @@ import org.apache.iotdb.db.auth.entity.PathPrivilege;
 
 public class IOUtils {
 
-  private IOUtils(){}
+  private IOUtils() {
+  }
 
   /**
    * Write a string into the given stream.
@@ -35,9 +36,8 @@ public class IOUtils {
    * @param outputStream        the destination to insert.
    * @param str                 the string to be written.
    * @param encoding            string encoding like 'utf-8'.
-   * @param encodingBufferLocal a ThreadLocal buffer may be passed to avoid
-   *                            frequently memory allocations. A null may also be passed
-   *                            to use a local buffer.
+   * @param encodingBufferLocal a ThreadLocal buffer may be passed to avoid frequently memory
+   *                            allocations. A null may also be passed to use a local buffer.
    * @throws IOException when an exception raised during operating the stream.
    */
   public static void writeString(OutputStream outputStream, String str, String encoding,
@@ -56,9 +56,8 @@ public class IOUtils {
    *
    * @param outputStream        the destination to insert.
    * @param i                   the integer to be written.
-   * @param encodingBufferLocal a ThreadLocal buffer may be passed to avoid
-   *                            frequently memory allocations. A null may also be passed
-   *                            to use a local buffer.
+   * @param encodingBufferLocal a ThreadLocal buffer may be passed to avoid frequently memory
+   *                            allocations. A null may also be passed to use a local buffer.
    * @throws IOException when an exception raised during operating the stream.
    */
   public static void writeInt(OutputStream outputStream, int i,
@@ -85,9 +84,8 @@ public class IOUtils {
    *
    * @param inputStream    the source to read.
    * @param encoding       string encoding like 'utf-8'.
-   * @param strBufferLocal a ThreadLocal buffer may be passed to avoid
-   *                       frequently memory allocations. A null may also be passed
-   *                       to use a local buffer.
+   * @param strBufferLocal a ThreadLocal buffer may be passed to avoid frequently memory
+   *                       allocations. A null may also be passed to use a local buffer.
    * @return a string read from the stream.
    * @throws IOException when an exception raised during operating the stream.
    */
@@ -118,9 +116,8 @@ public class IOUtils {
    *
    * @param inputStream    the source to read.
    * @param encoding       string encoding like 'utf-8'.
-   * @param strBufferLocal a ThreadLocal buffer may be passed to avoid
-   *                       frequently memory allocations. A null may also be passed
-   *                       to use a local buffer.
+   * @param strBufferLocal a ThreadLocal buffer may be passed to avoid frequently memory
+   *                       allocations. A null may also be passed to use a local buffer.
    * @return a PathPrivilege read from the stream.
    * @throws IOException when an exception raised during operating the stream.
    */
@@ -138,12 +135,12 @@ public class IOUtils {
 
   /**
    * Write a PathPrivilege to the given stream.
-   * @param outputStream the destination to insert.
-   * @param pathPrivilege the PathPrivilege to be written.
-   * @param encoding string encoding like 'utf-8'.
-   * @param encodingBufferLocal a ThreadLocal buffer may be passed to avoid
-   *                       frequently memory allocations. A null may also be passed
-   *                       to use a local buffer.
+   *
+   * @param outputStream        the destination to insert.
+   * @param pathPrivilege       the PathPrivilege to be written.
+   * @param encoding            string encoding like 'utf-8'.
+   * @param encodingBufferLocal a ThreadLocal buffer may be passed to avoid frequently memory
+   *                            allocations. A null may also be passed to use a local buffer.
    * @throws IOException when an exception raised during operating the stream.
    */
   public static void writePathPrivilege(OutputStream outputStream, PathPrivilege pathPrivilege,
@@ -158,8 +155,8 @@ public class IOUtils {
   }
 
   /**
-   * Replace newFile with oldFile. If the file system does not support atomic file replacement
-   * then delete the old file first.
+   * Replace newFile with oldFile. If the file system does not support atomic file replacement then
+   * delete the old file first.
    *
    * @param newFile the new file.
    * @param oldFile the file to be replaced.
@@ -167,9 +164,9 @@ public class IOUtils {
   public static void replaceFile(File newFile, File oldFile) throws IOException {
     if (!newFile.renameTo(oldFile)) {
       // some OSs need to delete the old file before renaming to it
-      if(!oldFile.delete()){
+      if (!oldFile.delete()) {
         throw new IOException(
-                String.format("Cannot delete old user file : %s", oldFile.getPath()));
+            String.format("Cannot delete old user file : %s", oldFile.getPath()));
       }
       if (!newFile.renameTo(oldFile)) {
         throw new IOException(

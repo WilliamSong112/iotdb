@@ -30,8 +30,7 @@ public interface IUserAccessor {
   /**
    * Deserialize a user from lower storage.
    *
-   * @param username
-   *            The name of the user to be deserialized.
+   * @param username The name of the user to be deserialized.
    * @return The user object or null if no such user.
    * @throws IOException if an exception is raised when interacting with the lower storage.
    */
@@ -40,8 +39,7 @@ public interface IUserAccessor {
   /**
    * Serialize the user object to lower storage.
    *
-   * @param user
-   *            The user object that is to be saved.
+   * @param user The user object that is to be saved.
    * @throws IOException if an exception is raised when interacting with the lower storage.
    */
   void saveUser(User user) throws IOException;
@@ -49,8 +47,7 @@ public interface IUserAccessor {
   /**
    * Delete a user's from lower storage.
    *
-   * @param username
-   *            The name of the user to be deleted.
+   * @param username The name of the user to be deleted.
    * @return True if the user is successfully deleted, false if the user does not exists.
    * @throws IOException if an exception is raised when interacting with the lower storage.
    */
@@ -58,6 +55,7 @@ public interface IUserAccessor {
 
   /**
    * List all users existing in the database.
+   *
    * @return A list that contains names of all users.
    */
   List<String> listAllUsers();

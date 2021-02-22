@@ -41,8 +41,8 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
- * Notice that, all test begins with "IoTDB" is integration test. All test which will start the IoTDB server should be
- * defined as integration test.
+ * Notice that, all test begins with "IoTDB" is integration test. All test which will start the
+ * IoTDB server should be defined as integration test.
  */
 public class IoTDBLargeDataIT {
 
@@ -232,12 +232,16 @@ public class IoTDBLargeDataIT {
               resultSet.getString(TestConstant.TIMESTAMP_STR) + "," + resultSet.getString(
                   TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s0)
                   + "," + resultSet.getString(
-                  TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1) + "," + resultSet
+                  TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1) + ","
+                  + resultSet
                   .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s2) + ","
-                  + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s3) + "," + resultSet.getString(
+                  + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s3) + ","
+                  + resultSet.getString(
                   TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s4)
                   + ","
-                  + resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s5);
+                  + resultSet
+                  .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s5);
           cnt++;
         }
 
@@ -259,7 +263,7 @@ public class IoTDBLargeDataIT {
     Class.forName(Config.JDBC_DRIVER_NAME);
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root", "root");
-Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       boolean hasResultSet = statement.execute(selectSql);
       Assert.assertTrue(hasResultSet);
 
@@ -330,7 +334,8 @@ Statement statement = connection.createStatement()) {
         while (resultSet.next()) {
           long time = Long.parseLong(resultSet.getString(
               TestConstant.TIMESTAMP_STR));
-          String value = resultSet.getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1);
+          String value = resultSet
+              .getString(TestConstant.d0 + IoTDBConstant.PATH_SEPARATOR + TestConstant.s1);
           if (time > 200900) {
             assertEquals("7777", value);
           }

@@ -82,7 +82,7 @@ public class IoTDBAggregationByLevelIT {
     };
     try (Connection connection = DriverManager.
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("select sum(temperature) from root.sg1.* GROUP BY level=1");
 
       int cnt = 0;
@@ -125,7 +125,7 @@ public class IoTDBAggregationByLevelIT {
     };
     try (Connection connection = DriverManager.
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("select avg(temperature) from root.sg1.* GROUP BY level=1");
 
       int cnt = 0;
@@ -167,7 +167,7 @@ public class IoTDBAggregationByLevelIT {
     };
     try (Connection connection = DriverManager.
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("select min_time(temperature) from root.*.* GROUP BY level=0");
 
       int cnt = 0;
@@ -201,7 +201,7 @@ public class IoTDBAggregationByLevelIT {
     };
     try (Connection connection = DriverManager.
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("select last_value(temperature) from root.*.* GROUP BY level=0");
 
       int cnt = 0;
@@ -247,20 +247,22 @@ public class IoTDBAggregationByLevelIT {
     };
     try (Connection connection = DriverManager.
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
 
-      statement.execute("select sum(temperature) from root.sg2.* GROUP BY ([0, 600), 100ms), level=1");
+      statement
+          .execute("select sum(temperature) from root.sg2.* GROUP BY ([0, 600), 100ms), level=1");
       int cnt = 0;
       try (ResultSet resultSet = statement.getResultSet()) {
         while (resultSet.next()) {
-          String ans = resultSet.getString(2) ;
+          String ans = resultSet.getString(2);
           Assert.assertEquals(retArray1[cnt], ans);
           cnt++;
         }
       }
 
       cnt = 0;
-      statement.execute("select max_time(temperature) from root.*.* GROUP BY ([0, 600), 100ms), level=1");
+      statement.execute(
+          "select max_time(temperature) from root.*.* GROUP BY ([0, 600), 100ms), level=1");
       try (ResultSet resultSet = statement.getResultSet()) {
         while (resultSet.next()) {
           String ans = resultSet.getString(2) + "," +
@@ -281,7 +283,7 @@ public class IoTDBAggregationByLevelIT {
     };
     try (Connection connection = DriverManager.
         getConnection("jdbc:iotdb://127.0.0.1:6667/", "root", "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
       statement.execute("select last_value(status) from root.*.* GROUP BY level=0");
 
       int cnt = 0;
@@ -300,9 +302,12 @@ public class IoTDBAggregationByLevelIT {
       }
 
       try {
-        planner.parseSQLToPhysicalPlan("select avg(status), sum(temperature) from root.sg2.* GROUP BY level=1");
+        planner.parseSQLToPhysicalPlan(
+            "select avg(status), sum(temperature) from root.sg2.* GROUP BY level=1");
       } catch (Exception e) {
-        Assert.assertEquals("Aggregation function is restricted to one if group by level clause exists", e.getMessage());
+        Assert.assertEquals(
+            "Aggregation function is restricted to one if group by level clause exists",
+            e.getMessage());
       }
     }
 
@@ -312,7 +317,7 @@ public class IoTDBAggregationByLevelIT {
     try (Connection connection = DriverManager
         .getConnection(Config.IOTDB_URL_PREFIX + "127.0.0.1:6667/", "root",
             "root");
-         Statement statement = connection.createStatement()) {
+        Statement statement = connection.createStatement()) {
 
       for (String sql : dataSet) {
         statement.execute(sql);

@@ -53,8 +53,8 @@ public class InOperator extends FunctionOperator {
    * In Operator Constructor.
    *
    * @param tokenIntType token in Int Type
-   * @param path path
-   * @param values values
+   * @param path         path
+   * @param values       values
    */
   public InOperator(int tokenIntType, PartialPath path, boolean not, Set<String> values) {
     super(tokenIntType);
@@ -152,7 +152,8 @@ public class InOperator extends FunctionOperator {
 
   @Override
   public InOperator copy() {
-    InOperator ret = new InOperator(this.tokenIntType, new PartialPath(singlePath.getNodes().clone()), not, new HashSet<>(values));
+    InOperator ret = new InOperator(this.tokenIntType,
+        new PartialPath(singlePath.getNodes().clone()), not, new HashSet<>(values));
     ret.tokenSymbol = tokenSymbol;
     ret.isLeaf = isLeaf;
     ret.isSingle = isSingle;

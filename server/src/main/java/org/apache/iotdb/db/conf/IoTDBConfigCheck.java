@@ -95,7 +95,7 @@ public class IoTDBConfigCheck {
 
   private static final String TIME_ENCODER_KEY = "time_encoder";
   private static String timeEncoderValue = String
-          .valueOf(TSFileDescriptor.getInstance().getConfig().getTimeEncoder());
+      .valueOf(TSFileDescriptor.getInstance().getConfig().getTimeEncoder());
 
   private static final String IOTDB_VERSION_STRING = "iotdb_version";
 
@@ -154,13 +154,11 @@ public class IoTDBConfigCheck {
 
   /**
    * check configuration in system.properties when starting IoTDB
-   *
+   * <p>
    * When init: create system.properties directly
-   *
-   * When upgrading the system.properties:
-   * (1) create system.properties.tmp
-   * (2) delete system.properties
-   * (3) rename system.properties.tmp to system.properties
+   * <p>
+   * When upgrading the system.properties: (1) create system.properties.tmp (2) delete
+   * system.properties (3) rename system.properties.tmp to system.properties
    */
   public void checkConfig() throws IOException {
     propertiesFile = SystemFileFactory.INSTANCE
@@ -337,7 +335,7 @@ public class IoTDBConfigCheck {
    */
   private void checkUnClosedTsFileV2() {
     if (SystemFileFactory.INSTANCE.getFile(WAL_DIR).isDirectory()
-      && SystemFileFactory.INSTANCE.getFile(WAL_DIR).list().length != 0) {
+        && SystemFileFactory.INSTANCE.getFile(WAL_DIR).list().length != 0) {
       logger.error("Unclosed Version-2 TsFile detected, please stop insertion, then run 'flush' "
           + "on v0.10 or v0.11 IoTDB before upgrading to v0.12");
       System.exit(-1);
@@ -370,8 +368,9 @@ public class IoTDBConfigCheck {
             File[] zeroLevelResources = fsFactory
                 .listFilesBySuffix(partitionDir.toString(), "0" + TsFileResource.RESOURCE_SUFFIX);
             if (zeroLevelTsFiles.length != zeroLevelResources.length) {
-              logger.error("Unclosed Version-2 TsFile detected, please stop insertion, then run 'flush' "
-                  + "on v0.11 IoTDB before upgrading to v0.12");
+              logger.error(
+                  "Unclosed Version-2 TsFile detected, please stop insertion, then run 'flush' "
+                      + "on v0.11 IoTDB before upgrading to v0.12");
               System.exit(-1);
             }
           }
@@ -381,8 +380,8 @@ public class IoTDBConfigCheck {
   }
 
   /**
-   * If upgrading from v0.11.2 to v0.12, there may be some unsealed merging files.
-   * We have to delete these files before upgrading.
+   * If upgrading from v0.11.2 to v0.12, there may be some unsealed merging files. We have to delete
+   * these files before upgrading.
    */
   private void deleteMergingTsFiles(File[] tsfiles, File[] resources) {
     Set<String> resourcesSet = new HashSet<>();
@@ -484,7 +483,7 @@ public class IoTDBConfigCheck {
           if (!virtualSg.exists()) {
             virtualSg.mkdir();
           }
-          File newPartition =  SystemFileFactory.INSTANCE
+          File newPartition = SystemFileFactory.INSTANCE
               .getFile(virtualSg, partition.getName());
           if (!newPartition.exists()) {
             newPartition.mkdir();

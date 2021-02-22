@@ -38,8 +38,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * FileReaderManager is a singleton, which is used to manage
- * all file readers(opened file streams) to ensure that each file is opened at most once.
+ * FileReaderManager is a singleton, which is used to manage all file readers(opened file streams)
+ * to ensure that each file is opened at most once.
  */
 public class FileReaderManager implements IService {
 
@@ -52,24 +52,24 @@ public class FileReaderManager implements IService {
   private static final int MAX_CACHED_FILE_SIZE = 30000;
 
   /**
-   * the key of closedFileReaderMap is the file path and the value of closedFileReaderMap
-   * is the corresponding reader.
+   * the key of closedFileReaderMap is the file path and the value of closedFileReaderMap is the
+   * corresponding reader.
    */
   private Map<String, TsFileSequenceReader> closedFileReaderMap;
   /**
-   * the key of unclosedFileReaderMap is the file path and the value of unclosedFileReaderMap
-   * is the corresponding reader.
+   * the key of unclosedFileReaderMap is the file path and the value of unclosedFileReaderMap is the
+   * corresponding reader.
    */
   private Map<String, TsFileSequenceReader> unclosedFileReaderMap;
 
   /**
-   * the key of closedFileReaderMap is the file path and the value of closedFileReaderMap
-   * is the file's reference count.
+   * the key of closedFileReaderMap is the file path and the value of closedFileReaderMap is the
+   * file's reference count.
    */
   private Map<String, AtomicInteger> closedReferenceMap;
   /**
-   * the key of unclosedFileReaderMap is the file path and the value of unclosedFileReaderMap
-   * is the file's reference count.
+   * the key of unclosedFileReaderMap is the file path and the value of unclosedFileReaderMap is the
+   * file's reference count.
    */
   private Map<String, AtomicInteger> unclosedReferenceMap;
 
@@ -132,7 +132,8 @@ public class FileReaderManager implements IService {
         iterator.remove();
         refMap.remove(entry.getKey());
         if (resourceLogger.isDebugEnabled()) {
-          resourceLogger.debug("{} TsFileReader is closed because of no reference.", entry.getKey());
+          resourceLogger
+              .debug("{} TsFileReader is closed because of no reference.", entry.getKey());
         }
       }
     }
@@ -164,8 +165,7 @@ public class FileReaderManager implements IService {
       // check if the file is old version
       if (!isClosed) {
         tsFileReader = new UnClosedTsFileReader(filePath);
-      }
-      else {
+      } else {
         tsFileReader = new TsFileSequenceReader(filePath);
         if (tsFileReader.readVersionNumber() != TSFileConfig.VERSION_NUMBER) {
           tsFileReader.close();
@@ -192,9 +192,11 @@ public class FileReaderManager implements IService {
     tsFile.readLock();
     synchronized (this) {
       if (!isClosed) {
-        unclosedReferenceMap.computeIfAbsent(tsFile.getTsFilePath(), k -> new AtomicInteger()).getAndIncrement();
+        unclosedReferenceMap.computeIfAbsent(tsFile.getTsFilePath(), k -> new AtomicInteger())
+            .getAndIncrement();
       } else {
-        closedReferenceMap.computeIfAbsent(tsFile.getTsFilePath(), k -> new AtomicInteger()).getAndIncrement();
+        closedReferenceMap.computeIfAbsent(tsFile.getTsFilePath(), k -> new AtomicInteger())
+            .getAndIncrement();
       }
     }
   }
@@ -207,7 +209,7 @@ public class FileReaderManager implements IService {
     synchronized (this) {
       if (!isClosed && unclosedReferenceMap.containsKey(tsFile.getTsFilePath())) {
         unclosedReferenceMap.get(tsFile.getTsFilePath()).decrementAndGet();
-      } else if (closedReferenceMap.containsKey(tsFile.getTsFilePath())){
+      } else if (closedReferenceMap.containsKey(tsFile.getTsFilePath())) {
         closedReferenceMap.get(tsFile.getTsFilePath()).decrementAndGet();
       }
     }
@@ -219,7 +221,8 @@ public class FileReaderManager implements IService {
    * integration tests will not conflict with each other.
    */
   public synchronized void closeAndRemoveAllOpenedReaders() throws IOException {
-    Iterator<Map.Entry<String, TsFileSequenceReader>> iterator = closedFileReaderMap.entrySet().iterator();
+    Iterator<Map.Entry<String, TsFileSequenceReader>> iterator = closedFileReaderMap.entrySet()
+        .iterator();
     while (iterator.hasNext()) {
       Map.Entry<String, TsFileSequenceReader> entry = iterator.next();
       entry.getValue().close();

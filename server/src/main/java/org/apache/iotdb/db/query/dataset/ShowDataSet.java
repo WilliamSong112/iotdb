@@ -32,6 +32,7 @@ import org.apache.iotdb.tsfile.read.query.dataset.QueryDataSet;
 import org.apache.iotdb.tsfile.utils.Binary;
 
 public abstract class ShowDataSet extends QueryDataSet {
+
   protected ShowPlan plan;
   private List<RowRecord> result = new ArrayList<>();
   private int index = 0;

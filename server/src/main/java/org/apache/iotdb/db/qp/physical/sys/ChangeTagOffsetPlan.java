@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChangeTagOffsetPlan extends PhysicalPlan {
+
   private PartialPath path;
   private long offset;
 

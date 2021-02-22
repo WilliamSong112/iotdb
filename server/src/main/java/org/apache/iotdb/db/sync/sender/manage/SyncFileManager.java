@@ -46,23 +46,22 @@ public class SyncFileManager implements ISyncFileManager {
   private static final Logger LOGGER = LoggerFactory.getLogger(SyncFileManager.class);
 
   /**
-   * All storage groups on the disk where the current sync task is executed
-   * logicalSg -> <virtualSg, timeRangeId>
+   * All storage groups on the disk where the current sync task is executed logicalSg -> <virtualSg,
+   * timeRangeId>
    */
   private Map<String, Map<Long, Set<Long>>> allSGs;
 
   /**
    * Key is storage group, value is all sealed tsfiles in the storage group. Inner key is time range
-   * id, inner value is the set of current sealed tsfiles.
-   * logicalSg -> <virtualSg, <timeRangeId, tsfiles>>
+   * id, inner value is the set of current sealed tsfiles. logicalSg -> <virtualSg, <timeRangeId,
+   * tsfiles>>
    */
   private Map<String, Map<Long, Map<Long, Set<File>>>> currentSealedLocalFilesMap;
 
   /**
    * Key is storage group, value is all last local tsfiles in the storage group, which doesn't
    * contains those tsfiles which are not synced successfully. Inner key is time range id, inner
-   * value is the set of last local tsfiles.
-   * logicalSg -> <virtualSg, <timeRangeId, tsfiles>>
+   * value is the set of last local tsfiles. logicalSg -> <virtualSg, <timeRangeId, tsfiles>>
    */
   private Map<String, Map<Long, Map<Long, Set<File>>>> lastLocalFilesMap;
 
@@ -117,14 +116,18 @@ public class SyncFileManager implements ISyncFileManager {
 
           for (File timeRangeFolder : virtualSgFolder.listFiles()) {
             Long timeRangeId = Long.parseLong(timeRangeFolder.getName());
-            currentAllLocalFiles.get(sgFolder.getName()).get(vgId).putIfAbsent(timeRangeId, new HashSet<>());
+            currentAllLocalFiles.get(sgFolder.getName()).get(vgId)
+                .putIfAbsent(timeRangeId, new HashSet<>());
             File[] files = timeRangeFolder.listFiles();
             Arrays.stream(files)
-              .forEach(file -> currentAllLocalFiles.get(sgFolder.getName()).get(vgId).get(timeRangeId)
-                .add(new File(timeRangeFolder.getAbsolutePath(), file.getName())));
+                .forEach(
+                    file -> currentAllLocalFiles.get(sgFolder.getName()).get(vgId).get(timeRangeId)
+                        .add(new File(timeRangeFolder.getAbsolutePath(), file.getName())));
           }
         } catch (Exception e) {
-          LOGGER.error("Invalid virtual storage group folder: {}", virtualSgFolder.getAbsolutePath(), e);
+          LOGGER
+              .error("Invalid virtual storage group folder: {}", virtualSgFolder.getAbsolutePath(),
+                  e);
         }
       }
     }
@@ -138,7 +141,8 @@ public class SyncFileManager implements ISyncFileManager {
         currentSealedLocalFilesMap.get(sgName).putIfAbsent(vgId, new HashMap<>());
         for (Entry<Long, Set<File>> innerEntry : vgEntry.getValue().entrySet()) {
           Long timeRangeId = innerEntry.getKey();
-          currentSealedLocalFilesMap.get(sgName).get(vgId).putIfAbsent(timeRangeId, new HashSet<>());
+          currentSealedLocalFilesMap.get(sgName).get(vgId)
+              .putIfAbsent(timeRangeId, new HashSet<>());
           for (File file : innerEntry.getValue()) {
             if (!file.getName().endsWith(TSFILE_SUFFIX)) {
               continue;
@@ -177,8 +181,8 @@ public class SyncFileManager implements ISyncFileManager {
         allSGs.putIfAbsent(sgName, new HashMap<>());
         allSGs.get(sgName).putIfAbsent(vgId, new HashSet<>());
         lastLocalFilesMap.computeIfAbsent(sgName, k -> new HashMap<>())
-          .computeIfAbsent(vgId, k -> new HashMap<>())
-          .computeIfAbsent(timeRangeId, k -> new HashSet<>()).add(file);
+            .computeIfAbsent(vgId, k -> new HashMap<>())
+            .computeIfAbsent(timeRangeId, k -> new HashSet<>()).add(file);
       }
     }
   }
@@ -197,7 +201,7 @@ public class SyncFileManager implements ISyncFileManager {
       deletedFilesMap.putIfAbsent(sgName, new HashMap<>());
 
       for (Entry<Long, Map<Long, Set<File>>> entry : currentSealedLocalFilesMap
-        .getOrDefault(sgName, Collections.emptyMap()).entrySet()) {
+          .getOrDefault(sgName, Collections.emptyMap()).entrySet()) {
         Long vgId = entry.getKey();
         toBeSyncedFilesMap.get(sgName).putIfAbsent(vgId, new HashMap<>());
         allSGs.get(sgName).putIfAbsent(vgId, new HashSet<>());
@@ -208,8 +212,8 @@ public class SyncFileManager implements ISyncFileManager {
           allSGs.get(sgName).get(vgId).add(timeRangeId);
           for (File newFile : innerEntry.getValue()) {
             if (!lastLocalFilesMap.getOrDefault(sgName, Collections.emptyMap())
-              .getOrDefault(vgId, Collections.emptyMap())
-              .getOrDefault(timeRangeId, Collections.emptySet()).contains(newFile)) {
+                .getOrDefault(vgId, Collections.emptyMap())
+                .getOrDefault(timeRangeId, Collections.emptySet()).contains(newFile)) {
               toBeSyncedFilesMap.get(sgName).get(vgId).get(timeRangeId).add(newFile);
             }
           }
@@ -229,8 +233,8 @@ public class SyncFileManager implements ISyncFileManager {
 
           for (File oldFile : innerEntry.getValue()) {
             if (!currentSealedLocalFilesMap.getOrDefault(sgName, Collections.emptyMap())
-              .getOrDefault(vgId, Collections.emptyMap())
-              .getOrDefault(timeRangeId, Collections.emptySet()).contains(oldFile)) {
+                .getOrDefault(vgId, Collections.emptyMap())
+                .getOrDefault(timeRangeId, Collections.emptySet()).contains(oldFile)) {
               deletedFilesMap.get(sgName).get(vgId).get(timeRangeId).add(oldFile);
             }
           }

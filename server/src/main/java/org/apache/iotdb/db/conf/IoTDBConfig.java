@@ -65,7 +65,7 @@ public class IoTDBConfig {
   public static final Pattern STORAGE_GROUP_PATTERN = Pattern.compile(STORAGE_GROUP_MATCHER);
 
   public static final Pattern NODE_PATTERN = Pattern.compile(NODE_MATCHER);
-  
+
   /**
    * Port which the metrics service listens to.
    */
@@ -215,8 +215,8 @@ public class IoTDBConfig {
   private int estimatedSeriesSize = 300;
 
   /**
-   * Size of log buffer for every MetaData operation. If the size of a MetaData operation plan
-   * is larger than this parameter, then the MetaData operation plan will be rejected by MManager.
+   * Size of log buffer for every MetaData operation. If the size of a MetaData operation plan is
+   * larger than this parameter, then the MetaData operation plan will be rejected by MManager.
    */
   private int mlogBufferSize = 1024 * 1024;
 
@@ -352,16 +352,15 @@ public class IoTDBConfig {
 
   /**
    * Work when tsfile_manage_strategy is level_strategy. When merge point number reaches this, merge
-   * the files to the last level.
-   * During a merge, if a chunk with less number of chunks than this parameter, the chunk will be
-   * merged with its succeeding chunks even if it is not overflowed, until the merged chunks reach
-   * this threshold and the new chunk will be flushed.
+   * the files to the last level. During a merge, if a chunk with less number of chunks than this
+   * parameter, the chunk will be merged with its succeeding chunks even if it is not overflowed,
+   * until the merged chunks reach this threshold and the new chunk will be flushed.
    */
   private int mergeChunkPointNumberThreshold = 100000;
 
   /**
-   * Works when the compaction_strategy is LEVEL_COMPACTION.
-   * When point number of a page reaches this, use "append merge" instead of "deserialize merge".
+   * Works when the compaction_strategy is LEVEL_COMPACTION. When point number of a page reaches
+   * this, use "append merge" instead of "deserialize merge".
    */
   private int mergePagePointNumberThreshold = 100;
 
@@ -371,36 +370,32 @@ public class IoTDBConfig {
   private CompactionStrategy compactionStrategy = CompactionStrategy.LEVEL_COMPACTION;
 
   /**
-   * Works when the compaction_strategy is LEVEL_COMPACTION.
-   * Whether to merge unseq files into seq files or not.
+   * Works when the compaction_strategy is LEVEL_COMPACTION. Whether to merge unseq files into seq
+   * files or not.
    */
   private boolean enableUnseqCompaction = true;
 
   /**
-   * Works when the compaction_strategy is LEVEL_COMPACTION.
-   * The max seq file num of each level.
-   * When the num of files in one level exceeds this,
-   * the files in this level will merge to one and put to upper level.
+   * Works when the compaction_strategy is LEVEL_COMPACTION. The max seq file num of each level.
+   * When the num of files in one level exceeds this, the files in this level will merge to one and
+   * put to upper level.
    */
   private int seqFileNumInEachLevel = 6;
 
   /**
-   * Works when the compaction_strategy is LEVEL_COMPACTION.
-   * The max num of seq level.
+   * Works when the compaction_strategy is LEVEL_COMPACTION. The max num of seq level.
    */
   private int seqLevelNum = 3;
 
   /**
-   * Works when compaction_strategy is LEVEL_COMPACTION.
-   * The max ujseq file num of each level.
-   * When the num of files in one level exceeds this,
-   * the files in this level will merge to one and put to upper level.
+   * Works when compaction_strategy is LEVEL_COMPACTION. The max ujseq file num of each level. When
+   * the num of files in one level exceeds this, the files in this level will merge to one and put
+   * to upper level.
    */
   private int unseqFileNumInEachLevel = 10;
 
   /**
-   * Works when the compaction_strategy is LEVEL_COMPACTION.
-   * The max num of unseq level.
+   * Works when the compaction_strategy is LEVEL_COMPACTION. The max num of unseq level.
    */
   private int unseqLevelNum = 1;
 
@@ -549,8 +544,8 @@ public class IoTDBConfig {
   private TSDataType integerStringInferType = TSDataType.FLOAT;
 
   /**
-   * register time series as which type when receiving an integer string and using float may lose precision
-   * num > 2 ^ 24
+   * register time series as which type when receiving an integer string and using float may lose
+   * precision num > 2 ^ 24
    */
   private TSDataType longStringInferType = TSDataType.DOUBLE;
 
@@ -640,9 +635,9 @@ public class IoTDBConfig {
   private long mergeIntervalSec = 0L;
 
   /**
-   * When set to true, all unseq merges becomes full merge (the whole SeqFiles are re-written despite how
-   * much they are overflowed). This may increase merge overhead depending on how much the SeqFiles
-   * are overflowed.
+   * When set to true, all unseq merges becomes full merge (the whole SeqFiles are re-written
+   * despite how much they are overflowed). This may increase merge overhead depending on how much
+   * the SeqFiles are overflowed.
    */
   private boolean forceFullMerge = false;
 
@@ -652,8 +647,8 @@ public class IoTDBConfig {
   private int mergeWriteThroughputMbPerSec = 8;
 
   /**
-   * How many thread will be set up to perform compaction, 10 by default. Set to 1 when less
-   * than or equal to 0.
+   * How many thread will be set up to perform compaction, 10 by default. Set to 1 when less than or
+   * equal to 0.
    */
   private int compactionThreadNum = 10;
 
