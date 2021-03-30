@@ -19,13 +19,6 @@
 
 package org.apache.iotdb.cluster.server.service;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.BufferUnderflowException;
-import java.nio.ByteBuffer;
-import java.nio.file.Files;
-import org.apache.iotdb.cluster.client.sync.SyncDataClient;
-import org.apache.iotdb.cluster.client.sync.SyncMetaClient;
 import org.apache.iotdb.cluster.exception.LeaderUnknownException;
 import org.apache.iotdb.cluster.exception.UnknownLogTypeException;
 import org.apache.iotdb.cluster.rpc.thrift.AppendEntriesRequest;
@@ -39,12 +32,20 @@ import org.apache.iotdb.cluster.rpc.thrift.RaftService;
 import org.apache.iotdb.cluster.rpc.thrift.RaftService.Client;
 import org.apache.iotdb.cluster.server.NodeCharacter;
 import org.apache.iotdb.cluster.server.member.RaftMember;
+import org.apache.iotdb.cluster.utils.ClientUtils;
 import org.apache.iotdb.cluster.utils.IOUtils;
 import org.apache.iotdb.cluster.utils.StatusUtils;
 import org.apache.iotdb.service.rpc.thrift.TSStatus;
+
 import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.BufferUnderflowException;
+import java.nio.ByteBuffer;
+import java.nio.file.Files;
 
 public abstract class BaseSyncService implements RaftService.Iface {
 
@@ -81,7 +82,9 @@ public abstract class BaseSyncService implements RaftService.Iface {
     try {
       return member.appendEntries(request);
     } catch (BufferUnderflowException e) {
-      logger.error("Underflow buffers {} of logs from {}", request.getEntries(),
+      logger.error(
+          "Underflow buffers {} of logs from {}",
+          request.getEntries(),
           request.getPrevLogIndex() + 1);
       throw new TException(e);
     } catch (Exception e) {
@@ -90,8 +93,7 @@ public abstract class BaseSyncService implements RaftService.Iface {
   }
 
   @Override
-  public long requestCommitIndex(Node header)
-      throws TException {
+  public long requestCommitIndex(Node header) throws TException {
     long commitIndex = member.getCommitIndex();
     if (commitIndex != Long.MIN_VALUE) {
       return commitIndex;
@@ -108,17 +110,9 @@ public abstract class BaseSyncService implements RaftService.Iface {
       client.getInputProtocol().getTransport().close();
       throw e;
     } finally {
-      putBackSyncClient(client);
+      ClientUtils.putBackSyncClient(client);
     }
     return commitIndex;
-  }
-
-  void putBackSyncClient(Client client) {
-    if (client instanceof SyncDataClient) {
-      ((SyncDataClient) client).putBack();
-    } else {
-      ((SyncMetaClient) client).putBack();
-    }
   }
 
   @Override
@@ -157,7 +151,7 @@ public abstract class BaseSyncService implements RaftService.Iface {
           client.getInputProtocol().getTransport().close();
           throw e;
         } finally {
-          putBackSyncClient(client);
+          ClientUtils.putBackSyncClient(client);
         }
         return status;
       } else {
